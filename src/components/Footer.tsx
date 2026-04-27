@@ -136,40 +136,52 @@ export default function Footer() {
           </nav>
         </div>
 
-        {/* Legal Links */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-white tracking-wide text-sm uppercase font-bold text-opacity-80">
-            Legal
-          </h3>
-          <nav className="flex flex-col gap-0 border-l border-[#1F2937] pl-4">
-            <a 
-              href="/privacy-policy" 
-              className="py-2 text-gray-300 hover:text-white text-base font-medium flex items-center justify-between group"
-            >
-              Website Privacy Policy
-            </a>
-            <a 
-              href="/eu-uk-jobs-privacy-policy" 
-              className="py-2 text-gray-300 hover:text-white text-base font-medium flex items-center justify-between group"
-            >
-              EU and UK Privacy Policies
-            </a>
-            <a 
-              href="/california-privacy-policy" 
-              className="py-2 text-gray-300 hover:text-white text-base font-medium flex items-center justify-between group"
-            >
-              California Privacy Policy
-            </a>
-            <a 
-              href="/carrer-privacy-policy" 
-              className="py-2 text-gray-300 hover:text-white text-base font-medium flex items-center justify-between group"
-            >
-              Careers Site Privacy Notice
-            </a>
-          </nav>
-        </div>
-      </div>
+       {/* Legal Links */}
+<div className="flex flex-col gap-4">
+  <h3 className="text-white tracking-wide text-sm uppercase font-bold text-opacity-80">
+    Legal
+  </h3>
 
+  <nav className="flex flex-col gap-0 border-l border-[#1F2937] pl-4">
+
+    <a
+      href="/privacy-policy"
+      className="py-2 text-gray-300 hover:text-white text-base font-medium"
+    >
+      Website Privacy Policy
+    </a>
+
+    <a
+      href="/eu-uk-jobs-privacy-policy"
+      className="py-2 text-gray-300 hover:text-white text-base font-medium"
+    >
+      EU and UK Privacy Policies
+    </a>
+
+    <a
+      href="/california-privacy-policy"
+      className="py-2 text-gray-300 hover:text-white text-base font-medium"
+    >
+      California Privacy Policy
+    </a>
+
+    <a
+      href="/cookie-policy"
+      className="py-2 text-gray-300 hover:text-white text-base font-medium"
+    >
+      Cookie Policy
+    </a>
+
+    <a
+      href="/carrer-privacy-policy"
+      className="py-2 text-gray-300 hover:text-white text-base font-medium"
+    >
+      Careers Site Privacy Notice
+    </a>
+
+  </nav>
+</div>
+</div>
       {/* Divider */}
       <div className="w-full h-px bg-[#1F2937]"></div>
 

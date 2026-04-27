@@ -1,3 +1,4 @@
+import CookiePolicyPage from "./pages/cookie-policy";
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -76,7 +77,6 @@ import DocumentViewerPage from './pages/document-viewer';
 import NDAAdminPage from './pages/nda-admin';
 import { AuthSessionProvider, useAuthSession } from './auth/AuthSessionProvider';
 import AuthRequiredRoute from './components/AuthRequiredRoute';
-import HushhHackathonPage from './pages/hushh-hackathon/ui';
 import MetricsPage from './pages/metrics';
 
 const KaiIndiaApp = React.lazy(() => import('./kai-india/pages'));
@@ -108,9 +108,10 @@ const ContentWrapper = ({ children }: { children: ReactNode }) => {
   const isProfile = location.pathname === '/profile';
   const isHushhHackathon = location.pathname === '/hushh-hackathon';
   const isMetrics = location.pathname === '/metrics' || location.pathname === '/metric';
+  const isCookiePolicy = location.pathname === '/cookie-policy';
 
   return (
-    <div className={`${isHomePage || isAuthCallback || isUserRegistration || isOnboarding || isKycFlow || isKycDemo || isA2APlayground || isInvestorGuide || isHushhAI || isKai || isStudio || isHushhUserProfile || isSignNda || isDocumentViewer || isInvestorProfile || isPublicInvestorProfile || isDiscoverFundA || isCommunity || isDeleteAccount || isLogin || isSignup || isProfile || isHushhHackathon || isMetrics ? '' : 'mt-20'}`}>
+    <div className={`${isHomePage || isAuthCallback || isUserRegistration || isOnboarding || isKycFlow || isKycDemo || isA2APlayground || isInvestorGuide || isHushhAI || isKai || isStudio || isHushhUserProfile || isSignNda || isDocumentViewer || isInvestorProfile || isPublicInvestorProfile || isDiscoverFundA || isCommunity || isDeleteAccount || isLogin || isSignup || isProfile || isHushhHackathon || isMetrics || isCookiePolicy ? '' : 'mt-20'}`}>
       {children}
     </div>
   );
@@ -133,6 +134,7 @@ const useLayoutVisibility = () => {
   const isSignNda = location.pathname.startsWith('/sign-nda');
   const isDocumentViewer = location.pathname.startsWith('/document-viewer');
   const isHushhUserProfile = location.pathname.startsWith('/hushh-user-profile');
+  const isCookiePolicy = location.pathname === '/cookie-policy';
 
   // All pages using HushhTechHeader — hide old global Navbar/Footer
   const isKycFlow = location.pathname.startsWith('/kyc-flow');
@@ -141,7 +143,7 @@ const useLayoutVisibility = () => {
   const isPublicInvestorProfile = location.pathname.startsWith('/investor/');
   const isHushhHackathon = location.pathname === '/hushh-hackathon';
   const isMetrics = location.pathname === '/metrics' || location.pathname === '/metric';
-  const hideOld = isHushhAI || isKai || isStudio || isHomePage || isOnboarding || isProfile || isFundA || isCommunity || isDeleteAccount || isLogin || isSignup || isSignNda || isDocumentViewer || isHushhUserProfile || isKycFlow || isKycDemo || isA2APlayground || isPublicInvestorProfile || isHushhHackathon || isMetrics;
+  const hideOld = isHushhAI || isKai || isStudio || isHomePage || isOnboarding || isProfile || isFundA || isCommunity || isDeleteAccount || isLogin || isSignup || isSignNda || isDocumentViewer || isHushhUserProfile || isKycFlow || isKycDemo || isA2APlayground || isPublicInvestorProfile || isHushhHackathon || isMetrics || isCookiePolicy;
   return {
     showNavbar: !hideOld,
     showFooter: !hideOld,
@@ -150,6 +152,9 @@ const useLayoutVisibility = () => {
 };
 
 function App() {
+    if (window.location.pathname === "/cookie-policy") {
+    return <CookiePolicyPage />;
+  }
   // Inner layout component that uses hooks for conditional rendering
   const AppLayout = () => {
     const { showNavbar, showFooter, showMobileNav } = useLayoutVisibility();
@@ -161,6 +166,7 @@ function App() {
         <ContentWrapper>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/cookie-policy" element={<CookiePolicyPage />} />
             <Route path="/about/leadership" element={<Leadership />} />
             <Route path="/about/philosophy" element={<Philosophy />} />
             <Route path="/Login" element={<LoginPage />} />
@@ -391,19 +397,19 @@ function App() {
   };
 
   return (
-    <ChakraProvider theme={theme}>
-      <AuthSessionProvider>
-        <Router>
-          <GoogleAnalyticsRouteTracker />
-          <ScrollToTop />
-          <OnboardingShellAutoPadding />
-          <GlobalNDAGate>
-            <AppLayout />
-          </GlobalNDAGate>
-        </Router>
-      </AuthSessionProvider>
-    </ChakraProvider>
-  );
+  <ChakraProvider theme={theme}>
+    <AuthSessionProvider>
+      <Router>
+        <GoogleAnalyticsRouteTracker />
+        <ScrollToTop />
+        <OnboardingShellAutoPadding />
+        <GlobalNDAGate>
+          <AppLayout />
+        </GlobalNDAGate>
+      </Router>
+    </AuthSessionProvider>
+  </ChakraProvider>
+);
 }
 
 export default App;
