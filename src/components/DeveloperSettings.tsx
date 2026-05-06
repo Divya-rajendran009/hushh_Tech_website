@@ -122,7 +122,7 @@ const DeveloperSettings: React.FC<DeveloperSettingsProps> = ({ investorSlug }) =
             <h1 className="text-xl font-bold text-slate-900 leading-tight">Developer Tools</h1>
           </div>
           <button 
-            onClick={() => window.open('https://docs.hushh.ai', '_blank')}
+            onClick={() => window.open('https://docs.hushh.ai', '_blank', 'noopener,noreferrer')}
             className="flex items-center justify-center px-3 py-2 rounded-lg text-[#2B8CEE] hover:bg-blue-50 transition-colors text-sm font-medium gap-1"
           >
             <span>Docs</span>

@@ -7,7 +7,7 @@ const AIPoweredBerkshire = () => {
   
   useEffect(() => {
     // Open the Gamma site in a new tab
-    window.open('https://hushh-fund-a-wtv9ctn.gamma.site/', '_blank');
+    window.open('https://hushh-fund-a-wtv9ctn.gamma.site/', '_blank', 'noopener,noreferrer');
     // Redirect back to community
     navigate('/community');
   }, [navigate]);

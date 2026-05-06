@@ -144,11 +144,11 @@ const PublicInvestorProfilePage: React.FC = () => {
 
   // Social share handlers
   const handleShareWhatsApp = () => {
-    window.open(`https://wa.me/?text=${encodeURIComponent(`Check out this investor profile: ${profileUrl}`)}`, '_blank');
+    window.open(`https://wa.me/?text=${encodeURIComponent(`Check out this investor profile: ${profileUrl}`)}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleShareX = () => {
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out this investor profile: ${profileUrl}`)}`, '_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out this investor profile: ${profileUrl}`)}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleShareEmail = () => {
@@ -156,11 +156,11 @@ const PublicInvestorProfilePage: React.FC = () => {
   };
 
   const handleShareLinkedIn = () => {
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(profileUrl)}`, '_blank');
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(profileUrl)}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleOpenProfile = () => {
-    window.open(profileUrl, '_blank');
+    window.open(profileUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleBack = () => {

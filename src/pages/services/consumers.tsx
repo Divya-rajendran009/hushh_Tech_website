@@ -578,7 +578,8 @@ const Consumers = () => {
           onClick={() =>
             window.open(
               "https://docs.google.com/forms/d/e/1FAIpQLSeIQF0GhLxmwEHrmOpMRQVlxuJBtQYUP2oT_GQt16h8oyw2Dg/viewform",
-              "_blank"
+              "_blank",
+              "noopener,noreferrer"
             )
           }
         >
@@ -853,7 +854,8 @@ const Consumers = () => {
           onClick={() =>
             window.open(
               "https://chromewebstore.google.com/detail/hushh-browser-companion/glmkckchoggnebfiklpbiajpmjoagjgj?authuser=0&hl=en",
-              "_blank"
+              "_blank",
+              "noopener,noreferrer"
             )
           }
         >
@@ -1023,7 +1025,8 @@ const Consumers = () => {
           onClick={() =>
             window.open(
               "https://docs.google.com/forms/d/e/1FAIpQLSeIQF0GhLxmwEHrmOpMRQVlxuJBtQYUP2oT_GQt16h8oyw2Dg/viewform",
-              "_blank"
+              "_blank",
+              "noopener,noreferrer"
             )
           }
         >Schedule a demo to know more about Vibe Search

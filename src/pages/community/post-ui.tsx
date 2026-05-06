@@ -78,7 +78,7 @@ export default function CommunityPostPage() {
             <div className="space-y-3">
               <HushhTechCta
                 variant={HushhTechCtaVariant.BLACK}
-                onClick={() => window.open(post.pdfUrl, "_blank")}
+                onClick={() => window.open(post.pdfUrl, "_blank", "noopener,noreferrer")}
               >
                 Open PDF Document
                 <span className="material-symbols-outlined !text-[1.1rem]">

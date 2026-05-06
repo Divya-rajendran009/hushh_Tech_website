@@ -114,7 +114,7 @@ export function useViewPreferencesLogic() {
 
   const handleShareProfile = () => {
     if (profileUrl) {
-      window.open(profileUrl, "_blank");
+      window.open(profileUrl, "_blank", "noopener,noreferrer");
     }
   };
 

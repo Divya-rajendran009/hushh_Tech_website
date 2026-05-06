@@ -972,7 +972,7 @@ export default function MetricsPage() {
                 <a
                   href={lookerStudioLink}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-full border border-black bg-black px-5 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-black"
                 >
                   Open Looker traffic view

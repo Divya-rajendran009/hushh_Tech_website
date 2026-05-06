@@ -498,7 +498,8 @@ const Business = () => {
           onClick={() =>
             window.open(
               "https://docs.google.com/forms/d/e/1FAIpQLSeIQF0GhLxmwEHrmOpMRQVlxuJBtQYUP2oT_GQt16h8oyw2Dg/viewform",
-              "_blank"
+              "_blank",
+              "noopener,noreferrer"
             )
           }
         >
