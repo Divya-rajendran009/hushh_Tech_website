@@ -33,7 +33,7 @@ const CTA_VARIANTS: Record<HushhTechCtaVariant, ButtonVariant> = {
 
 /** Base classes shared by both variants */
 const BASE_CLASSES = [
-  "w-full h-14",
+  "w-full",
 ].join(" ");
 
 const HushhTechCta: React.FC<HushhTechCtaProps> = ({
