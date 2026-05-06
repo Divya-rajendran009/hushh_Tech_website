@@ -814,12 +814,12 @@ export const useHushhUserProfileLogic = () => {
   // Social share handlers — with no-slug feedback
   const handleShareWhatsApp = () => {
     if (!profileUrl) { warnNoProfileUrl(); return; }
-    window.open(`https://wa.me/?text=${encodeURIComponent(`Check out my Hushh investor profile: ${profileUrl}`)}`, '_blank');
+    window.open(`https://wa.me/?text=${encodeURIComponent(`Check out my Hushh investor profile: ${profileUrl}`)}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleShareX = () => {
     if (!profileUrl) { warnNoProfileUrl(); return; }
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out my Hushh investor profile: ${profileUrl}`)}`, '_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out my Hushh investor profile: ${profileUrl}`)}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleShareEmail = () => {
@@ -829,12 +829,12 @@ export const useHushhUserProfileLogic = () => {
 
   const handleShareLinkedIn = () => {
     if (!profileUrl) { warnNoProfileUrl(); return; }
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(profileUrl)}`, '_blank');
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(profileUrl)}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleOpenProfile = () => {
     if (!profileUrl) { warnNoProfileUrl(); return; }
-    window.open(profileUrl, '_blank');
+    window.open(profileUrl, '_blank', 'noopener,noreferrer');
   };
 
   // UI styles aligned with investor profile design system

@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import RouteErrorBoundary from "./components/core/RouteErrorBoundary";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/home/ui';
@@ -76,7 +77,6 @@ import DocumentViewerPage from './pages/document-viewer';
 import NDAAdminPage from './pages/nda-admin';
 import { AuthSessionProvider, useAuthSession } from './auth/AuthSessionProvider';
 import AuthRequiredRoute from './components/AuthRequiredRoute';
-import HushhHackathonPage from './pages/hushh-hackathon/ui';
 import MetricsPage from './pages/metrics';
 import NotFound from './pages/NotFound';
 
@@ -159,7 +159,9 @@ function App() {
     return (
       <div className="min-h-screen flex flex-col">
         {showNavbar && <Navbar />}
-        <ContentWrapper>
+   <ContentWrapper>
+     <RouteErrorBoundary>
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about/leadership" element={<Leadership />} />
@@ -381,16 +383,20 @@ function App() {
             {/* Global NDA Signing Page */}
             <Route path='/sign-nda' element={<SignNDAPage />} />
             <Route path='/document-viewer' element={<DocumentViewerPage />} />
-            {/* NDA Admin Page - Password protected view of all NDA agreements */}
-            <Route path='/nda-admin' element={<NDAAdminPage />} />
+                        {/* NDA Admin Page - Password protected view of all NDA agreements */}
+            <Route path="/nda-admin" element={<NDAAdminPage />} />
+
             {/* 404 Not Found - Must be last route */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </ContentWrapper>
-        {showFooter && <Footer />}
-        {showMobileNav && <MobileBottomNav />}
-      </div>
-    );
+        </Suspense>
+      </RouteErrorBoundary>
+    </ContentWrapper>
+
+    {showFooter && <Footer />}
+    {showMobileNav && <MobileBottomNav />}
+  </div>
+);
   };
 
   return (
