@@ -319,7 +319,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
                 className="font-bold text-center text-slate-900 mb-2 max-w-[280px]"
                 style={{ fontSize: '22px', lineHeight: '1.3' }}
               >
-                Hello! How can I help you today?
+                Ask about this investor profile
               </h2>
               
               {/* Subtitle - 14px, center, gray */}
@@ -327,7 +327,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
                 className="text-center text-slate-500 max-w-[300px] leading-relaxed"
                 style={{ fontSize: '14px' }}
               >
-                I'm ready to assist with questions about {investorName}'s investment profile and preferences.
+                Get quick answers about {investorName}'s profile, preferences, and investment context.
               </p>
             </div>
           )}
@@ -405,7 +405,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
                       <span className="w-2 h-2 bg-[#2B8CEE] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                       <span className="w-2 h-2 bg-[#2B8CEE] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
-                    <span className="text-sm">Thinking...</span>
+                    <span className="text-sm">Reviewing profile context...</span>
                   </div>
                 </div>
               </div>
