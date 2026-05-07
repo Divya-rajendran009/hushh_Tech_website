@@ -247,7 +247,7 @@ describe("keyboard accessibility helpers", () => {
       vi.runOnlyPendingTimers();
     });
 
-    const options = Array.from(container.querySelectorAll("[role='option']"));
+    const options = Array.from(container.querySelectorAll("[role='menuitemradio']"));
     expect(options).toHaveLength(4);
     expect(trigger?.getAttribute("aria-expanded")).toBe("true");
     expect(document.activeElement).toBe(options[0]);
@@ -272,7 +272,7 @@ describe("keyboard accessibility helpers", () => {
       );
     });
     expect(languageMock.changeLanguage).toHaveBeenCalledWith("fr");
-    expect(container.querySelector("[role='listbox']")).toBeNull();
+    expect(container.querySelector("[role='menu']")).toBeNull();
     expect(document.activeElement).toBe(trigger);
   });
 
