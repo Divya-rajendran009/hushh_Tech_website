@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiGlobe, FiCheck, FiChevronDown } from 'react-icons/fi';
+import { isKeyboardActivationKey, moveFocusWithin } from '../utils/keyboardNavigation';
 
 const languages = [
   { code: 'en', name: 'English', shortCode: 'EN' },
@@ -17,9 +18,12 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   // Get current language short code
   const currentLang = languages.find(l => l.code === i18n.language)?.shortCode || 'EN';
+  const listboxId = 'hushh-language-listbox';
 
   // Handle click outside to close dropdown
   useEffect(() => {
@@ -48,6 +52,57 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
     }
     
     setIsOpen(false);
+    triggerRef.current?.focus({ preventScroll: true });
+  };
+
+  const focusSelectedLanguage = () => {
+    window.setTimeout(() => {
+      const selectedOption =
+        menuRef.current?.querySelector<HTMLElement>('[aria-selected="true"]') ||
+        menuRef.current?.querySelector<HTMLElement>('[role="option"]');
+      selectedOption?.focus({ preventScroll: true });
+    }, 0);
+  };
+
+  const openAndFocusMenu = () => {
+    setIsOpen(true);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      focusSelectedLanguage();
+    }
+  }, [isOpen]);
+
+  const handleTriggerKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openAndFocusMenu();
+    }
+  };
+
+  const handleMenuKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setIsOpen(false);
+      triggerRef.current?.focus({ preventScroll: true });
+      return;
+    }
+
+    if (isKeyboardActivationKey(event.key)) {
+      const activeElement = document.activeElement;
+      if (
+        activeElement instanceof HTMLElement &&
+        activeElement.getAttribute('role') === 'option' &&
+        menuRef.current?.contains(activeElement)
+      ) {
+        event.preventDefault();
+        activeElement.click();
+      }
+      return;
+    }
+
+    moveFocusWithin(menuRef.current, event);
   };
 
   // Dark variant styles (for dark header)
@@ -57,13 +112,18 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
     <div className="relative" ref={dropdownRef}>
       {/* Language Selector Pill */}
       <button
+        ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={handleTriggerKeyDown}
         className={`group flex h-9 items-center gap-1 px-3 py-1.5 rounded-full transition-colors ${
           isDark 
             ? 'bg-gray-800 active:bg-gray-700 border border-gray-700' 
             : 'bg-gray-100 hover:bg-gray-200 border border-transparent dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700'
         }`}
         aria-label="Select language"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={listboxId}
       >
         <FiGlobe className={`w-3.5 h-3.5 ${isDark ? 'text-gray-400' : 'text-gray-600 dark:text-gray-400'}`} />
         <span className={`text-xs font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700 dark:text-gray-300'}`}>
@@ -74,13 +134,22 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-[200]">
+        <div
+          ref={menuRef}
+          id={listboxId}
+          role="listbox"
+          aria-label="Language options"
+          onKeyDown={handleMenuKeyDown}
+          className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-[200]"
+        >
           {languages.map((lang) => {
             const isSelected = i18n.language === lang.code;
             return (
               <button
                 key={lang.code}
                 onClick={() => changeLanguage(lang.code)}
+                role="option"
+                aria-selected={isSelected}
                 className={`w-full flex items-center justify-between px-4 py-2.5 text-left text-sm transition-colors
                   ${isSelected 
                     ? 'bg-[#135bec]/5 text-[#135bec] font-semibold' 
