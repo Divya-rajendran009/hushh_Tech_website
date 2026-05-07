@@ -143,7 +143,12 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true">
+    <div
+      className="fixed inset-0 z-[60]"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="hushh-tech-faq-title"
+    >
       {/* Backdrop */}
       <div
         className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${
