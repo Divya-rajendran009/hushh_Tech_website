@@ -67,12 +67,12 @@ export default function HomePage() {
               neurology
             </span>
             <div>
-              <h3
+              <h2
                 className="text-lg font-medium mb-1 font-serif"
                 style={playfair}
               >
                 AI-Powered
-              </h3>
+              </h2>
               <p className="text-xs text-gray-500 font-light leading-relaxed">
                 Institutional analytics processing millions of signals.
               </p>
@@ -83,12 +83,12 @@ export default function HomePage() {
               supervised_user_circle
             </span>
             <div>
-              <h3
+              <h2
                 className="text-lg font-medium mb-1 font-serif"
                 style={playfair}
               >
                 Human-Led
-              </h3>
+              </h2>
               <p className="text-xs text-gray-500 font-light leading-relaxed">
                 Seasoned oversight ensuring long-term strategic vision.
               </p>
@@ -156,7 +156,7 @@ export default function HomePage() {
                   <span className={`material-symbols-outlined thin-icon ${item.color}`}>{item.icon}</span>
                 </div>
                 <div>
-                  <h4 className="font-medium text-sm mb-1">{item.title}</h4>
+                  <h3 className="font-medium text-sm mb-1">{item.title}</h3>
                   <p className="text-[11px] text-gray-500 font-light max-w-[120px] mx-auto">
                     {item.desc}
                   </p>
@@ -236,7 +236,7 @@ export default function HomePage() {
                 <span className={`material-symbols-outlined thin-icon ${item.color} mb-2`}>
                   {item.icon}
                 </span>
-                <h5 className="font-medium text-sm">{item.title}</h5>
+                <h2 className="font-medium text-sm">{item.title}</h2>
                 <p className="text-[10px] text-gray-500 font-light">
                   {item.desc}
                 </p>
