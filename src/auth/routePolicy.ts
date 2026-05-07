@@ -14,6 +14,7 @@ export const PUBLIC_MARKETING_ROUTE_PREFIXES = [
   "/metric",
   "/metrics",
   "/privacy-policy",
+  "/consent-preferences",
   "/faq",
   "/carrer-privacy-policy",
   "/california-privacy-policy",

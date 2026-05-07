@@ -1,4 +1,5 @@
 import config from "../../resources/config/config";
+import { hasConsentFor } from "../consent/preferences";
 
 const ANALYTICS_ID_KEY = "hushh_site_analytics_id";
 const ANALYTICS_SESSION_KEY = "hushh_site_analytics_session_id";
@@ -242,6 +243,10 @@ function getQueryLengthBucket(query: string) {
 
 export async function trackSiteEvent(eventName: string, options: TrackEventOptions = {}) {
   if (typeof window === "undefined" || typeof navigator === "undefined") {
+    return;
+  }
+
+  if (!hasConsentFor("analytics")) {
     return;
   }
 

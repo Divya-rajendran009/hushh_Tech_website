@@ -80,6 +80,8 @@ import AuthRequiredRoute from './components/AuthRequiredRoute';
 import HushhHackathonPage from './pages/hushh-hackathon/ui';
 import MetricsPage from './pages/metrics';
 import NotFound from './pages/NotFound';
+import ConsentPreferenceCenter from './components/consent/ConsentPreferenceCenter';
+import ConsentPreferencesPage from './pages/consent-preferences';
 
 const KaiIndiaApp = React.lazy(() => import('./kai-india/pages'));
 
@@ -180,6 +182,7 @@ function App() {
             <Route path="/career" element={<Career />} />
             <Route path="/career/*" element={<Career />} />
             <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+            <Route path='/consent-preferences' element={<ConsentPreferencesPage />} />
             <Route path='/carrer-privacy-policy' element={<CareersPrivacyPolicy />} />
             <Route path="/community" element={
               <CommunityPage />
@@ -406,6 +409,7 @@ function App() {
           <GlobalNDAGate>
             <AppLayout />
           </GlobalNDAGate>
+          <ConsentPreferenceCenter />
         </Router>
       </AuthSessionProvider>
     </ChakraProvider>

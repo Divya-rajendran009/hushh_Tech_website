@@ -13,6 +13,7 @@ describe("google analytics client tracking", () => {
   beforeEach(() => {
     vi.resetModules();
     document.head.innerHTML = "";
+    window.localStorage.clear();
     window.dataLayer = [];
     window.gtag = undefined as unknown as Window["gtag"];
     document.title = "Metrics";
@@ -25,6 +26,8 @@ describe("google analytics client tracking", () => {
   });
 
   it("initializes GA only once and disables automatic page views", async () => {
+    const consent = await import("../src/services/consent/preferences");
+    consent.acceptAllConsentPreferences();
     const analytics = await import("../src/services/analytics/googleAnalytics");
 
     analytics.initializeGoogleAnalytics();
@@ -35,13 +38,27 @@ describe("google analytics client tracking", () => {
     );
 
     expect(scripts).toHaveLength(1);
-    expect(window.dataLayer).toEqual([
-      ["js", expect.any(Date)],
-      ["config", "G-R58S9WWPM0", { send_page_view: false }],
+    expect(window.dataLayer).toContainEqual([
+      "consent",
+      "update",
+      {
+        ad_storage: "granted",
+        analytics_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+      },
+    ]);
+    expect(window.dataLayer).toContainEqual(["js", expect.any(Date)]);
+    expect(window.dataLayer).toContainEqual([
+      "config",
+      "G-R58S9WWPM0",
+      { send_page_view: false },
     ]);
   });
 
   it("tracks page views without duplicating the same route immediately", async () => {
+    const consent = await import("../src/services/consent/preferences");
+    consent.acceptAllConsentPreferences();
     const analytics = await import("../src/services/analytics/googleAnalytics");
 
     analytics.trackPageView("/metrics", "?view=public");
@@ -62,5 +79,24 @@ describe("google analytics client tracking", () => {
       "?view=public",
       ""
     );
+  });
+
+  it("does not load GA or track page views before analytics consent", async () => {
+    const analytics = await import("../src/services/analytics/googleAnalytics");
+
+    analytics.initializeGoogleAnalytics();
+    analytics.trackPageView("/metrics");
+
+    expect(
+      document.head.querySelectorAll(
+        'script[src="https://www.googletagmanager.com/gtag/js?id=G-R58S9WWPM0"]'
+      )
+    ).toHaveLength(0);
+    expect(
+      window.dataLayer.filter(
+        (entry) => entry[0] === "event" && entry[1] === "page_view"
+      )
+    ).toHaveLength(0);
+    expect(trackPageViewEvent).not.toHaveBeenCalled();
   });
 });

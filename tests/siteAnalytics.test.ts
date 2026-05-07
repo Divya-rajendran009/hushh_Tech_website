@@ -45,6 +45,8 @@ describe("site analytics client", () => {
   });
 
   it("does not forward raw UTM query values", async () => {
+    const consent = await import("../src/services/consent/preferences");
+    consent.acceptAllConsentPreferences();
     const { trackSiteEvent } = await import("../src/services/analytics/siteAnalytics");
 
     await trackSiteEvent("page_view");
@@ -56,5 +58,13 @@ describe("site analytics client", () => {
     expect(body.events[0].routePath).toBe("/profile/:id");
     expect(serialized).not.toContain("person@example.com");
     expect(serialized).not.toContain("token-secret");
+  });
+
+  it("does not collect first-party analytics before analytics consent", async () => {
+    const { trackSiteEvent } = await import("../src/services/analytics/siteAnalytics");
+
+    await trackSiteEvent("page_view");
+
+    expect(fetch).not.toHaveBeenCalled();
   });
 });
