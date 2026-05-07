@@ -56,6 +56,20 @@ const seattleGpsAddress = {
   longitude: -122.3378,
 } satisfies LocationData;
 
+const londonGpsAddress = {
+  country: 'United Kingdom',
+  countryCode: 'GB',
+  state: 'Greater London',
+  stateCode: '',
+  city: 'London',
+  postalCode: 'SW1A 2AA',
+  phoneDialCode: '+44',
+  timezone: 'Europe/London',
+  formattedAddress: '10 Downing Street, Westminster, London SW1A 2AA, United Kingdom',
+  latitude: 51.5034,
+  longitude: -0.1276,
+} satisfies LocationData;
+
 describe('step 3 address logic', () => {
   it('auto-fills the full normalized address instead of collapsing line 1 to the first token', () => {
     const patch = buildStep3AutofillPatch({
@@ -92,6 +106,25 @@ describe('step 3 address logic', () => {
       city: 'Seattle',
       state: 'Washington',
       addressCountry: 'United States',
+    });
+  });
+
+  it('auto-fills UK city and postcode formats without polluting address line 1', () => {
+    const patch = buildStep3AutofillPatch({
+      current: emptyFormState,
+      manual: noManualOverrides,
+      locationData: londonGpsAddress,
+    });
+
+    expect(patch).toMatchObject({
+      citizenshipCountry: 'United Kingdom',
+      residenceCountry: 'United Kingdom',
+      addressLine1: '10 Downing Street, Westminster',
+      addressLine2: 'London, Greater London',
+      zipCode: 'SW1A 2AA',
+      city: 'London',
+      state: 'Greater London',
+      addressCountry: 'United Kingdom',
     });
   });
 

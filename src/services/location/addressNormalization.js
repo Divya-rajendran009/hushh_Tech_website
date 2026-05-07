@@ -57,6 +57,17 @@ const isStatePostalSegment = (segment, { state, stateCode, zipCode }) => {
 const buildCityStateLine2 = (city, state) =>
   [cleanString(city), cleanString(state)].filter(Boolean).join(', ');
 
+const looksLikeStateCode = (value) => /^[A-Z]{2,3}$/.test(cleanString(value));
+
+const removeKnownLocationTokens = (segment, { city, state, stateCode, zipCode }) => {
+  let working = cleanString(segment);
+  [zipCode, state, stateCode, city].forEach((candidate) => {
+    working = stripCandidate(working, candidate);
+  });
+
+  return normalizeSpacing(working.replace(/-/g, ' '));
+};
+
 const inferPostalCodeFromSegment = (segment, { state, stateCode }) => {
   const normalized = normalizeSpacing(
     stripCandidate(stripCandidate(segment, state), stateCode)
@@ -75,6 +86,20 @@ const inferPostalCodeFromSegment = (segment, { state, stateCode }) => {
   return POSTAL_CODE_PATTERN.test(last) ? last : '';
 };
 
+const inferCityFromTerminalSegment = (segment, { state, stateCode, zipCode }) => {
+  let working = cleanString(segment);
+  if (!working) return '';
+
+  if (zipCode) {
+    working = working.replace(new RegExp(`\\b${escapeRegExp(zipCode)}\\b`, 'gi'), ' ');
+  }
+
+  working = normalizeSpacing(stripCandidate(stripCandidate(working, state), stateCode));
+  if (looksLikeStateCode(working)) return '';
+
+  return POSTAL_CODE_PATTERN.test(working) ? '' : working;
+};
+
 const inferStateFromSegment = (segment, { zipCode, stateCode }) => {
   let working = cleanString(segment);
   if (!working) return cleanString(stateCode);
@@ -86,6 +111,11 @@ const inferStateFromSegment = (segment, { zipCode, stateCode }) => {
 
   working = normalizeSpacing(stripCandidate(working, stateCode));
   return working || cleanString(stateCode);
+};
+
+const isCityStatePostalSegment = (segment, { city, state, stateCode, zipCode }) => {
+  const working = removeKnownLocationTokens(segment, { city, state, stateCode, zipCode });
+  return working.length === 0 || POSTAL_CODE_PATTERN.test(working);
 };
 
 export function normalizeDetectedAddress(locationData, countryNameOverride = '') {
@@ -104,14 +134,29 @@ export function normalizeDetectedAddress(locationData, countryNameOverride = '')
 
   const statePostalSegment = segments[segments.length - 1] || '';
   const zipCode = gpsZipCode || inferPostalCodeFromSegment(statePostalSegment, { state: gpsState, stateCode });
-  const state = gpsState || inferStateFromSegment(statePostalSegment, { zipCode, stateCode });
-  const city = gpsCity || (segments.length > 1 ? segments[segments.length - 2] : '');
+  const inferredTerminalCity = inferCityFromTerminalSegment(statePostalSegment, {
+    state: gpsState,
+    stateCode,
+    zipCode,
+  });
+  const city = gpsCity || inferredTerminalCity || (segments.length > 1 ? segments[segments.length - 2] : '');
+  const state = gpsState || (
+    inferredTerminalCity && normalizeComparable(inferredTerminalCity) === normalizeComparable(city)
+      ? cleanString(stateCode)
+      : inferStateFromSegment(statePostalSegment, { zipCode, stateCode })
+  );
 
-  if (segments.length && isStatePostalSegment(segments[segments.length - 1], { state, stateCode, zipCode })) {
+  if (
+    segments.length &&
+    (
+      isStatePostalSegment(segments[segments.length - 1], { state, stateCode, zipCode }) ||
+      isCityStatePostalSegment(segments[segments.length - 1], { city, state, stateCode, zipCode })
+    )
+  ) {
     segments.pop();
   }
 
-  if (segments.length && matchesSegment(segments[segments.length - 1], [city])) {
+  while (segments.length && matchesSegment(segments[segments.length - 1], [city])) {
     segments.pop();
   }
 
