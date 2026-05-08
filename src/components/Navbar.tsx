@@ -9,6 +9,7 @@ import DeleteAccountModal from "./DeleteAccountModal";
 import { useStockQuotes, StockQuote, STOCK_LOGOS } from "../hooks/useStockQuotes";
 import config from "../resources/config/config";
 import { useAuthSession } from "../auth/AuthSessionProvider";
+import { SkipToContentLink } from "./ui/SkipToContentLink";
 
 const WELCOME_TOAST_PENDING_KEY = "showWelcomeToast";
 const WELCOME_TOAST_USER_KEY = "showWelcomeToastUserId";
@@ -159,19 +160,6 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
-  const handleSkipToContent = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    const mainContent = document.querySelector<HTMLElement>('main, [role="main"]');
-    if (!mainContent) return;
-
-    event.preventDefault();
-    if (!mainContent.hasAttribute("tabindex")) {
-      mainContent.setAttribute("tabindex", "-1");
-      mainContent.addEventListener("blur", () => mainContent.removeAttribute("tabindex"), { once: true });
-    }
-    mainContent.focus({ preventScroll: true });
-    mainContent.scrollIntoView({ block: "start" });
-  };
-
   const isActive = (path: string) => location.pathname === path;
 
   useEffect(() => {
@@ -222,13 +210,7 @@ export default function Navbar() {
 
   return (
     <>
-      <a
-        href="#main-content"
-        onClick={handleSkipToContent}
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[1100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-gray-900 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]"
-      >
-        Skip to content
-      </a>
+      <SkipToContentLink />
 
       {/* Fixed Header with Navigation + Ticker - Light Theme */}
       <header className="fixed w-full z-[999] top-0">

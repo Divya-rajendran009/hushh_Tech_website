@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import hushhLogo from "../images/Hushhogo.png";
 import HushhTechNavDrawer from "../hushh-tech-nav-drawer/HushhTechNavDrawer";
 import { useStockQuotes, StockQuote } from "../../hooks/useStockQuotes";
+import { SkipToContentLink } from "../ui/SkipToContentLink";
 
 /* ── Chip-based ticker component — matches Navbar design ── */
 const TickerChip = ({ quote, isLoading }: { quote: StockQuote; isLoading?: boolean }) => (
@@ -59,31 +60,12 @@ const HushhTechHeader: React.FC<HushhTechHeaderProps> = ({
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const handleSkipToContent = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    const mainContent = document.querySelector<HTMLElement>('main, [role="main"]');
-    if (!mainContent) return;
-
-    event.preventDefault();
-    if (!mainContent.hasAttribute("tabindex")) {
-      mainContent.setAttribute("tabindex", "-1");
-      mainContent.addEventListener("blur", () => mainContent.removeAttribute("tabindex"), { once: true });
-    }
-    mainContent.focus({ preventScroll: true });
-    mainContent.scrollIntoView({ block: "start" });
-  };
-
   // Fetch real-time stock quotes (refreshes every 2 minutes)
   const { quotes, loading: quotesLoading, lastUpdated } = useStockQuotes(120000);
 
   return (
     <>
-      <a
-        href="#main-content"
-        onClick={handleSkipToContent}
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[1100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-gray-900 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]"
-      >
-        Skip to content
-      </a>
+      <SkipToContentLink />
 
       {/* Fixed header — always pinned to top */}
       <header
