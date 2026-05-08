@@ -279,7 +279,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
               <h1 className="text-xl font-bold text-slate-900 leading-tight">Hushh Assistant</h1>
             </div>
             <button
-              className="flex items-center justify-center w-10 h-10 rounded-full text-slate-600 hover:bg-slate-100 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full text-slate-600 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B8CEE] focus-visible:ring-offset-2"
               aria-label="Open chat settings"
             >
               <Settings className="w-5 h-5" />
@@ -437,7 +437,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
             <button
               onClick={sendMessage}
               disabled={loading || !input.trim()}
-              className="flex items-center justify-center shrink-0 w-[52px] h-[52px] bg-[#2B8CEE] text-white rounded-xl hover:bg-blue-600 active:scale-95 transition-all shadow-md shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+              className="flex items-center justify-center shrink-0 w-[52px] h-[52px] bg-[#2B8CEE] text-white rounded-xl hover:bg-blue-600 active:scale-95 transition-all shadow-md shadow-blue-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B8CEE] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
               aria-label="Send message"
             >
               <ArrowUp className="w-6 h-6" />
