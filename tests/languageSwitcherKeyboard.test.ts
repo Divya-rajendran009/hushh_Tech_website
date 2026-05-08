@@ -151,4 +151,26 @@ describe("LanguageSwitcher keyboard accessibility", () => {
     expect(trigger.getAttribute("aria-expanded")).toBe("false");
     expect(document.activeElement).toBe(trigger);
   });
+
+  it("keeps the menu open when Escape belongs to another focused component", async () => {
+    const trigger = await renderSwitcher();
+    const modalButton = document.createElement("button");
+    document.body.appendChild(modalButton);
+
+    trigger.focus();
+    await keyDown(trigger, "ArrowDown");
+    modalButton.focus();
+
+    await act(async () => {
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+      );
+    });
+
+    expect(container.querySelector("[role='menu']")).not.toBeNull();
+    expect(trigger.getAttribute("aria-expanded")).toBe("true");
+    expect(document.activeElement).toBe(modalButton);
+
+    modalButton.remove();
+  });
 });

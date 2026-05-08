@@ -63,6 +63,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
 
     const handleDocumentKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return;
+      if (!dropdownRef.current?.contains(document.activeElement)) return;
 
       event.preventDefault();
       closeDropdown(true);
