@@ -59,11 +59,32 @@ const HushhTechHeader: React.FC<HushhTechHeaderProps> = ({
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const handleSkipToContent = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const mainContent = document.querySelector<HTMLElement>('main, [role="main"]');
+    if (!mainContent) return;
+
+    event.preventDefault();
+    if (!mainContent.hasAttribute("tabindex")) {
+      mainContent.setAttribute("tabindex", "-1");
+      mainContent.addEventListener("blur", () => mainContent.removeAttribute("tabindex"), { once: true });
+    }
+    mainContent.focus({ preventScroll: true });
+    mainContent.scrollIntoView({ block: "start" });
+  };
+
   // Fetch real-time stock quotes (refreshes every 2 minutes)
   const { quotes, loading: quotesLoading, lastUpdated } = useStockQuotes(120000);
 
   return (
     <>
+      <a
+        href="#main-content"
+        onClick={handleSkipToContent}
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[1100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-gray-900 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]"
+      >
+        Skip to content
+      </a>
+
       {/* Fixed header — always pinned to top */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-sm ${className}`}
