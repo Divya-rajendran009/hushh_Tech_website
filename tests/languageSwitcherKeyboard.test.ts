@@ -131,4 +131,24 @@ describe("LanguageSwitcher keyboard accessibility", () => {
     expect(trigger.getAttribute("aria-expanded")).toBe("false");
     expect(document.activeElement).toBe(trigger);
   });
+
+  it("closes with document-level Escape when the menu is open", async () => {
+    const trigger = await renderSwitcher();
+
+    trigger.focus();
+    await keyDown(trigger, "ArrowDown");
+
+    expect(container.querySelector("[role='menu']")).not.toBeNull();
+
+    await act(async () => {
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+      );
+    });
+
+    expect(i18nMock.changeLanguage).not.toHaveBeenCalled();
+    expect(container.querySelector("[role='menu']")).toBeNull();
+    expect(trigger.getAttribute("aria-expanded")).toBe("false");
+    expect(document.activeElement).toBe(trigger);
+  });
 });
