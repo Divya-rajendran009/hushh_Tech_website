@@ -9,6 +9,7 @@ import DeleteAccountModal from "./DeleteAccountModal";
 import { useStockQuotes, StockQuote, STOCK_LOGOS } from "../hooks/useStockQuotes";
 import config from "../resources/config/config";
 import { useAuthSession } from "../auth/AuthSessionProvider";
+import { SkipToContentLink } from "./ui/SkipToContentLink";
 
 const WELCOME_TOAST_PENDING_KEY = "showWelcomeToast";
 const WELCOME_TOAST_USER_KEY = "showWelcomeToastUserId";
@@ -209,6 +210,8 @@ export default function Navbar() {
 
   return (
     <>
+      <SkipToContentLink />
+
       {/* Fixed Header with Navigation + Ticker - Light Theme */}
       <header className="fixed w-full z-[999] top-0">
         {/* Main Navigation Bar - Soft Light Background */}
