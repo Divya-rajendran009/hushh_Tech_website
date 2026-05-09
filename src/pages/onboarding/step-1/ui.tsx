@@ -256,6 +256,8 @@ export default function OnboardingStep1() {
                     <button
                       key={opt.value}
                       onClick={() => setFrequency(opt.value)}
+                      type="button"
+                      aria-pressed={isSelected}
                       className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
@@ -296,6 +298,8 @@ export default function OnboardingStep1() {
                     <button
                       key={opt.value}
                       onClick={() => setInvestmentDay(opt.value)}
+                      type="button"
+                      aria-pressed={isSelected}
                       className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
@@ -336,6 +340,8 @@ export default function OnboardingStep1() {
                     <button
                       key={amt}
                       onClick={() => handleAmountClick(amt)}
+                      type="button"
+                      aria-pressed={isSelected}
                       className={`flex-shrink-0 px-5 py-2.5 text-xs font-mono font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
