@@ -249,7 +249,11 @@ export default function OnboardingStep1() {
                   </p>
                 </div>
               </div>
-              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 pl-14">
+              <div
+                className="flex gap-2 overflow-x-auto no-scrollbar pb-1 pl-14"
+                role="radiogroup"
+                aria-label="Recurring investment frequency"
+              >
                 {FREQ_OPTIONS.map((opt) => {
                   const isSelected = frequency === opt.value;
                   return (
@@ -257,7 +261,8 @@ export default function OnboardingStep1() {
                       key={opt.value}
                       onClick={() => setFrequency(opt.value)}
                       type="button"
-                      aria-pressed={isSelected}
+                      role="radio"
+                      aria-checked={isSelected}
                       className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
@@ -291,7 +296,11 @@ export default function OnboardingStep1() {
                   </p>
                 </div>
               </div>
-              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 pl-14">
+              <div
+                className="flex gap-2 overflow-x-auto no-scrollbar pb-1 pl-14"
+                role="radiogroup"
+                aria-label="Recurring investment debit day"
+              >
                 {DAY_OPTIONS.map((opt) => {
                   const isSelected = investmentDay === opt.value;
                   return (
@@ -299,7 +308,8 @@ export default function OnboardingStep1() {
                       key={opt.value}
                       onClick={() => setInvestmentDay(opt.value)}
                       type="button"
-                      aria-pressed={isSelected}
+                      role="radio"
+                      aria-checked={isSelected}
                       className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
@@ -333,7 +343,11 @@ export default function OnboardingStep1() {
                   </p>
                 </div>
               </div>
-              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 pl-14">
+              <div
+                className="flex gap-2 overflow-x-auto no-scrollbar pb-2 pl-14"
+                role="radiogroup"
+                aria-label="Recurring investment amount"
+              >
                 {AMOUNT_PRESETS.map((amt) => {
                   const isSelected = selectedAmount === amt;
                   return (
@@ -341,7 +355,8 @@ export default function OnboardingStep1() {
                       key={amt}
                       onClick={() => handleAmountClick(amt)}
                       type="button"
-                      aria-pressed={isSelected}
+                      role="radio"
+                      aria-checked={isSelected}
                       className={`flex-shrink-0 px-5 py-2.5 text-xs font-mono font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"

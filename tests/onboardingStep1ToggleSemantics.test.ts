@@ -41,7 +41,7 @@ vi.mock("../src/pages/onboarding/step-1/logic", async (importOriginal) => {
 
 import OnboardingStep1 from "../src/pages/onboarding/step-1/ui";
 
-describe("Onboarding step 1 toggle semantics", () => {
+describe("Onboarding step 1 option group semantics", () => {
   let container: HTMLDivElement;
   let root: Root;
 
@@ -60,21 +60,29 @@ describe("Onboarding step 1 toggle semantics", () => {
     vi.clearAllMocks();
   });
 
-  it("exposes selected recurring options as pressed toggle buttons", async () => {
+  it("exposes selected recurring options as radio groups", async () => {
     await act(async () => {
       root.render(React.createElement(OnboardingStep1));
     });
 
-    expect(getButton("weekly").getAttribute("aria-pressed")).toBe("true");
-    expect(getButton("once a month").getAttribute("aria-pressed")).toBe("false");
-    expect(getButton("15th of month").getAttribute("aria-pressed")).toBe("true");
-    expect(getButton("1st of month").getAttribute("aria-pressed")).toBe("false");
-    expect(getButton("$1M").getAttribute("aria-pressed")).toBe("true");
-    expect(getButton("$500,000").getAttribute("aria-pressed")).toBe("false");
+    const groups = Array.from(container.querySelectorAll("[role='radiogroup']"));
+
+    expect(groups.map((group) => group.getAttribute("aria-label"))).toEqual([
+      "Recurring investment frequency",
+      "Recurring investment debit day",
+      "Recurring investment amount",
+    ]);
+
+    expect(getRadio("weekly").getAttribute("aria-checked")).toBe("true");
+    expect(getRadio("once a month").getAttribute("aria-checked")).toBe("false");
+    expect(getRadio("15th of month").getAttribute("aria-checked")).toBe("true");
+    expect(getRadio("1st of month").getAttribute("aria-checked")).toBe("false");
+    expect(getRadio("$1M").getAttribute("aria-checked")).toBe("true");
+    expect(getRadio("$500,000").getAttribute("aria-checked")).toBe("false");
   });
 
-  function getButton(name: string): HTMLButtonElement {
-    const button = Array.from(container.querySelectorAll("button")).find(
+  function getRadio(name: string): HTMLButtonElement {
+    const button = Array.from(container.querySelectorAll("button[role='radio']")).find(
       (candidate) => candidate.textContent?.trim() === name,
     );
 
