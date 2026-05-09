@@ -4,7 +4,7 @@
  * Slides in from right, covers entire viewport.
  */
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import hushhLogo from "../images/Hushhogo.png";
 import { useAuthSession } from "../../auth/AuthSessionProvider";
 import { useModalKeyboardNavigation } from "../../hooks/useModalKeyboardNavigation";
@@ -78,6 +78,10 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
     navigate(path);
   };
 
+  const handleLinkClick = () => {
+    onClose();
+  };
+
   const handleLogout = async () => {
     onClose();
     await signOut();
@@ -138,8 +142,9 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
           <ul className="grid grid-cols-2 gap-2 md:gap-3 list-none m-0 p-0">
             {NAV_ITEMS.map((item) => (
               <li key={item.path}>
-              <button
-                onClick={() => handleNavigate(item.path)}
+              <Link
+                to={item.path}
+                onClick={handleLinkClick}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
               >
                 <div className="w-7 h-7 rounded-full bg-gray-50 group-hover:bg-hushh-blue/10 border border-transparent group-hover:border-hushh-blue/20 flex items-center justify-center transition-all shrink-0">
@@ -150,7 +155,7 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                 <span className="text-[0.9rem] font-medium text-gray-900 tracking-wide group-hover:text-hushh-blue transition-colors leading-tight">
                   {item.label}
                 </span>
-              </button>
+              </Link>
               </li>
             ))}
           </ul>
@@ -160,8 +165,9 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
           <nav aria-label="Featured action">
           <ul className="list-none m-0 p-0">
           <li>
-          <button
-            onClick={() => handleNavigate(HIGHLIGHT_ITEM.path)}
+          <Link
+            to={HIGHLIGHT_ITEM.path}
+            onClick={handleLinkClick}
             className="group flex items-center gap-4 py-3.5 my-3 px-3 rounded-xl bg-hushh-blue/5 border border-hushh-blue/20 w-full text-left hover:bg-hushh-blue/10 transition-colors"
           >
             <div className="w-8 h-8 rounded-full bg-white border border-hushh-blue/20 flex items-center justify-center">
@@ -180,7 +186,7 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
             <span className="ml-auto material-symbols-outlined text-hushh-blue/40 !text-[1rem]">
               arrow_forward
             </span>
-          </button>
+          </Link>
           </li>
           </ul>
           </nav>
@@ -190,8 +196,9 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
           <ul className="grid grid-cols-2 gap-2 md:gap-3 list-none m-0 p-0">
             {BOTTOM_NAV.map((item) => (
               <li key={item.path}>
-              <button
-                onClick={() => handleNavigate(item.path)}
+              <Link
+                to={item.path}
+                onClick={handleLinkClick}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
               >
                 <div className="w-7 h-7 rounded-full bg-gray-50 group-hover:bg-hushh-blue/10 border border-transparent group-hover:border-hushh-blue/20 flex items-center justify-center transition-all shrink-0">
@@ -202,7 +209,7 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                 <span className="text-[0.9rem] font-medium text-gray-900 tracking-wide group-hover:text-hushh-blue transition-colors">
                   {item.label}
                 </span>
-              </button>
+              </Link>
               </li>
             ))}
           </ul>
@@ -215,8 +222,9 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
             <nav aria-label="Account menu">
             <ul className="list-none m-0 p-0 space-y-4">
               <li>
-              <button
-                onClick={() => handleNavigate("/hushh-user-profile")}
+              <Link
+                to="/hushh-user-profile"
+                onClick={handleLinkClick}
                 className="flex items-center gap-5 group w-full text-left"
               >
                 <div className="w-8 h-8 rounded-full bg-hushh-blue text-white flex items-center justify-center">
@@ -225,7 +233,7 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                 <span className="text-[0.95rem] font-medium text-gray-900 tracking-wide group-hover:text-hushh-blue transition-colors">
                   View Profile
                 </span>
-              </button>
+              </Link>
               </li>
 
               <li className="pl-[3.25rem]">
@@ -250,8 +258,9 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
             <nav aria-label="Account menu">
             <ul className="grid grid-cols-2 gap-2 md:gap-3 list-none m-0 p-0">
               <li>
-              <button
-                onClick={() => handleNavigate("/login")}
+              <Link
+                to="/login"
+                onClick={handleLinkClick}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
               >
                 <span className="material-symbols-outlined text-gray-400 group-hover:text-hushh-blue transition-colors !text-[1rem]">
@@ -260,11 +269,12 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                 <span className="text-[0.9rem] font-medium text-gray-900 tracking-wide group-hover:text-hushh-blue transition-colors">
                   Log In
                 </span>
-              </button>
+              </Link>
               </li>
               <li>
-              <button
-                onClick={() => handleNavigate("/signup")}
+              <Link
+                to="/signup"
+                onClick={handleLinkClick}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
               >
                 <span className="material-symbols-outlined text-gray-400 group-hover:text-hushh-blue transition-colors !text-[1rem]">
@@ -273,7 +283,7 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                 <span className="text-[0.9rem] font-medium text-gray-900 tracking-wide group-hover:text-hushh-blue transition-colors">
                   Sign Up
                 </span>
-              </button>
+              </Link>
               </li>
             </ul>
             </nav>

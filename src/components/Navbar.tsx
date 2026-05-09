@@ -239,8 +239,8 @@ export default function Navbar() {
               const active = isActive(path);
               return (
                 <li key={path}>
-                <button
-                  onClick={() => handleLinkClick(path)}
+                <Link
+                  to={path}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     active
                       ? 'bg-[#2F80ED]/10 text-[#1f6cc7]'
@@ -248,7 +248,7 @@ export default function Navbar() {
                   }`}
                 >
                   {label}
-                </button>
+                </Link>
                 </li>
               );
             })}
@@ -379,8 +379,9 @@ export default function Navbar() {
                   { path: "/a2a-playground", label: t('nav.kycStudio'), icon: "verified_user", bg: "#FF2D55" },
                 ].map(({ path, label, icon, bg }, idx, arr) => (
                   <li key={path}>
-                  <button
-                    onClick={() => handleLinkClick(path)}
+                  <Link
+                    to={path}
+                    onClick={() => setIsOpen(false)}
                     className="flex items-center w-full min-h-[44px] py-2.5 pr-4 pl-4 active:bg-[#E5E5EA] transition-colors relative"
                   >
                     <div
@@ -399,7 +400,7 @@ export default function Navbar() {
                     {idx < arr.length - 1 && (
                       <div className="absolute bottom-0 right-0 h-[0.5px] bg-[#C6C6C8]" style={{ width: 'calc(100% - 56px)', marginLeft: '56px' }} />
                     )}
-                  </button>
+                  </Link>
                   </li>
                 ))}
               </ul>
@@ -411,8 +412,9 @@ export default function Navbar() {
                   { path: "/faq", label: t('nav.faq'), icon: "help", bg: "#FF9500" },
                 ].map(({ path, label, icon, bg }, idx, arr) => (
                   <li key={path}>
-                  <button
-                    onClick={() => handleLinkClick(path)}
+                  <Link
+                    to={path}
+                    onClick={() => setIsOpen(false)}
                     className="flex items-center w-full min-h-[44px] py-2.5 pr-4 pl-4 active:bg-[#E5E5EA] transition-colors relative"
                   >
                     <div
@@ -430,7 +432,7 @@ export default function Navbar() {
                     {idx < arr.length - 1 && (
                       <div className="absolute bottom-0 right-0 h-[0.5px] bg-[#C6C6C8]" style={{ width: 'calc(100% - 56px)', marginLeft: '56px' }} />
                     )}
-                  </button>
+                  </Link>
                   </li>
                 ))}
               </ul>

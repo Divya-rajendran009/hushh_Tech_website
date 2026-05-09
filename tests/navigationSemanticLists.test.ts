@@ -41,7 +41,7 @@ describe("navigation semantic list structure", () => {
     return element ? Array.from(element.children).map((child) => child.tagName) : [];
   }
 
-  it("renders mobile bottom navigation as a named list of button actions", async () => {
+  it("renders mobile bottom navigation as a named list of links", async () => {
     await act(async () => {
       root.render(
         React.createElement(
@@ -64,7 +64,8 @@ describe("navigation semantic list structure", () => {
     expect(list).not.toBeNull();
     expect(childTags(list)).toEqual(["LI", "LI", "LI", "LI"]);
     expect(items).toHaveLength(4);
-    expect(list?.querySelectorAll("button")).toHaveLength(4);
+    expect(list?.querySelectorAll("a")).toHaveLength(4);
+    expect(list?.querySelectorAll("button")).toHaveLength(0);
   });
 
   it("renders drawer navigation groups as named lists", async () => {
@@ -95,7 +96,8 @@ describe("navigation semantic list structure", () => {
       expect(nav).not.toBeNull();
       expect(list).not.toBeNull();
       expect(childTags(list)).toEqual(Array(itemCount).fill("LI"));
-      expect(list?.querySelectorAll("button")).toHaveLength(itemCount);
+      expect(list?.querySelectorAll("a")).toHaveLength(itemCount);
+      expect(list?.querySelectorAll("button")).toHaveLength(0);
     }
   });
 });

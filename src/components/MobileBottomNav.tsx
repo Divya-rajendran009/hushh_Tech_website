@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { Box, Flex, Text, Icon } from '@chakra-ui/react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FiHome, FiTrendingUp, FiUsers, FiUser } from 'react-icons/fi';
 
 interface NavItem {
@@ -59,7 +59,6 @@ const hiddenOnPages = [
 ];
 
 const MobileBottomNav: React.FC = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   // Check if current page should hide the nav
@@ -120,8 +119,8 @@ const MobileBottomNav: React.FC = () => {
               h="100%"
             >
               <Flex
-                as="button"
-                type="button"
+                as={Link}
+                to={item.path}
                 direction="column"
                 align="center"
                 justify="center"
@@ -130,9 +129,8 @@ const MobileBottomNav: React.FC = () => {
                 w="100%"
                 h="100%"
                 cursor="pointer"
-                onClick={() => navigate(item.path)}
                 transition="all 0.2s ease"
-                border="0"
+                textDecoration="none"
                 bg="transparent"
                 fontFamily="inherit"
                 _active={{ transform: 'scale(0.95)' }}
