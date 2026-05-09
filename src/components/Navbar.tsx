@@ -234,12 +234,12 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <ul className="hidden lg:flex items-center gap-1 list-none m-0 p-0">
             {primaryNavLinks.map(({ path, label }) => {
               const active = isActive(path);
               return (
+                <li key={path}>
                 <button
-                  key={path}
                   onClick={() => handleLinkClick(path)}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     active
@@ -249,9 +249,10 @@ export default function Navbar() {
                 >
                   {label}
                 </button>
+                </li>
               );
             })}
-          </div>
+          </ul>
 
           {/* Right: Utilities */}
           <div className="flex items-center gap-3">
@@ -369,7 +370,7 @@ export default function Navbar() {
               </div>
 
               {/* Section 1: Primary Navigation */}
-              <div className="bg-white rounded-[10px] overflow-hidden mb-5 shadow-sm">
+              <ul className="bg-white rounded-[10px] overflow-hidden mb-5 shadow-sm list-none m-0 p-0">
                 {[
                   { path: "/", label: t('nav.home'), icon: "home", bg: "#007AFF" },
                   { path: "/about/leadership", label: t('nav.ourPhilosophy'), icon: "menu_book", bg: "#34C759" },
@@ -377,8 +378,8 @@ export default function Navbar() {
                   { path: "/community", label: t('nav.community'), icon: "groups", bg: "#FF9500" },
                   { path: "/a2a-playground", label: t('nav.kycStudio'), icon: "verified_user", bg: "#FF2D55" },
                 ].map(({ path, label, icon, bg }, idx, arr) => (
+                  <li key={path}>
                   <button
-                    key={path}
                     onClick={() => handleLinkClick(path)}
                     className="flex items-center w-full min-h-[44px] py-2.5 pr-4 pl-4 active:bg-[#E5E5EA] transition-colors relative"
                   >
@@ -399,17 +400,18 @@ export default function Navbar() {
                       <div className="absolute bottom-0 right-0 h-[0.5px] bg-[#C6C6C8]" style={{ width: 'calc(100% - 56px)', marginLeft: '56px' }} />
                     )}
                   </button>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
               {/* Section 2: Contact & FAQ */}
-              <div className="bg-white rounded-[10px] overflow-hidden mb-5 shadow-sm">
+              <ul className="bg-white rounded-[10px] overflow-hidden mb-5 shadow-sm list-none m-0 p-0">
                 {[
                   { path: "/contact", label: t('nav.contact'), icon: "mail", bg: "#8E8E93" },
                   { path: "/faq", label: t('nav.faq'), icon: "help", bg: "#FF9500" },
                 ].map(({ path, label, icon, bg }, idx, arr) => (
+                  <li key={path}>
                   <button
-                    key={path}
                     onClick={() => handleLinkClick(path)}
                     className="flex items-center w-full min-h-[44px] py-2.5 pr-4 pl-4 active:bg-[#E5E5EA] transition-colors relative"
                   >
@@ -429,8 +431,9 @@ export default function Navbar() {
                       <div className="absolute bottom-0 right-0 h-[0.5px] bg-[#C6C6C8]" style={{ width: 'calc(100% - 56px)', marginLeft: '56px' }} />
                     )}
                   </button>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
               {/* Section 3: Hushh Coins — unlock CTA when 0, full card when > 0 */}
               {isAuthenticated && hushhCoins !== null && hushhCoins === 0 && (

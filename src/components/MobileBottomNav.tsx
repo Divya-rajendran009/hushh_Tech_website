@@ -86,6 +86,8 @@ const MobileBottomNav: React.FC = () => {
 
   return (
     <Box
+      as="nav"
+      aria-label="Primary mobile navigation"
       display={{ base: 'block', md: 'none' }}
       position="fixed"
       bottom="0"
@@ -98,62 +100,77 @@ const MobileBottomNav: React.FC = () => {
       pb="env(safe-area-inset-bottom)"
     >
       <Flex
+        as="ul"
         justify="space-around"
         align="center"
         h="85px"
         maxW="448px"
         mx="auto"
         px="2"
+        m="0"
+        listStyleType="none"
       >
         {navItems.map((item) => {
           const active = isActive(item);
           return (
-            <Flex
+            <Box
+              as="li"
               key={item.id}
-              direction="column"
-              align="center"
-              justify="center"
-              gap="1"
-              p="2"
               flex="1"
               h="100%"
-              cursor="pointer"
-              onClick={() => navigate(item.path)}
-              transition="all 0.2s ease"
-              role="group"
-              _active={{ transform: 'scale(0.95)' }}
             >
-              {/* Icon Container - Blue circle when active */}
               <Flex
+                as="button"
+                type="button"
+                direction="column"
                 align="center"
                 justify="center"
-                w="48px"
-                h="48px"
-                borderRadius="full"
-                bg={active ? '#E8F0FE' : 'transparent'}
+                gap="1"
+                p="2"
+                w="100%"
+                h="100%"
+                cursor="pointer"
+                onClick={() => navigate(item.path)}
                 transition="all 0.2s ease"
+                border="0"
+                bg="transparent"
+                fontFamily="inherit"
+                _active={{ transform: 'scale(0.95)' }}
               >
-                <Icon
-                  as={item.icon}
-                  boxSize={6}
-                  color={active ? '#2F80ED' : '#9CA3AF'}
-                  strokeWidth={active ? 2.5 : 2}
+                {/* Icon Container - Blue circle when active */}
+                <Flex
+                  as="span"
+                  align="center"
+                  justify="center"
+                  w="48px"
+                  h="48px"
+                  borderRadius="full"
+                  bg={active ? '#E8F0FE' : 'transparent'}
                   transition="all 0.2s ease"
-                />
+                >
+                  <Icon
+                    as={item.icon}
+                    boxSize={6}
+                    color={active ? '#2F80ED' : '#9CA3AF'}
+                    strokeWidth={active ? 2.5 : 2}
+                    transition="all 0.2s ease"
+                  />
+                </Flex>
+
+                {/* Label */}
+                <Text
+                  as="span"
+                  fontSize="11px"
+                  fontWeight={active ? '600' : '500'}
+                  color={active ? '#2F80ED' : '#9CA3AF'}
+                  letterSpacing="0.01em"
+                  transition="all 0.2s ease"
+                  mt="-2px"
+                >
+                  {item.label}
+                </Text>
               </Flex>
-              
-              {/* Label */}
-              <Text
-                fontSize="11px"
-                fontWeight={active ? '600' : '500'}
-                color={active ? '#2F80ED' : '#9CA3AF'}
-                letterSpacing="0.01em"
-                transition="all 0.2s ease"
-                mt="-2px"
-              >
-                {item.label}
-              </Text>
-            </Flex>
+            </Box>
           );
         })}
       </Flex>

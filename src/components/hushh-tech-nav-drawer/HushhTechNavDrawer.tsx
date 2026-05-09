@@ -134,10 +134,11 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
       <div className="flex-1 px-5 md:px-6 pt-2 pb-6 flex flex-col justify-between overflow-y-auto">
         <div className="space-y-1">
           {/* Main nav items */}
-          <div className="grid grid-cols-2 gap-2 md:gap-3">
+          <nav aria-label="Main menu">
+          <ul className="grid grid-cols-2 gap-2 md:gap-3 list-none m-0 p-0">
             {NAV_ITEMS.map((item) => (
+              <li key={item.path}>
               <button
-                key={item.path}
                 onClick={() => handleNavigate(item.path)}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
               >
@@ -150,10 +151,15 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                   {item.label}
                 </span>
               </button>
+              </li>
             ))}
-          </div>
+          </ul>
+          </nav>
 
           {/* Highlight card — unlock coins */}
+          <nav aria-label="Featured action">
+          <ul className="list-none m-0 p-0">
+          <li>
           <button
             onClick={() => handleNavigate(HIGHLIGHT_ITEM.path)}
             className="group flex items-center gap-4 py-3.5 my-3 px-3 rounded-xl bg-hushh-blue/5 border border-hushh-blue/20 w-full text-left hover:bg-hushh-blue/10 transition-colors"
@@ -175,12 +181,16 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
               arrow_forward
             </span>
           </button>
+          </li>
+          </ul>
+          </nav>
 
           {/* Bottom nav items */}
-          <div className="grid grid-cols-2 gap-2 md:gap-3">
+          <nav aria-label="Secondary menu">
+          <ul className="grid grid-cols-2 gap-2 md:gap-3 list-none m-0 p-0">
             {BOTTOM_NAV.map((item) => (
+              <li key={item.path}>
               <button
-                key={item.path}
                 onClick={() => handleNavigate(item.path)}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
               >
@@ -193,14 +203,18 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                   {item.label}
                 </span>
               </button>
+              </li>
             ))}
-          </div>
+          </ul>
+          </nav>
         </div>
 
         {/* ── Footer section ── */}
         <div className="mt-12 pt-8 border-t border-gray-100 space-y-6">
           {isAuthenticated ? (
-            <>
+            <nav aria-label="Account menu">
+            <ul className="list-none m-0 p-0 space-y-4">
+              <li>
               <button
                 onClick={() => handleNavigate("/hushh-user-profile")}
                 className="flex items-center gap-5 group w-full text-left"
@@ -212,24 +226,30 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                   View Profile
                 </span>
               </button>
+              </li>
 
-              <div className="flex flex-col gap-4 pl-[3.25rem]">
+              <li className="pl-[3.25rem]">
                 <button
                   onClick={() => void handleLogout()}
                   className="text-left text-[0.85rem] font-medium text-gray-500 hover:text-red-500 transition-colors tracking-wide"
                 >
                   Log Out
                 </button>
+              </li>
+              <li className="pl-[3.25rem]">
                 <button
                   onClick={() => handleNavigate("/delete-account")}
                   className="text-left text-[0.85rem] font-medium text-gray-400 hover:text-red-500 transition-colors tracking-wide"
                 >
                   Delete Account
                 </button>
-              </div>
-            </>
+              </li>
+            </ul>
+            </nav>
           ) : (
-            <div className="grid grid-cols-2 gap-2 md:gap-3">
+            <nav aria-label="Account menu">
+            <ul className="grid grid-cols-2 gap-2 md:gap-3 list-none m-0 p-0">
+              <li>
               <button
                 onClick={() => handleNavigate("/login")}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
@@ -241,6 +261,8 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                   Log In
                 </span>
               </button>
+              </li>
+              <li>
               <button
                 onClick={() => handleNavigate("/signup")}
                 className="group flex items-center gap-3 py-3 px-3 border border-gray-100 hover:border-hushh-blue/20 bg-white hover:bg-hushh-blue/5 transition-colors rounded-xl w-full text-left"
@@ -252,7 +274,9 @@ const HushhTechNavDrawer: React.FC<HushhTechNavDrawerProps> = ({
                   Sign Up
                 </span>
               </button>
-            </div>
+              </li>
+            </ul>
+            </nav>
           )}
 
           {/* Decorative bar */}
