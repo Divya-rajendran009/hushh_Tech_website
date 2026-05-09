@@ -81,6 +81,82 @@ describe("Onboarding step 1 option group semantics", () => {
     expect(getRadio("$500,000").getAttribute("aria-checked")).toBe("false");
   });
 
+  it("keeps only the selected option in each radio group tab order", async () => {
+    await act(async () => {
+      root.render(React.createElement(OnboardingStep1));
+    });
+
+    const [frequencyGroup, dayGroup, amountGroup] = getRadioGroups();
+
+    expect(getGroupTabIndexes(frequencyGroup)).toEqual([-1, -1, 0, -1]);
+    expect(getGroupTabIndexes(dayGroup)).toEqual([-1, 0, -1]);
+    expect(getGroupTabIndexes(amountGroup)).toEqual([-1, -1, 0, -1]);
+  });
+
+  it("supports arrow-key navigation for recurring frequency options", async () => {
+    await act(async () => {
+      root.render(React.createElement(OnboardingStep1));
+    });
+
+    const weekly = getRadio("weekly");
+    const biweekly = getRadio("bi-weekly");
+
+    await act(async () => {
+      weekly.focus();
+      weekly.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+    });
+
+    expect(step1Logic.setFrequency).toHaveBeenCalledWith("every_other_week");
+    expect(document.activeElement).toBe(biweekly);
+  });
+
+  it("supports arrow-key navigation for recurring day options", async () => {
+    await act(async () => {
+      root.render(React.createElement(OnboardingStep1));
+    });
+
+    const fifteenth = getRadio("15th of month");
+    const first = getRadio("1st of month");
+
+    await act(async () => {
+      fifteenth.focus();
+      fifteenth.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+    });
+
+    expect(step1Logic.setInvestmentDay).toHaveBeenCalledWith("1st of the month");
+    expect(document.activeElement).toBe(first);
+  });
+
+  it("supports arrow-key navigation for recurring amount options", async () => {
+    await act(async () => {
+      root.render(React.createElement(OnboardingStep1));
+    });
+
+    const oneMillion = getRadio("$1M");
+    const onePointFiveMillion = getRadio("$2M");
+
+    await act(async () => {
+      oneMillion.focus();
+      oneMillion.dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }));
+    });
+
+    expect(step1Logic.handleAmountClick).toHaveBeenCalledWith(1500000);
+    expect(document.activeElement).toBe(onePointFiveMillion);
+  });
+
+  function getRadioGroups(): HTMLElement[] {
+    const groups = Array.from(container.querySelectorAll<HTMLElement>("[role='radiogroup']"));
+
+    expect(groups).toHaveLength(3);
+    return groups;
+  }
+
+  function getGroupTabIndexes(group: HTMLElement): number[] {
+    return Array.from(group.querySelectorAll<HTMLButtonElement>("button[role='radio']")).map(
+      (radio) => radio.tabIndex,
+    );
+  }
+
   function getRadio(name: string): HTMLButtonElement {
     const button = Array.from(container.querySelectorAll("button[role='radio']")).find(
       (candidate) => candidate.textContent?.trim() === name,

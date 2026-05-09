@@ -3,6 +3,7 @@
  * Matches the refined HTML design. Logic stays in logic.ts.
  * Uses HushhTechBackHeader + HushhTechCta reusable components.
  */
+import type { KeyboardEvent } from "react";
 import {
   useStep1Logic,
   SHARE_CLASSES,
@@ -40,6 +41,61 @@ const DAY_OPTIONS = [
 const CURRENT_STEP = 1;
 const PROGRESS_PCT = Math.round((CURRENT_STEP / TOTAL_STEPS) * 100);
 
+type RadioOptionValue = string | number;
+
+const RADIO_NAV_KEYS = new Set([
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowUp",
+  "End",
+  "Home",
+]);
+
+const getNextRadioIndex = (
+  key: string,
+  currentIndex: number,
+  optionCount: number,
+) => {
+  if (key === "Home") return 0;
+  if (key === "End") return optionCount - 1;
+  if (key === "ArrowRight" || key === "ArrowDown") {
+    return (currentIndex + 1) % optionCount;
+  }
+  if (key === "ArrowLeft" || key === "ArrowUp") {
+    return (currentIndex - 1 + optionCount) % optionCount;
+  }
+  return currentIndex;
+};
+
+const getRadioTabIndex = (selectedIndex: number, optionIndex: number) => {
+  const tabbableIndex = selectedIndex === -1 ? 0 : selectedIndex;
+  return optionIndex === tabbableIndex ? 0 : -1;
+};
+
+const focusRadioAtIndex = (
+  event: KeyboardEvent<HTMLButtonElement>,
+  nextIndex: number,
+) => {
+  const radioGroup = event.currentTarget.closest("[role='radiogroup']");
+  const radios = radioGroup?.querySelectorAll<HTMLButtonElement>("[role='radio']");
+  radios?.[nextIndex]?.focus();
+};
+
+const handleRadioKeyDown = <T extends RadioOptionValue>(
+  event: KeyboardEvent<HTMLButtonElement>,
+  options: readonly T[],
+  currentIndex: number,
+  onSelect: (value: T) => void,
+) => {
+  if (!RADIO_NAV_KEYS.has(event.key)) return;
+
+  event.preventDefault();
+  const nextIndex = getNextRadioIndex(event.key, currentIndex, options.length);
+  onSelect(options[nextIndex]);
+  focusRadioAtIndex(event, nextIndex);
+};
+
 export default function OnboardingStep1() {
   const {
     units,
@@ -61,6 +117,11 @@ export default function OnboardingStep1() {
     handleNext,
     handleBack,
   } = useStep1Logic();
+  const frequencyValues = FREQ_OPTIONS.map((option) => option.value);
+  const dayValues = DAY_OPTIONS.map((option) => option.value);
+  const selectedFrequencyIndex = FREQ_OPTIONS.findIndex((option) => option.value === frequency);
+  const selectedDayIndex = DAY_OPTIONS.findIndex((option) => option.value === investmentDay);
+  const selectedAmountIndex = AMOUNT_PRESETS.findIndex((amount) => amount === selectedAmount);
 
   return (
     <div className="bg-white text-gray-900 min-h-screen antialiased flex flex-col selection:bg-hushh-blue selection:text-white">
@@ -254,15 +315,24 @@ export default function OnboardingStep1() {
                 role="radiogroup"
                 aria-label="Recurring investment frequency"
               >
-                {FREQ_OPTIONS.map((opt) => {
+                {FREQ_OPTIONS.map((opt, optionIndex) => {
                   const isSelected = frequency === opt.value;
                   return (
                     <button
                       key={opt.value}
                       onClick={() => setFrequency(opt.value)}
+                      onKeyDown={(event) =>
+                        handleRadioKeyDown(
+                          event,
+                          frequencyValues,
+                          optionIndex,
+                          setFrequency,
+                        )
+                      }
                       type="button"
                       role="radio"
                       aria-checked={isSelected}
+                      tabIndex={getRadioTabIndex(selectedFrequencyIndex, optionIndex)}
                       className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
@@ -301,15 +371,24 @@ export default function OnboardingStep1() {
                 role="radiogroup"
                 aria-label="Recurring investment debit day"
               >
-                {DAY_OPTIONS.map((opt) => {
+                {DAY_OPTIONS.map((opt, optionIndex) => {
                   const isSelected = investmentDay === opt.value;
                   return (
                     <button
                       key={opt.value}
                       onClick={() => setInvestmentDay(opt.value)}
+                      onKeyDown={(event) =>
+                        handleRadioKeyDown(
+                          event,
+                          dayValues,
+                          optionIndex,
+                          setInvestmentDay,
+                        )
+                      }
                       type="button"
                       role="radio"
                       aria-checked={isSelected}
+                      tabIndex={getRadioTabIndex(selectedDayIndex, optionIndex)}
                       className={`flex-shrink-0 px-4 py-2.5 text-xs font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
@@ -348,15 +427,24 @@ export default function OnboardingStep1() {
                 role="radiogroup"
                 aria-label="Recurring investment amount"
               >
-                {AMOUNT_PRESETS.map((amt) => {
+                {AMOUNT_PRESETS.map((amt, optionIndex) => {
                   const isSelected = selectedAmount === amt;
                   return (
                     <button
                       key={amt}
                       onClick={() => handleAmountClick(amt)}
+                      onKeyDown={(event) =>
+                        handleRadioKeyDown(
+                          event,
+                          AMOUNT_PRESETS,
+                          optionIndex,
+                          handleAmountClick,
+                        )
+                      }
                       type="button"
                       role="radio"
                       aria-checked={isSelected}
+                      tabIndex={getRadioTabIndex(selectedAmountIndex, optionIndex)}
                       className={`flex-shrink-0 px-5 py-2.5 text-xs font-mono font-medium transition whitespace-nowrap border rounded-full ${
                         isSelected
                           ? "bg-hushh-blue text-white border-hushh-blue shadow-md"
