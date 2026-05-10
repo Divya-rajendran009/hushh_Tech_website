@@ -183,6 +183,15 @@ describe("PublicInvestorProfilePage", () => {
     expect(container.textContent).toContain("Verified Investor Profile");
     expect(container.textContent).toContain("Verified");
     expect(container.textContent).toContain("Investment Profile");
+
+    const walletActions = container.querySelector(
+      '[data-testid="public-profile-wallet-actions"]'
+    );
+    const walletButtons = walletActions?.querySelectorAll("button");
+
+    expect(walletActions?.className).toContain("flex-wrap");
+    expect(walletButtons?.[0]?.className).toContain("min-w-[9.5rem]");
+    expect(walletButtons?.[1]?.className).toContain("min-w-[9.5rem]");
   });
 
   it("shows basic shared pages for unconfirmed public profiles without verified copy", async () => {

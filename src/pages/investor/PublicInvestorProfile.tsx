@@ -402,11 +402,14 @@ const PublicInvestorProfilePage: React.FC = () => {
               <>
                 {/* Wallet Buttons - Top */}
                 <section className="pt-6 pb-2">
-                  <div className="flex items-center justify-center gap-4">
+                  <div
+                    className="flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+                    data-testid="public-profile-wallet-actions"
+                  >
                     <button
                       onClick={handleAppleWalletPass}
                       disabled={isApplePassLoading || !appleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-[9.5rem] flex-1 items-center justify-center gap-2.5 px-5 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed sm:flex-none sm:px-6"
                       aria-label="Add to Apple Wallet"
                     >
                       <FaApple className="w-5 h-5 text-black" />
@@ -417,7 +420,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                     <button
                       onClick={handleGoogleWalletPass}
                       disabled={isGooglePassLoading || !googleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-[9.5rem] flex-1 items-center justify-center gap-2.5 px-5 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed sm:flex-none sm:px-6"
                       aria-label="Add to Google Wallet"
                     >
                       <FaGoogle className="w-4 h-4" style={{ color: '#4285F4' }} />
