@@ -411,8 +411,6 @@ const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, o
               {isExpanded && (
                 <div
                   id={panelId}
-                  role="region"
-                  aria-labelledby={triggerId}
                   className="p-3 space-y-2 bg-white"
                 >
                   {categoryPrefs.map(([fieldName, value]) => {

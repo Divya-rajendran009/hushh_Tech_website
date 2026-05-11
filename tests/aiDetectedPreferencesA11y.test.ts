@@ -66,7 +66,7 @@ describe("AIDetectedPreferences accessibility", () => {
     });
   }
 
-  it("labels collapsible AI analytics categories with their trigger state and controlled region", async () => {
+  it("labels collapsible AI analytics categories without nested duplicate landmarks", async () => {
     await renderPreferences();
 
     const trigger = Array.from(container.querySelectorAll("button")).find((button) =>
@@ -78,8 +78,9 @@ describe("AIDetectedPreferences accessibility", () => {
     expect(trigger?.id).toBe("ai-preferences-food-drink-trigger");
 
     const panel = container.querySelector("#ai-preferences-food-drink-panel");
-    expect(panel?.getAttribute("role")).toBe("region");
-    expect(panel?.getAttribute("aria-labelledby")).toBe(trigger?.id);
+    expect(panel).not.toBeNull();
+    expect(panel?.hasAttribute("role")).toBe(false);
+    expect(panel?.hasAttribute("aria-labelledby")).toBe(false);
 
     await act(async () => {
       trigger?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
