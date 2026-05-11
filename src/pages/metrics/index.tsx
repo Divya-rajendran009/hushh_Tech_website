@@ -165,16 +165,19 @@ function MetricCard({
   return (
     <div
       className={`rounded-[1.6rem] border border-gray-200 bg-white px-5 py-5 shadow-sm ${className}`.trim()}
+      data-testid="metric-card"
     >
       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500">
         {eyebrow}
       </p>
-      <h3 className="mt-3 text-[28px] font-semibold tracking-tight text-black">
-        {value}
-      </h3>
-      <p className="mt-2 text-sm font-medium text-gray-700">{label}</p>
+      <div className="mt-4 space-y-1.5" data-testid="metric-label-value-stack">
+        <p className="text-sm font-medium leading-5 text-gray-700">{label}</p>
+        <h3 className="text-[28px] font-semibold leading-none tracking-tight text-black">
+          {value}
+        </h3>
+      </div>
       {hint ? (
-        <p className="mt-1 text-sm leading-6 text-gray-500">{hint}</p>
+        <p className="mt-3 text-sm leading-6 text-gray-500">{hint}</p>
       ) : null}
     </div>
   );
