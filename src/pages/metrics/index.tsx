@@ -149,7 +149,7 @@ function buildLookerStudioLink(rawUrl?: string) {
   }
 }
 
-function MetricCard({
+export function MetricCard({
   eyebrow,
   label,
   value,
@@ -169,10 +169,15 @@ function MetricCard({
       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500">
         {eyebrow}
       </p>
-      <h3 className="mt-3 text-[28px] font-semibold tracking-tight text-black">
+      <h3
+        className="mt-3 text-[28px] font-semibold tracking-tight text-black"
+        aria-label={`${label}: ${value}`}
+      >
         {value}
       </h3>
-      <p className="mt-2 text-sm font-medium text-gray-700">{label}</p>
+      <p className="mt-2 text-sm font-medium text-gray-700" aria-hidden="true">
+        {label}
+      </p>
       {hint ? (
         <p className="mt-1 text-sm leading-6 text-gray-500">{hint}</p>
       ) : null}
