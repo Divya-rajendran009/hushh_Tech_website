@@ -571,19 +571,31 @@ const PublicInvestorProfilePage: React.FC = () => {
                         const isExpanded = expandedFields.has(fieldName);
 
                         return (
-                          <div key={fieldName} className="py-4 border-b border-gray-200">
+                          <div
+                            key={fieldName}
+                            className="py-4 border-b border-gray-200"
+                            data-testid="profile-metadata-row"
+                          >
                             <button
                               onClick={() => toggleField(fieldName)}
-                              className="w-full flex items-center gap-4 text-left"
+                              className="w-full flex items-start gap-3 text-left sm:items-center sm:gap-4"
                             >
                               <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
                                 {getFieldIcon(fieldName)}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-semibold text-gray-900 mb-0.5">{label}</p>
-                                <p className="text-xs text-gray-500 font-medium">{valueText}</p>
+                                <p className="text-sm font-semibold text-gray-900 mb-0.5 whitespace-normal break-words">
+                                  {label}
+                                </p>
+                                <p
+                                  className="text-xs text-gray-500 font-medium leading-relaxed whitespace-normal break-words"
+                                  style={{ overflowWrap: "anywhere" }}
+                                  data-testid="profile-metadata-value"
+                                >
+                                  {valueText}
+                                </p>
                               </div>
-                              <div className="flex items-center gap-2 shrink-0">
+                              <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
                                 <span
                                   className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
                                   style={{ backgroundColor: `${confColor}15`, color: confColor }}
@@ -598,8 +610,11 @@ const PublicInvestorProfilePage: React.FC = () => {
                               </div>
                             </button>
                             {isExpanded && fieldData.rationale && (
-                              <div className="mt-3 ml-14 pl-0">
-                                <p className="text-xs text-gray-500 italic mb-2">
+                              <div className="mt-3 ml-0 sm:ml-14">
+                                <p
+                                  className="text-xs text-gray-500 italic mb-2 leading-relaxed whitespace-normal break-words"
+                                  style={{ overflowWrap: "anywhere" }}
+                                >
                                   {fieldData.rationale}
                                 </p>
                                 <div className="h-0.5 bg-gray-200 rounded-full overflow-hidden">
