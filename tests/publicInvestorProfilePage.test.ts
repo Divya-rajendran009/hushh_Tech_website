@@ -170,6 +170,11 @@ describe("PublicInvestorProfilePage", () => {
           confidence: 0.82,
           rationale: "Matched from profile context",
         },
+        sector_preferences: {
+          value: ["private-credit-and-ai-infrastructure-allocation-with-a-long-custom-note"],
+          confidence: 0.76,
+          rationale: "Long profile metadata should wrap within the card instead of forcing horizontal overflow.",
+        },
       },
       onboarding_data: null,
       shadow_profile: null,
@@ -183,6 +188,15 @@ describe("PublicInvestorProfilePage", () => {
     expect(container.textContent).toContain("Verified Investor Profile");
     expect(container.textContent).toContain("Verified");
     expect(container.textContent).toContain("Investment Profile");
+
+    const metadataValues = container.querySelectorAll('[data-testid="profile-metadata-value"]');
+    const longMetadataValue = Array.from(metadataValues).find((value) =>
+      value.textContent?.includes("private-credit-and-ai-infrastructure")
+    ) as HTMLElement | undefined;
+
+    expect(longMetadataValue).toBeTruthy();
+    expect(longMetadataValue?.className).toContain("break-words");
+    expect(longMetadataValue?.style.overflowWrap).toBe("anywhere");
   });
 
   it("shows basic shared pages for unconfirmed public profiles without verified copy", async () => {

@@ -401,27 +401,27 @@ const PublicInvestorProfilePage: React.FC = () => {
             {activeTab === 'home' && (
               <>
                 {/* Wallet Buttons - Top */}
-                <section className="pt-6 pb-2">
-                  <div className="flex items-center justify-center gap-4">
+                <section className="pt-4 sm:pt-6 pb-2">
+                  <div className="flex flex-col min-[380px]:flex-row items-stretch min-[380px]:items-center justify-center gap-3 min-[380px]:gap-4">
                     <button
                       onClick={handleAppleWalletPass}
                       disabled={isApplePassLoading || !appleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Add to Apple Wallet"
                     >
-                      <FaApple className="w-5 h-5 text-black" />
-                      <span className="text-sm font-medium text-black">
+                      <FaApple className="w-5 h-5 shrink-0 text-black" />
+                      <span className="text-sm font-medium text-black whitespace-nowrap">
                         {isApplePassLoading ? "Loading..." : "Apple Wallet"}
                       </span>
                     </button>
                     <button
                       onClick={handleGoogleWalletPass}
                       disabled={isGooglePassLoading || !googleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Add to Google Wallet"
                     >
-                      <FaGoogle className="w-4 h-4" style={{ color: '#4285F4' }} />
-                      <span className="text-sm font-medium text-black">
+                      <FaGoogle className="w-4 h-4 shrink-0" style={{ color: '#4285F4' }} />
+                      <span className="text-sm font-medium text-black whitespace-nowrap">
                         {isGooglePassLoading ? "Loading..." : "Google Wallet"}
                       </span>
                     </button>
@@ -571,19 +571,31 @@ const PublicInvestorProfilePage: React.FC = () => {
                         const isExpanded = expandedFields.has(fieldName);
 
                         return (
-                          <div key={fieldName} className="py-4 border-b border-gray-200">
+                          <div
+                            key={fieldName}
+                            className="py-4 border-b border-gray-200"
+                            data-testid="profile-metadata-row"
+                          >
                             <button
                               onClick={() => toggleField(fieldName)}
-                              className="w-full flex items-center gap-4 text-left"
+                              className="w-full flex items-start gap-3 text-left sm:items-center sm:gap-4"
                             >
                               <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
                                 {getFieldIcon(fieldName)}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-semibold text-gray-900 mb-0.5">{label}</p>
-                                <p className="text-xs text-gray-500 font-medium">{valueText}</p>
+                                <p className="text-sm font-semibold text-gray-900 mb-0.5 whitespace-normal break-words">
+                                  {label}
+                                </p>
+                                <p
+                                  className="text-xs text-gray-500 font-medium leading-relaxed whitespace-normal break-words"
+                                  style={{ overflowWrap: "anywhere" }}
+                                  data-testid="profile-metadata-value"
+                                >
+                                  {valueText}
+                                </p>
                               </div>
-                              <div className="flex items-center gap-2 shrink-0">
+                              <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
                                 <span
                                   className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
                                   style={{ backgroundColor: `${confColor}15`, color: confColor }}
@@ -598,8 +610,11 @@ const PublicInvestorProfilePage: React.FC = () => {
                               </div>
                             </button>
                             {isExpanded && fieldData.rationale && (
-                              <div className="mt-3 ml-14 pl-0">
-                                <p className="text-xs text-gray-500 italic mb-2">
+                              <div className="mt-3 ml-0 sm:ml-14">
+                                <p
+                                  className="text-xs text-gray-500 italic mb-2 leading-relaxed whitespace-normal break-words"
+                                  style={{ overflowWrap: "anywhere" }}
+                                >
                                   {fieldData.rationale}
                                 </p>
                                 <div className="h-0.5 bg-gray-200 rounded-full overflow-hidden">
