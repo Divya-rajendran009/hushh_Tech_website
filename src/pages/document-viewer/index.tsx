@@ -214,7 +214,7 @@ const DocumentViewerPage: React.FC = () => {
                 if (block.type === 'list-item') {
                   return (
                     <p key={`${block.type}-${index}`} className="pl-5 text-[15px] leading-7 text-slate-700">
-                      <span className="mr-2 text-slate-400">•</span>
+                      <span className="mr-2 text-slate-400" aria-hidden="true">•</span>
                       {block.text}
                     </p>
                   );
