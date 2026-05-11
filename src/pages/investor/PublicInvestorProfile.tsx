@@ -401,27 +401,27 @@ const PublicInvestorProfilePage: React.FC = () => {
             {activeTab === 'home' && (
               <>
                 {/* Wallet Buttons - Top */}
-                <section className="pt-6 pb-2">
-                  <div className="flex items-center justify-center gap-4">
+                <section className="pt-4 sm:pt-6 pb-2">
+                  <div className="flex flex-col min-[380px]:flex-row items-stretch min-[380px]:items-center justify-center gap-3 min-[380px]:gap-4">
                     <button
                       onClick={handleAppleWalletPass}
                       disabled={isApplePassLoading || !appleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Add to Apple Wallet"
                     >
-                      <FaApple className="w-5 h-5 text-black" />
-                      <span className="text-sm font-medium text-black">
+                      <FaApple className="w-5 h-5 shrink-0 text-black" />
+                      <span className="text-sm font-medium text-black whitespace-nowrap">
                         {isApplePassLoading ? "Loading..." : "Apple Wallet"}
                       </span>
                     </button>
                     <button
                       onClick={handleGoogleWalletPass}
                       disabled={isGooglePassLoading || !googleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Add to Google Wallet"
                     >
-                      <FaGoogle className="w-4 h-4" style={{ color: '#4285F4' }} />
-                      <span className="text-sm font-medium text-black">
+                      <FaGoogle className="w-4 h-4 shrink-0" style={{ color: '#4285F4' }} />
+                      <span className="text-sm font-medium text-black whitespace-nowrap">
                         {isGooglePassLoading ? "Loading..." : "Google Wallet"}
                       </span>
                     </button>
