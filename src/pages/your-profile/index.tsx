@@ -7,6 +7,7 @@ import services from '../../services/services';
 import { UserPreferenceProfile } from '../../types/preferences';
 import { useAuthSession } from '../../auth/AuthSessionProvider';
 import { buildLoginRedirectPath } from '../../auth/routePolicy';
+import { AvatarFallback } from '../../components/profile/AvatarFallback';
 
 interface UserProfile {
   hushh_id: string;
@@ -348,9 +349,9 @@ const ProfilePage = () => {
           <div className="px-6 py-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="h-16 w-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
+                <AvatarFallback size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500">
                   <User className="h-8 w-8 text-white" />
-                </div>
+                </AvatarFallback>
                 <div>
                   <h1 className="text-3xl font-bold text-gray-800">{userProfile.name}</h1>
                   <p className="text-gray-600 mt-1">Hushh ID: {userProfile.hushh_id}</p>

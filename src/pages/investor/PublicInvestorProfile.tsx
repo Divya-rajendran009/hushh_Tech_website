@@ -13,6 +13,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { HiMail } from "react-icons/hi";
 import HushhTechBackHeader from "../../components/hushh-tech-back-header/HushhTechBackHeader";
 import HushhTechCta, { HushhTechCtaVariant } from "../../components/hushh-tech-cta/HushhTechCta";
+import { AvatarFallback } from "../../components/profile/AvatarFallback";
 import { useFooterVisibility } from "../../utils/useFooterVisibility";
 import { InvestorChatWidget } from "../../components/InvestorChatWidget";
 import WalletCardPreviewModal from "../../components/wallet/WalletCardPreviewModal";
@@ -216,9 +217,9 @@ const PublicInvestorProfilePage: React.FC = () => {
       <div className="bg-white text-gray-900 min-h-screen antialiased flex flex-col selection:bg-hushh-blue selection:text-white">
         <HushhTechBackHeader onBackClick={() => navigate('/')} rightLabel="FAQs" />
         <main className="px-6 flex-grow max-w-md mx-auto w-full flex flex-col items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
+          <AvatarFallback size="lg" className="bg-gray-100 mx-auto mb-6">
             <User className="w-8 h-8 text-gray-400" />
-          </div>
+          </AvatarFallback>
           <h1
             className="text-[2rem] leading-[1.1] font-normal text-black tracking-tight text-center mb-3 font-serif"
             style={{ fontFamily: "'Playfair Display', serif" }}
@@ -463,9 +464,9 @@ const PublicInvestorProfilePage: React.FC = () => {
                 <section className="mb-8 space-y-0">
                   <div className="py-4 border-b border-gray-200 flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+                      <AvatarFallback className="bg-gray-100">
                         <User className="w-5 h-5 text-gray-600" />
-                      </div>
+                      </AvatarFallback>
                       <div>
                         <p className="text-sm font-semibold text-gray-900">{displayName}</p>
                         <p className="text-xs text-gray-500 font-medium">{secondaryBasicInfoLabel}</p>
@@ -476,25 +477,25 @@ const PublicInvestorProfilePage: React.FC = () => {
                     </span>
                   </div>
                   <div className="py-4 border-b border-gray-200 flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+                    <AvatarFallback className="bg-gray-100">
                       <span className="material-symbols-outlined text-gray-600 text-xl" style={{ fontVariationSettings: "'wght' 400" }}>mail</span>
+                    </AvatarFallback>
+                    <div className="min-w-0 flex-1">
+                      <p
+                        className="text-sm font-semibold text-gray-900 whitespace-normal break-words"
+                        style={{ overflowWrap: "anywhere" }}
+                        data-testid="profile-email-value"
+                      >
+                        {basicInfo.email || 'Contact hidden'}
+                      </p>
+                      <p className="text-xs text-gray-500 font-medium">Contact masked for privacy</p>
                     </div>
-                      <div className="min-w-0 flex-1">
-                        <p
-                          className="text-sm font-semibold text-gray-900 whitespace-normal break-words"
-                          style={{ overflowWrap: "anywhere" }}
-                          data-testid="profile-email-value"
-                        >
-                          {basicInfo.email || 'Contact hidden'}
-                        </p>
-                        <p className="text-xs text-gray-500 font-medium">Contact masked for privacy</p>
-                      </div>
-                    </div>
+                  </div>
                   {basicInfo.organisation && (
                     <div className="py-4 border-b border-gray-200 flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+                      <AvatarFallback className="bg-gray-100">
                         <Briefcase className="w-5 h-5 text-gray-600" />
-                      </div>
+                      </AvatarFallback>
                       <div>
                         <p className="text-sm font-semibold text-gray-900">{basicInfo.organisation}</p>
                         <p className="text-xs text-gray-500 font-medium">Organisation</p>

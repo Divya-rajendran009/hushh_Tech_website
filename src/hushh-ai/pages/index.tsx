@@ -746,6 +746,16 @@ export default function HushhAIPage() {
                         src={userProfile.avatarUrl || undefined}
                         bg={THEME.colors.accent}
                         color="white"
+                        sx={{
+                          ".chakra-avatar__initials": {
+                            alignItems: "center",
+                            display: "flex",
+                            height: "100%",
+                            justifyContent: "center",
+                            lineHeight: 1,
+                            width: "100%",
+                          },
+                        }}
                       />
                       <VStack align="start" spacing={0} flex={1}>
                         <Tooltip label={userProfile.displayName || 'User'} placement="top">
