@@ -4,7 +4,12 @@ import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { DashboardStatusBadge, MetricCard } from "../src/pages/metrics";
+import {
+  AnalyticsToolbar,
+  AnalyticsToolbarLink,
+  DashboardStatusBadge,
+  MetricCard,
+} from "../src/pages/metrics";
 
 describe("metrics MetricCard accessibility", () => {
   let container: HTMLDivElement;
@@ -64,5 +69,37 @@ describe("metrics MetricCard accessibility", () => {
     expect(badge?.textContent).toBe("Live");
     expect(badge?.className).toContain("inline-flex");
     expect(badge?.className).toContain("rounded-full");
+  });
+
+  it("keeps analytics toolbar buttons consistently centered and full width on narrow screens", async () => {
+    await act(async () => {
+      root.render(
+        React.createElement(
+          AnalyticsToolbar,
+          null,
+          React.createElement(
+            AnalyticsToolbarLink,
+            {
+              href: "https://lookerstudio.google.com/reporting/example",
+              target: "_blank",
+              rel: "noreferrer",
+            },
+            "Open Looker traffic view"
+          )
+        )
+      );
+    });
+
+    const toolbar = container.querySelector("div");
+    const button = container.querySelector("a");
+
+    expect(toolbar?.className).toContain("sm:items-center");
+    expect(toolbar?.className).toContain("sm:justify-end");
+    expect(button?.className).toContain("inline-flex");
+    expect(button?.className).toContain("min-h-10");
+    expect(button?.className).toContain("w-full");
+    expect(button?.className).toContain("items-center");
+    expect(button?.className).toContain("justify-center");
+    expect(button?.className).toContain("sm:w-auto");
   });
 });

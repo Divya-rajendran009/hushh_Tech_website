@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type AnchorHTMLAttributes,
+  type ReactNode,
+} from "react";
 import { Helmet } from "react-helmet";
 import {
   Bar,
@@ -147,6 +153,38 @@ function buildLookerStudioLink(rawUrl?: string) {
   } catch {
     return "";
   }
+}
+
+export function AnalyticsToolbar({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
+      {children}
+    </div>
+  );
+}
+
+export function AnalyticsToolbarLink({
+  className = "",
+  children,
+  ...props
+}: AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const classes = [
+    "inline-flex min-h-10 w-full items-center justify-center whitespace-nowrap",
+    "rounded-full border border-black bg-black px-5 py-2 text-sm font-medium leading-none text-white",
+    "transition hover:bg-transparent hover:text-black sm:w-auto",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <a
+      {...props}
+      className={classes}
+    >
+      {children}
+    </a>
+  );
 }
 
 export function MetricCard({
@@ -985,7 +1023,7 @@ export default function MetricsPage() {
           </section>
 
           <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-6 shadow-sm">
-            <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
                   Traffic context
@@ -996,14 +1034,15 @@ export default function MetricsPage() {
               </div>
 
               {lookerStudioLink && (
-                <a
-                  href={lookerStudioLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-full border border-black bg-black px-5 py-2 text-sm font-medium text-white transition hover:bg-transparent hover:text-black"
-                >
-                  Open Looker traffic view
-                </a>
+                <AnalyticsToolbar>
+                  <AnalyticsToolbarLink
+                    href={lookerStudioLink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open Looker traffic view
+                  </AnalyticsToolbarLink>
+                </AnalyticsToolbar>
                 )}
             </div>
 
