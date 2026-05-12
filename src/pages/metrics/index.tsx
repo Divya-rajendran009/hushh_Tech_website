@@ -222,6 +222,26 @@ function SummaryCell({
   );
 }
 
+export function DashboardStatusBadge({
+  label,
+  value,
+  className,
+}: {
+  label: string;
+  value: string;
+  className: string;
+}) {
+  return (
+    <span
+      role="status"
+      aria-label={`${label}: ${value}`}
+      className={`inline-flex rounded-full px-3 py-1 text-[10px] font-semibold uppercase ${className}`.trim()}
+    >
+      {value}
+    </span>
+  );
+}
+
 function SearchPerformanceList({
   title,
   rows,
@@ -597,8 +617,10 @@ export default function MetricsPage() {
                     From signup to confirmation
                   </h2>
                 </div>
-                <span
-                  className={`rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] ${
+                <DashboardStatusBadge
+                  label="Funnel stack status"
+                  value={statusLabel}
+                  className={`tracking-[0.2em] ${
                     statusLabel === "Issue"
                       ? "bg-red-400/20 text-red-200"
                       : statusLabel === "Cached"
@@ -607,9 +629,7 @@ export default function MetricsPage() {
                           ? "bg-white/10 text-white/70"
                           : "bg-emerald-400/15 text-emerald-200"
                   }`}
-                >
-                  {statusLabel}
-                </span>
+                />
               </div>
 
               <div className="mt-6 space-y-4">
@@ -1217,9 +1237,11 @@ export default function MetricsPage() {
                       Separate hushh-api flow
                     </h2>
                   </div>
-                  <div className="rounded-full border border-[#e8dfcb] bg-[#faf5ea] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6f684f]">
-                    Not merged
-                  </div>
+                  <DashboardStatusBadge
+                    label="Legacy appendix status"
+                    value="Not merged"
+                    className="border border-[#e8dfcb] bg-[#faf5ea] tracking-[0.18em] text-[#6f684f]"
+                  />
                 </div>
 
                 <div className="mt-6 rounded-2xl border border-[#ece4d2] bg-[#faf5ea] px-4 py-4">
@@ -1250,9 +1272,11 @@ export default function MetricsPage() {
                         Runtime warnings
                       </h2>
                     </div>
-                    <div className="rounded-full border border-amber-200 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-800">
-                      {warnings.length} note{warnings.length === 1 ? "" : "s"}
-                    </div>
+                    <DashboardStatusBadge
+                      label="Audit notes status"
+                      value={`${warnings.length} note${warnings.length === 1 ? "" : "s"}`}
+                      className="border border-amber-200 bg-white/70 tracking-[0.18em] text-amber-800"
+                    />
                   </div>
 
                   <div className="mt-5 grid gap-3">
