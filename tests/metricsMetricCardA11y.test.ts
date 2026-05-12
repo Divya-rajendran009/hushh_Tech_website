@@ -8,6 +8,7 @@ import {
   AnalyticsToolbar,
   AnalyticsToolbarLink,
   DashboardStatusBadge,
+  EmbeddedChartFrame,
   MetricCard,
 } from "../src/pages/metrics";
 
@@ -74,6 +75,32 @@ describe("metrics MetricCard accessibility", () => {
     expect(badge?.className).toContain("justify-center");
     expect(badge?.className).toContain("leading-none");
     expect(badge?.className).toContain("rounded-full");
+  });
+
+  it("contains embedded charts in a horizontal scroll frame", async () => {
+    await act(async () => {
+      root.render(
+        React.createElement(
+          EmbeddedChartFrame,
+          {
+            minWidth: 620,
+            height: 340,
+            className: "mt-6",
+          },
+          React.createElement("div", { "data-testid": "chart" })
+        )
+      );
+    });
+
+    const chart = container.querySelector('[data-testid="chart"]');
+    const frameInner = chart?.parentElement;
+    const frame = frameInner?.parentElement;
+
+    expect(frame?.className).toContain("overflow-x-auto");
+    expect(frame?.className).toContain("max-w-full");
+    expect(frame?.className).toContain("overscroll-x-contain");
+    expect(frameInner?.style.minWidth).toBe("620px");
+    expect(frameInner?.style.height).toBe("340px");
   });
 
   it("keeps analytics toolbar buttons consistently centered and full width on narrow screens", async () => {

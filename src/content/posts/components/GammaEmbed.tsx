@@ -23,6 +23,8 @@ const GammaEmbed: React.FC<GammaEmbedProps> = ({ title, description, src }) => {
       <Box
         bg="#f8fafc"
         minH="100vh"
+        maxW="100vw"
+        overflowX="hidden"
         px={{ base: 4, md: 8 }}
         pt={{ base: 20, md: 24 }}
         pb={{ base: 12, md: 16 }}
@@ -33,6 +35,7 @@ const GammaEmbed: React.FC<GammaEmbedProps> = ({ title, description, src }) => {
           title={title}
           allowFullScreen
           width="100%"
+          maxW="100%"
           minHeight={{ base: "70vh", md: "80vh" }}
           border="0"
           display="block"

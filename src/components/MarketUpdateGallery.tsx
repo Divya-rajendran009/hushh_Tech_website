@@ -172,7 +172,14 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
   };
 
   return (
-    <Box as="section" mt={8} aria-labelledby={galleryHeadingId}>
+    <Box
+      as="section"
+      mt={8}
+      w="100%"
+      maxW="100%"
+      overflowX="hidden"
+      aria-labelledby={galleryHeadingId}
+    >
       <Heading
         as="h3"
         id={galleryHeadingId}
@@ -184,7 +191,7 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
       </Heading>
       
       {/* Gallery of images */}
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} w="100%">
         {isLoading ? (
           // Show skeletons while loading
           renderSkeletons()
@@ -195,6 +202,9 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
               as="button"
               type="button"
               key={image.name} 
+              w="100%"
+              maxW="100%"
+              minW={0}
               borderRadius="lg" 
               overflow="hidden"
               boxShadow="md"
@@ -226,8 +236,10 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
                   src={image.url}
                   alt={`Market Analysis Chart ${getChartLabel(image.name)}`}
                   borderRadius="md"
+                  display="block"
                   objectFit="contain"
                   w="100%"
+                  maxW="100%"
                   minH="300px"
                   maxH="400px"
                   loading="lazy"
