@@ -18,6 +18,24 @@ import { InvestorProfileReview } from "../../components/investorProfile/Investor
 import WalletCardPreviewModal from "../../components/wallet/WalletCardPreviewModal";
 import { useInvestorProfileLogic } from "./logic";
 
+const walletCardActionDisabledStyles = {
+  bg: "gray.100",
+  borderColor: "gray.200",
+  color: "gray.400",
+  cursor: "not-allowed",
+  opacity: 1,
+  transform: "none",
+  _hover: {
+    bg: "gray.100",
+    borderColor: "gray.200",
+    transform: "none",
+  },
+  _active: {
+    bg: "gray.100",
+    transform: "none",
+  },
+};
+
 function InvestorProfilePage() {
   const {
     step,
@@ -182,6 +200,7 @@ function InvestorProfilePage() {
                   gap={2}
                   _hover={{ bg: "#F8FAFC" }}
                   _active={{ bg: "#F1F5F9", transform: "scale(0.98)" }}
+                  _disabled={walletCardActionDisabledStyles}
                 >
                   <Icon as={FaApple} boxSize={6} />
                 </Button>
@@ -205,6 +224,7 @@ function InvestorProfilePage() {
                   gap={2}
                   _hover={{ bg: "#F8FAFC" }}
                   _active={{ bg: "#F1F5F9", transform: "scale(0.98)" }}
+                  _disabled={walletCardActionDisabledStyles}
                 >
                   <Icon as={FaGoogle} boxSize={6} />
                 </Button>

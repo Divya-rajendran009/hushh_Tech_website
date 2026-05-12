@@ -16,6 +16,14 @@ import NWSScoreBadge from "../../components/profile/NWSScoreBadge";
 import { PrivacyShield } from "../../components/profile/PrivacyShield";
 import WalletCardPreviewModal from "../../components/wallet/WalletCardPreviewModal";
 
+const walletCardActionClassName = [
+  "border border-gray-200 rounded-2xl py-3 px-4 flex items-center justify-center gap-2",
+  "text-black hover:border-hushh-blue/30 transition-colors",
+  "disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:opacity-100 disabled:cursor-not-allowed",
+  "disabled:hover:border-gray-200 disabled:hover:bg-gray-100 disabled:active:scale-100",
+  "disabled:[&_svg]:grayscale disabled:[&_svg]:opacity-60 disabled:[&_span]:text-gray-400",
+].join(" ");
+
 /* ── Playfair heading style ── */
 const playfair = { fontFamily: "'Playfair Display', serif" };
 
@@ -428,12 +436,12 @@ const HushhUserProfilePage: React.FC = () => {
               type="button"
               onClick={handleAppleWalletPass}
               disabled={isApplePassLoading || !appleWalletSupported}
-              className="border border-gray-200 rounded-2xl py-3 px-4 flex items-center justify-center gap-2 hover:border-hushh-blue/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className={walletCardActionClassName}
             >
               <FaApple className="text-lg" />
               <span className="text-xs font-medium">{isApplePassLoading ? "Loading..." : "Apple Wallet"}</span>
             </button>
-            <button type="button" onClick={handleGoogleWalletPass} disabled={isGooglePassLoading || !googleWalletSupported} className="border border-gray-200 rounded-2xl py-3 px-4 flex items-center justify-center gap-2 hover:border-hushh-blue/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <button type="button" onClick={handleGoogleWalletPass} disabled={isGooglePassLoading || !googleWalletSupported} className={walletCardActionClassName}>
               <FcGoogle className="text-lg" />
               <span className="text-xs font-medium">{isGooglePassLoading ? "Loading..." : "Google Wallet"}</span>
             </button>

@@ -145,4 +145,27 @@ describe("HushhUserProfile PrivacyShield integration", () => {
       container.querySelectorAll('input[role="switch"]'),
     ).toHaveLength(2);
   });
+
+  it("uses muted disabled styling for unsupported wallet card actions", async () => {
+    await act(async () => {
+      root.render(React.createElement(HushhUserProfilePage));
+    });
+
+    const appleButton = Array.from(container.querySelectorAll("button")).find(
+      (button) => button.textContent?.includes("Apple Wallet"),
+    );
+    const googleButton = Array.from(container.querySelectorAll("button")).find(
+      (button) => button.textContent?.includes("Google Wallet"),
+    );
+
+    for (const button of [appleButton, googleButton]) {
+      expect(button).toBeInstanceOf(HTMLButtonElement);
+      expect((button as HTMLButtonElement).disabled).toBe(true);
+      expect(button?.className).toContain("disabled:bg-gray-100");
+      expect(button?.className).toContain("disabled:text-gray-400");
+      expect(button?.className).toContain("disabled:opacity-100");
+      expect(button?.className).toContain("disabled:hover:bg-gray-100");
+      expect(button?.className).toContain("disabled:active:scale-100");
+    }
+  });
 });

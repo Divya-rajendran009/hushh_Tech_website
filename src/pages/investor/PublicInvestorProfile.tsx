@@ -38,6 +38,14 @@ import {
 
 type TabType = 'home' | 'chat';
 
+const walletCardActionClassName = [
+  "flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6",
+  "bg-[#F5F5F5] text-black rounded-full transition-all hover:bg-gray-200 active:scale-[0.97]",
+  "disabled:bg-gray-100 disabled:text-gray-400 disabled:opacity-100 disabled:cursor-not-allowed",
+  "disabled:hover:bg-gray-100 disabled:active:scale-100",
+  "disabled:[&_svg]:grayscale disabled:[&_svg]:opacity-60 disabled:[&_span]:text-gray-400",
+].join(" ");
+
 const PublicInvestorProfilePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -406,7 +414,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                     <button
                       onClick={handleAppleWalletPass}
                       disabled={isApplePassLoading || !appleWalletSupported}
-                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className={walletCardActionClassName}
                       aria-label="Add to Apple Wallet"
                     >
                       <FaApple className="w-5 h-5 shrink-0 text-black" />
@@ -417,7 +425,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                     <button
                       onClick={handleGoogleWalletPass}
                       disabled={isGooglePassLoading || !googleWalletSupported}
-                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className={walletCardActionClassName}
                       aria-label="Add to Google Wallet"
                     >
                       <FaGoogle className="w-4 h-4 shrink-0" style={{ color: '#4285F4' }} />
