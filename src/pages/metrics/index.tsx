@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Helmet } from "react-helmet";
 import {
   Bar,
@@ -219,6 +219,40 @@ function SummaryCell({
         {value}
       </p>
     </div>
+  );
+}
+
+export function DashboardStatSection({
+  id,
+  title,
+  description,
+  className,
+  children,
+}: {
+  id: string;
+  title: string;
+  description?: string;
+  className: string;
+  children: ReactNode;
+}) {
+  const descriptionId = description ? `${id}-description` : undefined;
+
+  return (
+    <section
+      aria-labelledby={id}
+      aria-describedby={descriptionId}
+      className={className}
+    >
+      <h2 id={id} className="sr-only">
+        {title}
+      </h2>
+      {description ? (
+        <p id={descriptionId} className="sr-only">
+          {description}
+        </p>
+      ) : null}
+      {children}
+    </section>
   );
 }
 
@@ -484,7 +518,12 @@ export default function MetricsPage() {
                   </div>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2 xl:w-[22rem]">
+                <DashboardStatSection
+                  id="dashboard-refresh-summary"
+                  title="Dashboard refresh summary"
+                  description="Current reporting window, data freshness, and supporting traffic availability."
+                  className="grid gap-3 sm:grid-cols-2 xl:w-[22rem]"
+                >
                   <SummaryCell
                     label="Window"
                     value={
@@ -517,10 +556,15 @@ export default function MetricsPage() {
                           : "GA4 degraded"
                     }
                   />
-                </div>
+                </DashboardStatSection>
               </div>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              <DashboardStatSection
+                id="business-kpi-stats"
+                title="Business KPI stats"
+                description="Primary website signup, onboarding, and profile totals for the selected reporting window."
+                className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+              >
                 <MetricCard
                   eyebrow="Website KPI"
                   label="Raw signups"
@@ -581,7 +625,7 @@ export default function MetricsPage() {
                   }
                   className="bg-white/90"
                 />
-              </div>
+              </DashboardStatSection>
             </div>
 
             <aside className="rounded-[2rem] border border-black bg-[#050505] p-6 text-white shadow-2xl md:p-8">
@@ -624,7 +668,12 @@ export default function MetricsPage() {
                 ))}
               </div>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <DashboardStatSection
+                id="funnel-stack-context"
+                title="Funnel stack context"
+                description="Source, reporting window, and traffic context for the signup-to-confirmation funnel."
+                className="mt-6 grid gap-3 sm:grid-cols-2"
+              >
                 <SummaryCell
                   label="Source"
                   value="Website Supabase"
@@ -653,7 +702,7 @@ export default function MetricsPage() {
                   }
                   theme="dark"
                 />
-              </div>
+              </DashboardStatSection>
 
               {summary.error ? (
                 <div className="mt-6 rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm leading-6 text-red-100">
@@ -674,7 +723,12 @@ export default function MetricsPage() {
             </section>
           )}
 
-          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <DashboardStatSection
+            id="supporting-dashboard-stats"
+            title="Supporting dashboard stats"
+            description="Audience, search, infrastructure, and SEO metrics that support the primary business KPIs."
+            className="grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+          >
             <MetricCard
               eyebrow="Audience"
               label="Daily active users"
@@ -739,7 +793,7 @@ export default function MetricsPage() {
               }
               hint={searchPerformance?.realtime ? "Realtime" : "Fresh, not realtime"}
             />
-          </section>
+          </DashboardStatSection>
 
           <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-6 shadow-sm">
             <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
@@ -987,7 +1041,12 @@ export default function MetricsPage() {
                 )}
             </div>
 
-            <div className="mt-6 grid gap-3 md:grid-cols-3">
+            <DashboardStatSection
+              id="traffic-source-summary"
+              title="Traffic source summary"
+              description="Traffic provider, realtime count, and supporting traffic status."
+              className="mt-6 grid gap-3 md:grid-cols-3"
+            >
               <SummaryCell
                 label="Traffic source"
                 value={summary.data?.traffic.source || "GA4 Data API"}
@@ -1008,9 +1067,14 @@ export default function MetricsPage() {
                     : "Supporting metrics degraded"
                 }
               />
-            </div>
+            </DashboardStatSection>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <DashboardStatSection
+              id="traffic-dashboard-stats"
+              title="Traffic dashboard stats"
+              description="Daily, weekly, and monthly traffic, sessions, views, new users, engagement, and active user totals."
+              className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+            >
               <MetricCard
                 eyebrow="Traffic"
                 label="DAU / WAU / MAU"
@@ -1067,7 +1131,7 @@ export default function MetricsPage() {
                     : "…"
                 }
               />
-            </div>
+            </DashboardStatSection>
 
             <div className="mt-6 rounded-[1.6rem] border border-[#e8dfcb] bg-white p-4 sm:p-5">
               <div className="overflow-x-auto pb-2">
