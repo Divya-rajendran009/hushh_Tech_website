@@ -494,9 +494,13 @@ const FundA = () => {
           {shareClasses.map((sc) => (
             <div
               key={sc.shareClass}
+              data-testid="share-class-pricing-card"
               className="border border-gray-200 rounded-2xl p-5 hover:border-gray-300 hover:bg-gray-50/40 transition-all"
             >
-              <div className="flex items-center justify-between mb-3">
+              <div
+                data-testid="share-class-pricing-header"
+                className="flex flex-col items-start gap-3 mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:mb-3"
+              >
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full bg-ios-dark flex items-center justify-center">
                     <span className="material-symbols-outlined text-white !text-[0.9rem]">
@@ -507,11 +511,14 @@ const FundA = () => {
                     {sc.shareClass}
                   </span>
                 </div>
-                <span className="text-[11px] font-medium text-hushh-blue bg-hushh-blue/10 px-2.5 py-1 rounded-full">
+                <span className="inline-flex max-w-full text-[11px] font-medium text-hushh-blue bg-hushh-blue/10 px-2.5 py-1 rounded-full">
                   Min {sc.minInvestment}
                 </span>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div
+                data-testid="share-class-pricing-metrics"
+                className="grid grid-cols-1 gap-2 sm:grid-cols-3"
+              >
                 <div className="text-center rounded-xl border border-gray-200 bg-white px-2 py-2 transition-all hover:border-hushh-blue/40 hover:bg-hushh-blue/5">
                   <p className="text-[9px] uppercase tracking-widest text-gray-400 mb-0.5">
                     Mgmt

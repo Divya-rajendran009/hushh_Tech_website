@@ -54,6 +54,20 @@ vi.mock("../src/pages/discover-fund-a/logic", () => ({
         performanceFee: "15%",
         hurdleRate: "12%",
       },
+      {
+        shareClass: "Class B",
+        minInvestment: "$5M",
+        managementFee: "1.5%",
+        performanceFee: "15%",
+        hurdleRate: "10%",
+      },
+      {
+        shareClass: "Class C",
+        minInvestment: "$1M",
+        managementFee: "1.5%",
+        performanceFee: "25%",
+        hurdleRate: "8%",
+      },
     ],
     joinSectionTitle: "Join",
     joinSectionDescription: "Complete profile",
@@ -122,6 +136,36 @@ describe("FundA footer shell", () => {
     expect(featureIcons.length).toBeGreaterThan(0);
     featureIcons.forEach((icon) => {
       expect(icon.getAttribute("aria-hidden")).toBe("true");
+    });
+  });
+
+  it("stacks share class pricing details on narrow viewports before widening", async () => {
+    await act(async () => {
+      root.render(React.createElement(FundA));
+    });
+
+    const pricingCards = Array.from(
+      container.querySelectorAll('[data-testid="share-class-pricing-card"]'),
+    );
+    const pricingHeaders = Array.from(
+      container.querySelectorAll('[data-testid="share-class-pricing-header"]'),
+    );
+    const pricingMetrics = Array.from(
+      container.querySelectorAll('[data-testid="share-class-pricing-metrics"]'),
+    );
+
+    expect(pricingCards).toHaveLength(3);
+    expect(pricingHeaders).toHaveLength(pricingCards.length);
+    expect(pricingMetrics).toHaveLength(pricingCards.length);
+
+    pricingHeaders.forEach((pricingHeader) => {
+      expect(pricingHeader.className).toContain("flex-col");
+      expect(pricingHeader.className).toContain("sm:flex-row");
+    });
+
+    pricingMetrics.forEach((pricingMetricGroup) => {
+      expect(pricingMetricGroup.className).toContain("grid-cols-1");
+      expect(pricingMetricGroup.className).toContain("sm:grid-cols-3");
     });
   });
 });
