@@ -222,6 +222,24 @@ function SummaryCell({
   );
 }
 
+export function EmptyWidgetMessage({
+  children,
+  className = "",
+}: {
+  children: string;
+  className?: string;
+}) {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className={`rounded-2xl border border-dashed border-[#d8cfbb] bg-[#faf5ea] px-4 py-4 text-sm leading-6 text-[#5f5a4d] ${className}`.trim()}
+    >
+      {children}
+    </div>
+  );
+}
+
 function SearchPerformanceList({
   title,
   rows,
@@ -232,7 +250,11 @@ function SearchPerformanceList({
   labelKey: string;
 }) {
   return (
-    <div className="rounded-[1.4rem] border border-[#e8dfcb] bg-white px-4 py-4">
+    <div
+      className="rounded-[1.4rem] border border-[#e8dfcb] bg-white px-4 py-4"
+      role="region"
+      aria-label={`${title} search performance`}
+    >
       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
         {title}
       </p>
@@ -265,7 +287,7 @@ function SearchPerformanceList({
             );
           })
         ) : (
-          <p className="text-sm leading-6 text-gray-500">No public-safe rows yet.</p>
+          <EmptyWidgetMessage>No public-safe rows are available yet.</EmptyWidgetMessage>
         )}
       </div>
     </div>
@@ -382,6 +404,11 @@ export default function MetricsPage() {
   const resolvedWindow = summary.data?.window || fallbackWindow;
   const businessSeries = summary.data?.businessFunnel.series || [];
   const trafficSeries = summary.data?.traffic.series || [];
+  const onboardingStepBreakdown =
+    summary.data?.businessFunnel.onboardingStepBreakdown || [];
+  const hasBusinessSeries = businessSeries.length > 0;
+  const hasTrafficSeries = trafficSeries.length > 0;
+  const hasOnboardingStepBreakdown = onboardingStepBreakdown.length > 0;
   const warnings = summary.data?.dataQualityWarnings || [];
   const statusLabel = summary.error
     ? "Issue"
@@ -813,60 +840,72 @@ export default function MetricsPage() {
 
               <div className="mt-6 overflow-x-auto pb-2">
                 <div className="h-[300px] min-w-[620px] sm:h-[340px] sm:min-w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <ComposedChart data={businessSeries} margin={{ left: 0, right: 12 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#ede6d7" />
-                      <XAxis
-                        dataKey="date"
-                        tickFormatter={formatChartDate}
-                        tick={{ fill: "#6b6252", fontSize: 12 }}
-                        axisLine={{ stroke: "#e0d7c4" }}
-                        tickLine={false}
-                      />
-                      <YAxis
-                        allowDecimals={false}
-                        tick={{ fill: "#6b6252", fontSize: 12 }}
-                        axisLine={{ stroke: "#e0d7c4" }}
-                        tickLine={false}
-                      />
-                      <Tooltip
-                        formatter={(value: unknown, name: unknown) => [
-                          formatNumber(Number(value) || 0),
-                          String(name),
-                        ]}
-                        labelFormatter={(label) => formatChartDate(String(label))}
-                      />
-                      <Legend />
-                      <Bar
-                        dataKey="signups"
-                        name="Signups"
-                        fill="#244d86"
-                        radius={[8, 8, 0, 0]}
-                      />
-                      <Bar
-                        dataKey="onboardingStarted"
-                        name="Onboarding started"
-                        fill="#d1a15f"
-                        radius={[8, 8, 0, 0]}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="onboardingCompleted"
-                        name="Onboarding completed"
-                        stroke="#0d8f6f"
-                        strokeWidth={3}
-                        dot={{ r: 4 }}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="profilesConfirmed"
-                        name="Profiles confirmed"
-                        stroke="#111111"
-                        strokeWidth={3}
-                        dot={{ r: 4 }}
-                      />
-                    </ComposedChart>
-                  </ResponsiveContainer>
+                  {hasBusinessSeries ? (
+                    <div
+                      role="img"
+                      aria-label="Seven day KPI flow chart showing signups, onboarding started, onboarding completed, and profiles confirmed."
+                      className="h-full"
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <ComposedChart data={businessSeries} margin={{ left: 0, right: 12 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#ede6d7" />
+                          <XAxis
+                            dataKey="date"
+                            tickFormatter={formatChartDate}
+                            tick={{ fill: "#6b6252", fontSize: 12 }}
+                            axisLine={{ stroke: "#e0d7c4" }}
+                            tickLine={false}
+                          />
+                          <YAxis
+                            allowDecimals={false}
+                            tick={{ fill: "#6b6252", fontSize: 12 }}
+                            axisLine={{ stroke: "#e0d7c4" }}
+                            tickLine={false}
+                          />
+                          <Tooltip
+                            formatter={(value: unknown, name: unknown) => [
+                              formatNumber(Number(value) || 0),
+                              String(name),
+                            ]}
+                            labelFormatter={(label) => formatChartDate(String(label))}
+                          />
+                          <Legend />
+                          <Bar
+                            dataKey="signups"
+                            name="Signups"
+                            fill="#244d86"
+                            radius={[8, 8, 0, 0]}
+                          />
+                          <Bar
+                            dataKey="onboardingStarted"
+                            name="Onboarding started"
+                            fill="#d1a15f"
+                            radius={[8, 8, 0, 0]}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="onboardingCompleted"
+                            name="Onboarding completed"
+                            stroke="#0d8f6f"
+                            strokeWidth={3}
+                            dot={{ r: 4 }}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="profilesConfirmed"
+                            name="Profiles confirmed"
+                            stroke="#111111"
+                            strokeWidth={3}
+                            dot={{ r: 4 }}
+                          />
+                        </ComposedChart>
+                      </ResponsiveContainer>
+                    </div>
+                  ) : (
+                    <EmptyWidgetMessage className="flex h-full items-center">
+                      No KPI flow rows are available for this window.
+                    </EmptyWidgetMessage>
+                  )}
                 </div>
               </div>
             </div>
@@ -925,8 +964,8 @@ export default function MetricsPage() {
                   Onboarding step distribution
                 </p>
                 <div className="mt-4 space-y-3">
-                  {(summary.data?.businessFunnel.onboardingStepBreakdown || []).map(
-                    (item) => (
+                  {hasOnboardingStepBreakdown ? (
+                    onboardingStepBreakdown.map((item) => (
                       <div key={item.step}>
                         <div className="flex items-center justify-between text-sm">
                           <span className="font-medium text-black">
@@ -957,7 +996,11 @@ export default function MetricsPage() {
                           />
                         </div>
                       </div>
-                    )
+                    ))
+                  ) : (
+                    <EmptyWidgetMessage>
+                      No onboarding step rows are available for this window.
+                    </EmptyWidgetMessage>
                   )}
                 </div>
               </div>
@@ -1072,56 +1115,68 @@ export default function MetricsPage() {
             <div className="mt-6 rounded-[1.6rem] border border-[#e8dfcb] bg-white p-4 sm:p-5">
               <div className="overflow-x-auto pb-2">
                 <div className="h-[280px] min-w-[560px] sm:h-[300px] sm:min-w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={trafficSeries} margin={{ left: 0, right: 12 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#ede6d7" />
-                      <XAxis
-                        dataKey="date"
-                        tickFormatter={formatChartDate}
-                        tick={{ fill: "#6b6252", fontSize: 12 }}
-                        axisLine={{ stroke: "#e0d7c4" }}
-                        tickLine={false}
-                      />
-                      <YAxis
-                        allowDecimals={false}
-                        tick={{ fill: "#6b6252", fontSize: 12 }}
-                        axisLine={{ stroke: "#e0d7c4" }}
-                        tickLine={false}
-                      />
-                      <Tooltip
-                        formatter={(value: unknown, name: unknown) => [
-                          formatNumber(Number(value) || 0),
-                          String(name),
-                        ]}
-                        labelFormatter={(label) => formatChartDate(String(label))}
-                      />
-                      <Legend />
-                      <Line
-                        type="monotone"
-                        dataKey="activeUsers"
-                        name="Active users"
-                        stroke="#244d86"
-                        strokeWidth={3}
-                        dot={{ r: 3 }}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="sessions"
-                        name="Sessions"
-                        stroke="#d1a15f"
-                        strokeWidth={3}
-                        dot={{ r: 3 }}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="screenPageViews"
-                        name="Views"
-                        stroke="#0d8f6f"
-                        strokeWidth={3}
-                        dot={{ r: 3 }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  {hasTrafficSeries ? (
+                    <div
+                      role="img"
+                      aria-label="Traffic context chart showing active users, sessions, and views."
+                      className="h-full"
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={trafficSeries} margin={{ left: 0, right: 12 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#ede6d7" />
+                          <XAxis
+                            dataKey="date"
+                            tickFormatter={formatChartDate}
+                            tick={{ fill: "#6b6252", fontSize: 12 }}
+                            axisLine={{ stroke: "#e0d7c4" }}
+                            tickLine={false}
+                          />
+                          <YAxis
+                            allowDecimals={false}
+                            tick={{ fill: "#6b6252", fontSize: 12 }}
+                            axisLine={{ stroke: "#e0d7c4" }}
+                            tickLine={false}
+                          />
+                          <Tooltip
+                            formatter={(value: unknown, name: unknown) => [
+                              formatNumber(Number(value) || 0),
+                              String(name),
+                            ]}
+                            labelFormatter={(label) => formatChartDate(String(label))}
+                          />
+                          <Legend />
+                          <Line
+                            type="monotone"
+                            dataKey="activeUsers"
+                            name="Active users"
+                            stroke="#244d86"
+                            strokeWidth={3}
+                            dot={{ r: 3 }}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="sessions"
+                            name="Sessions"
+                            stroke="#d1a15f"
+                            strokeWidth={3}
+                            dot={{ r: 3 }}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="screenPageViews"
+                            name="Views"
+                            stroke="#0d8f6f"
+                            strokeWidth={3}
+                            dot={{ r: 3 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  ) : (
+                    <EmptyWidgetMessage className="flex h-full items-center">
+                      No traffic chart rows are available for this window.
+                    </EmptyWidgetMessage>
+                  )}
                 </div>
               </div>
             </div>
@@ -1144,6 +1199,9 @@ export default function MetricsPage() {
 
               <div className="mt-6 overflow-x-auto rounded-[1.4rem] border border-[#e8dfcb]">
                 <table className="min-w-full border-collapse text-left text-sm">
+                  <caption className="sr-only">
+                    Daily KPI appendix for the selected seven day window.
+                  </caption>
                   <thead className="bg-[#faf5ea] text-[#5f5a4d]">
                     <tr>
                       {[
@@ -1166,41 +1224,51 @@ export default function MetricsPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {businessSeries.map((row) => {
-                      const legacyRow = summary.data?.legacy.series.find(
-                        (candidate) => candidate.date === row.date
-                      );
+                    {hasBusinessSeries ? (
+                      businessSeries.map((row) => {
+                        const legacyRow = summary.data?.legacy.series.find(
+                          (candidate) => candidate.date === row.date
+                        );
 
-                      return (
-                        <tr
-                          key={row.date}
-                          className="border-t border-[#eee6d4] text-[#2b2822]"
-                        >
-                          <td className="px-4 py-3 font-medium">
-                            {formatChartDate(row.date)}
-                          </td>
-                          <td className="px-4 py-3">{formatNumber(row.signups)}</td>
-                          <td className="px-4 py-3">
-                            {formatNumber(row.persistedUsers)}
-                          </td>
-                          <td className="px-4 py-3">
-                            {formatNumber(row.onboardingStarted)}
-                          </td>
-                          <td className="px-4 py-3">
-                            {formatNumber(row.onboardingCompleted)}
-                          </td>
-                          <td className="px-4 py-3">
-                            {formatNumber(row.profilesCreated)}
-                          </td>
-                          <td className="px-4 py-3">
-                            {formatNumber(row.profilesConfirmed)}
-                          </td>
-                          <td className="px-4 py-3">
-                            {formatNumber(legacyRow?.usersCreated)}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                        return (
+                          <tr
+                            key={row.date}
+                            className="border-t border-[#eee6d4] text-[#2b2822]"
+                          >
+                            <td className="px-4 py-3 font-medium">
+                              {formatChartDate(row.date)}
+                            </td>
+                            <td className="px-4 py-3">{formatNumber(row.signups)}</td>
+                            <td className="px-4 py-3">
+                              {formatNumber(row.persistedUsers)}
+                            </td>
+                            <td className="px-4 py-3">
+                              {formatNumber(row.onboardingStarted)}
+                            </td>
+                            <td className="px-4 py-3">
+                              {formatNumber(row.onboardingCompleted)}
+                            </td>
+                            <td className="px-4 py-3">
+                              {formatNumber(row.profilesCreated)}
+                            </td>
+                            <td className="px-4 py-3">
+                              {formatNumber(row.profilesConfirmed)}
+                            </td>
+                            <td className="px-4 py-3">
+                              {formatNumber(legacyRow?.usersCreated)}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr className="border-t border-[#eee6d4]">
+                        <td colSpan={8} className="px-4 py-4">
+                          <EmptyWidgetMessage>
+                            No daily KPI rows are available for this window.
+                          </EmptyWidgetMessage>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
