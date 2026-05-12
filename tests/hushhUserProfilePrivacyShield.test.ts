@@ -145,4 +145,19 @@ describe("HushhUserProfile PrivacyShield integration", () => {
       container.querySelectorAll('input[role="switch"]'),
     ).toHaveLength(2);
   });
+
+  it("stacks wallet action controls with responsive mobile gaps", async () => {
+    await act(async () => {
+      root.render(React.createElement(HushhUserProfilePage));
+    });
+
+    const walletControls = container.querySelector(
+      '[data-testid="wallet-action-controls"]',
+    );
+
+    expect(walletControls?.className).toContain("grid-cols-1");
+    expect(walletControls?.className).toContain("gap-3");
+    expect(walletControls?.className).toContain("min-[380px]:grid-cols-2");
+    expect(walletControls?.className).toContain("min-[380px]:gap-4");
+  });
 });

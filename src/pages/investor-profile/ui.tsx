@@ -6,6 +6,7 @@ import {
   Text,
   VStack,
   HStack,
+  Stack,
   IconButton,
   Button,
   Icon,
@@ -161,54 +162,59 @@ function InvestorProfilePage() {
                 >
                   View Hushh Gold Pass
                 </Button>
-                <HStack spacing={4} justify="center" w="full">
-                <Button
-                  aria-label="Add to Apple Wallet"
-                  onClick={handleAppleWalletDownload}
-                  isDisabled={!appleWalletSupported}
-                  isLoading={isApplePassLoading}
-                  loadingText=""
-                  spinner={<Spinner size="sm" color="#0B1120" />}
-                  bg="white"
-                  color="#0B1120"
-                  borderRadius="12px"
-                  border="1px solid #0B1120"
-                  h="44px"
-                  minW="120px"
-                  px={4}
-                  display="inline-flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  gap={2}
-                  _hover={{ bg: "#F8FAFC" }}
-                  _active={{ bg: "#F1F5F9", transform: "scale(0.98)" }}
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  gap={{ base: 3, sm: 4 }}
+                  justify="center"
+                  w="full"
                 >
-                  <Icon as={FaApple} boxSize={6} />
-                </Button>
-                <Button
-                  aria-label="Add to Google Wallet"
-                  onClick={handleGoogleWalletDownload}
-                  isDisabled={!googleWalletSupported}
-                  isLoading={isGooglePassLoading}
-                  loadingText=""
-                  spinner={<Spinner size="sm" color="#0B1120" />}
-                  bg="white"
-                  color="#0B1120"
-                  borderRadius="12px"
-                  border="1px solid #0B1120"
-                  h="44px"
-                  minW="120px"
-                  px={4}
-                  display="inline-flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  gap={2}
-                  _hover={{ bg: "#F8FAFC" }}
-                  _active={{ bg: "#F1F5F9", transform: "scale(0.98)" }}
-                >
-                  <Icon as={FaGoogle} boxSize={6} />
-                </Button>
-                </HStack>
+                  <Button
+                    aria-label="Add to Apple Wallet"
+                    onClick={handleAppleWalletDownload}
+                    isDisabled={!appleWalletSupported}
+                    isLoading={isApplePassLoading}
+                    loadingText=""
+                    spinner={<Spinner size="sm" color="#0B1120" />}
+                    bg="white"
+                    color="#0B1120"
+                    borderRadius="12px"
+                    border="1px solid #0B1120"
+                    h="44px"
+                    minW={{ base: "100%", sm: "120px" }}
+                    px={4}
+                    display="inline-flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    gap={2}
+                    _hover={{ bg: "#F8FAFC" }}
+                    _active={{ bg: "#F1F5F9", transform: "scale(0.98)" }}
+                  >
+                    <Icon as={FaApple} boxSize={6} />
+                  </Button>
+                  <Button
+                    aria-label="Add to Google Wallet"
+                    onClick={handleGoogleWalletDownload}
+                    isDisabled={!googleWalletSupported}
+                    isLoading={isGooglePassLoading}
+                    loadingText=""
+                    spinner={<Spinner size="sm" color="#0B1120" />}
+                    bg="white"
+                    color="#0B1120"
+                    borderRadius="12px"
+                    border="1px solid #0B1120"
+                    h="44px"
+                    minW={{ base: "100%", sm: "120px" }}
+                    px={4}
+                    display="inline-flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    gap={2}
+                    _hover={{ bg: "#F8FAFC" }}
+                    _active={{ bg: "#F1F5F9", transform: "scale(0.98)" }}
+                  >
+                    <Icon as={FaGoogle} boxSize={6} />
+                  </Button>
+                </Stack>
               </VStack>
               {!appleWalletSupported && (
                 <Text mt={3} fontSize="xs" color="gray.500" textAlign="center">

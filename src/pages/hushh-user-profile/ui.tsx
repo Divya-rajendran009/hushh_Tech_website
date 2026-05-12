@@ -423,7 +423,10 @@ const HushhUserProfilePage: React.FC = () => {
           >
             <span className="text-xs font-medium">View Hushh Gold Pass</span>
           </button>
-          <div className="grid grid-cols-2 gap-4">
+          <div
+            data-testid="wallet-action-controls"
+            className="grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 min-[380px]:gap-4"
+          >
             <button
               type="button"
               onClick={handleAppleWalletPass}
