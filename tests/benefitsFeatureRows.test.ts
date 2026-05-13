@@ -68,4 +68,25 @@ describe("Benefits feature rows", () => {
       expect(list.className).toContain("md:gap-y-4");
     });
   });
+
+  it("labels page content sections with their visible headings", async () => {
+    await act(async () => {
+      root.render(React.createElement(BenefitsPage));
+    });
+
+    const labelledSections = Array.from(
+      container.querySelectorAll("section[aria-labelledby]"),
+    );
+
+    expect(labelledSections).toHaveLength(5);
+
+    labelledSections.forEach((section) => {
+      const headingId = section.getAttribute("aria-labelledby");
+      const heading = headingId ? container.querySelector(`#${headingId}`) : null;
+
+      expect(heading).not.toBeNull();
+      expect(heading?.tagName).toBe("H2");
+      expect(heading?.textContent?.trim()).not.toBe("");
+    });
+  });
 });

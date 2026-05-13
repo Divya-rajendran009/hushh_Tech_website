@@ -11,6 +11,13 @@ const benefitCardClassName =
   "h-full rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6";
 const benefitFeatureGridClassName =
   "grid grid-cols-1 gap-x-6 gap-y-3 sm:gap-y-3.5 md:grid-cols-2 md:gap-y-4";
+const sectionHeadingIds = {
+  compensation: "benefits-compensation-heading",
+  wellness: "benefits-wellness-heading",
+  growth: "benefits-growth-heading",
+  culture: "benefits-culture-heading",
+  whyJoin: "benefits-why-join-heading",
+};
 
 const BenefitsPage: React.FC = () => {
   return (
@@ -39,12 +46,16 @@ const BenefitsPage: React.FC = () => {
 
         <div className={benefitCardGridClassName} data-testid="benefits-card-grid">
           {/* Compensation & Investment Opportunities */}
-          <section className={benefitCardClassName}>
+          <section
+            aria-labelledby={sectionHeadingIds.compensation}
+            className={benefitCardClassName}
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 💰
               </span>
               <h2
+                id={sectionHeadingIds.compensation}
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -92,12 +103,16 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Health, Wellness & Family Support */}
-          <section className={benefitCardClassName}>
+          <section
+            aria-labelledby={sectionHeadingIds.wellness}
+            className={benefitCardClassName}
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🏥
               </span>
               <h2
+                id={sectionHeadingIds.wellness}
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -145,12 +160,16 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Work-Life, Growth & Giving Back */}
-          <section className={benefitCardClassName}>
+          <section
+            aria-labelledby={sectionHeadingIds.growth}
+            className={benefitCardClassName}
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🌱
               </span>
               <h2
+                id={sectionHeadingIds.growth}
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -210,12 +229,16 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Perks, Culture & Quality of Life */}
-          <section className={benefitCardClassName}>
+          <section
+            aria-labelledby={sectionHeadingIds.culture}
+            className={benefitCardClassName}
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🎯
               </span>
               <h2
+                id={sectionHeadingIds.culture}
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -251,8 +274,12 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Why Join Hushh Technologies? — home-style CTA card + primary black button */}
-          <section className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-6 text-center transition-colors hover:border-hushh-blue/30 sm:p-8 lg:col-span-2">
+          <section
+            aria-labelledby={sectionHeadingIds.whyJoin}
+            className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-6 text-center transition-colors hover:border-hushh-blue/30 sm:p-8 lg:col-span-2"
+          >
             <h2
+              id={sectionHeadingIds.whyJoin}
               className="mb-3 text-xl font-medium tracking-tight text-black sm:mb-4 sm:text-3xl md:text-4xl"
               style={playfair}
             >
