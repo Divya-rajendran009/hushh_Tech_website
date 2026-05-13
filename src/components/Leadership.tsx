@@ -182,15 +182,24 @@ export default function Leadership() {
             At Hushh Technologies LLC, our leadership team combines expertise in technology, finance, and strategy to redefine wealth creation.
           </Text>
           
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+          <SimpleGrid
+            data-testid="leadership-card-grid"
+            columns={{ base: 1, lg: 2 }}
+            spacing={{ base: 6, md: 8, lg: 10 }}
+            maxW="5xl"
+            mx="auto"
+            w="full"
+          >
             {/* Manish Sainani */}
             <Box 
+              data-testid="leadership-card"
               bg="white" 
-              p={8} 
+              p={{ base: 6, md: 8 }}
               borderRadius="lg" 
               boxShadow="md"
               textAlign="center"
               transition="transform 0.3s ease"
+              minW={0}
               _hover={{ transform: "translateY(-5px)" }}
             >
               <Box 
@@ -221,12 +230,14 @@ export default function Leadership() {
 
             {/* Justin Donaldson */}
             <Box 
+              data-testid="leadership-card"
               bg="white" 
-              p={8} 
+              p={{ base: 6, md: 8 }}
               borderRadius="lg" 
               boxShadow="md"
               textAlign="center"
               transition="transform 0.3s ease"
+              minW={0}
               _hover={{ transform: "translateY(-5px)" }}
             >
               <Box 
