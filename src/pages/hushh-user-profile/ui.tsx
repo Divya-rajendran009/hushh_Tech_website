@@ -186,17 +186,17 @@ const HushhUserProfilePage: React.FC = () => {
                 return (
                   <div key={fieldName}>
                     <div
-                      className="group flex items-center justify-between gap-4 border-b border-gray-100 py-4 hover:bg-gray-50/50 transition-colors cursor-pointer"
+                      className="group flex items-center justify-between gap-3 border-b border-gray-100 py-4 hover:bg-gray-50/50 transition-colors cursor-pointer"
                       onClick={() => options && setEditingField(isEditing ? null : fieldName)}
                       role="button"
                       tabIndex={0}
                       aria-label={`Edit ${label}`}
                       onKeyDown={(e) => { if (e.key === 'Enter' && options) setEditingField(isEditing ? null : fieldName); }}
                     >
-                      <span className="text-sm text-gray-500 font-light shrink-0">{label}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-black truncate max-w-[140px]">{valueText || "—"}</span>
-                        <span className={`text-[9px] px-1.5 py-0.5 rounded-full border shrink-0 ${getConfidenceBadgeClass(confidence)}`}>
+                      <span className="text-sm text-gray-500 font-light shrink-0 max-w-[42%] truncate">{label}</span>
+                      <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
+                        <span className="min-w-0 max-w-full truncate text-right text-sm font-medium text-black">{valueText || "—"}</span>
+                        <span className={`shrink-0 whitespace-nowrap rounded-full border px-1.5 py-0.5 text-[9px] leading-none ${getConfidenceBadgeClass(confidence)}`}>
                           {confLabel}
                         </span>
                         {options && (
