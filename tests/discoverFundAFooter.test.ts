@@ -28,13 +28,22 @@ vi.mock("../src/pages/discover-fund-a/logic", () => ({
     targetIRRPeriod: "Annually",
     targetIRRDisclaimer: "Disclaimer",
     philosophySectionTitle: "Investment Philosophy",
-    philosophyCards: [{ title: "Risk-First Architecture", description: "Risk" }],
+    philosophyCards: [
+      { title: "Risk-First Architecture", description: "Risk" },
+      { title: "AI-Enhanced Research", description: "Research" },
+    ],
     edgeSectionTitle: "Our Edge",
     sellTheWallHref: "/sell-the-wall",
-    edgeCards: [{ title: "Downside Protection", description: "Protection" }],
+    edgeCards: [
+      { title: "Downside Protection", description: "Protection" },
+      { title: "Income Generation", description: "Income" },
+    ],
     assetFocusSectionTitle: "Asset Focus",
     assetFocusDescription: "Assets",
-    assetPillars: [{ title: "Cash & Equivalents", description: "Cash" }],
+    assetPillars: [
+      { title: "Cash & Equivalents", description: "Cash" },
+      { title: "Strategic Options Overlay", description: "Options" },
+    ],
     alphaStackSectionTitle: "Alpha Stack",
     alphaStackSubtitle: "Breakdown",
     alphaStackRows: [
@@ -42,7 +51,10 @@ vi.mock("../src/pages/discover-fund-a/logic", () => ({
       { label: "Target Net IRR", value: "18-23%", isTotalRow: true },
     ],
     riskSectionTitle: "Risk Management",
-    riskCards: [{ title: "Hedging Framework", description: "Hedge" }],
+    riskCards: [
+      { title: "Hedging Framework", description: "Hedge" },
+      { title: "Liquidity Management", description: "Liquidity" },
+    ],
     keyTermsSectionTitle: "Key Terms",
     keyTermsSubtitle: "Terms",
     keyTerms: [{ title: "Liquidity", content: "Quarterly" }],
@@ -136,6 +148,35 @@ describe("FundA footer shell", () => {
     expect(featureIcons.length).toBeGreaterThan(0);
     featureIcons.forEach((icon) => {
       expect(icon.getAttribute("aria-hidden")).toBe("true");
+    });
+  });
+
+  it("keeps feature comparison cards comfortably spaced across breakpoints", async () => {
+    await act(async () => {
+      root.render(React.createElement(FundA));
+    });
+
+    const mobileCards = Array.from(
+      container.querySelectorAll('[data-testid="feature-comparison-card"]'),
+    );
+    const desktopTiles = Array.from(
+      container.querySelectorAll('[data-testid="feature-comparison-tile"]'),
+    );
+
+    expect(mobileCards).toHaveLength(8);
+    expect(desktopTiles).toHaveLength(8);
+
+    mobileCards.forEach((card) => {
+      expect(card.className).toContain("gap-3");
+      expect(card.className).toContain("p-4");
+      expect(card.className).toContain("sm:gap-4");
+      expect(card.className).toContain("sm:p-5");
+    });
+
+    desktopTiles.forEach((tile) => {
+      expect(tile.className).toContain("gap-3");
+      expect(tile.className).toContain("p-4");
+      expect(tile.className).toContain("xl:p-5");
     });
   });
 
