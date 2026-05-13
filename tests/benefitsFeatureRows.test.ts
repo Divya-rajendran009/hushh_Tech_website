@@ -68,4 +68,19 @@ describe("Benefits feature rows", () => {
       expect(list.className).toContain("md:gap-y-4");
     });
   });
+
+  it("gives the CTA card action a visible keyboard focus ring", async () => {
+    await act(async () => {
+      root.render(React.createElement(BenefitsPage));
+    });
+
+    const cta = container.querySelector<HTMLAnchorElement>(
+      'a[href="/career"]',
+    );
+
+    expect(cta).not.toBeNull();
+    expect(cta?.className).toContain("focus-visible:ring-2");
+    expect(cta?.className).toContain("focus-visible:ring-hushh-blue");
+    expect(cta?.className).toContain("focus-visible:ring-offset-4");
+  });
 });
