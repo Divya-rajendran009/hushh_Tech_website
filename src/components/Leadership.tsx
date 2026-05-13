@@ -10,6 +10,26 @@ const ctaFocusVisible = {
   },
 };
 
+const portraitBoxSize = { base: "128px", md: "150px" };
+const portraitFrameProps = {
+  boxSize: portraitBoxSize,
+  aspectRatio: "1 / 1",
+  borderRadius: "full",
+  overflow: "hidden",
+  mx: "auto",
+  mb: 6,
+  border: "3px solid #0891B2",
+  flexShrink: 0,
+};
+const portraitImageProps = {
+  boxSize: "100%",
+  width: "100%",
+  height: "100%",
+  objectFit: "cover" as const,
+  objectPosition: "center top",
+  display: "block",
+};
+
 export default function Leadership() {
   return (
     <Box bg="white">
@@ -193,15 +213,8 @@ export default function Leadership() {
               transition="transform 0.3s ease"
               _hover={{ transform: "translateY(-5px)" }}
             >
-              <Box 
-                boxSize={{ base: "128px", md: "150px" }}
-                borderRadius="full" 
-                overflow="hidden" 
-                mx="auto" 
-                mb={6}
-                border="3px solid #0891B2"
-              >
-                <Image src={img} alt="Manish Sainani" boxSize="full" objectFit="cover" display="block" />
+              <Box {...portraitFrameProps}>
+                <Image src={img} alt="Manish Sainani" {...portraitImageProps} />
               </Box>
               
               <Heading as="h3" fontSize="2xl" mb={2}>
@@ -229,15 +242,8 @@ export default function Leadership() {
               transition="transform 0.3s ease"
               _hover={{ transform: "translateY(-5px)" }}
             >
-              <Box 
-                boxSize={{ base: "128px", md: "150px" }}
-                borderRadius="full" 
-                overflow="hidden" 
-                mx="auto" 
-                mb={6}
-                border="3px solid #0891B2"
-              >
-                <Image src={img2} alt="Justin Donaldson" boxSize="full" objectFit="cover" display="block" />
+              <Box {...portraitFrameProps}>
+                <Image src={img2} alt="Justin Donaldson" {...portraitImageProps} />
               </Box>
               
               <Heading as="h3" fontSize="2xl" mb={2}>
