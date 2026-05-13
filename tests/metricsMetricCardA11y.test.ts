@@ -54,6 +54,17 @@ describe("metrics MetricCard accessibility", () => {
     expect(visibleLabel?.getAttribute("aria-hidden")).toBe("true");
   });
 
+  it("uses tighter mobile padding and restores dashboard spacing on larger screens", async () => {
+    await renderMetricCard();
+
+    const card = container.firstElementChild;
+
+    expect(card?.className).toContain("px-4");
+    expect(card?.className).toContain("py-4");
+    expect(card?.className).toContain("sm:px-5");
+    expect(card?.className).toContain("sm:py-5");
+  });
+
   it("exposes dashboard card badges as named status text", async () => {
     await act(async () => {
       root.render(

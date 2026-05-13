@@ -202,7 +202,7 @@ export function MetricCard({
 }) {
   return (
     <div
-      className={`rounded-[1.6rem] border border-gray-200 bg-white px-5 py-5 shadow-sm ${className}`.trim()}
+      className={`rounded-[1.6rem] border border-gray-200 bg-white px-4 py-4 shadow-sm sm:px-5 sm:py-5 ${className}`.trim()}
       data-testid="metric-card"
     >
       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500">
@@ -521,7 +521,7 @@ export default function MetricsPage() {
 
         <main className="mx-auto flex w-full max-w-[88rem] flex-col gap-8 px-6 pb-16 pt-6 md:px-8">
           <section className="grid gap-6 xl:grid-cols-[1.45fr_0.95fr]">
-            <div className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-6 shadow-sm md:p-8">
+            <div className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-5 shadow-sm sm:p-6 md:p-8">
               <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                 <div className="max-w-2xl">
                   <div className="inline-flex items-center gap-2 rounded-full border border-[#244d86]/15 bg-[#244d86]/5 px-3 py-1">
@@ -664,7 +664,7 @@ export default function MetricsPage() {
               </div>
             </div>
 
-            <aside className="rounded-[2rem] border border-black bg-[#050505] p-6 text-white shadow-2xl md:p-8">
+            <aside className="rounded-[2rem] border border-black bg-[#050505] p-5 text-white shadow-2xl sm:p-6 md:p-8">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.24em] text-white/45">
@@ -749,7 +749,7 @@ export default function MetricsPage() {
           </section>
 
           {summary.error && !isLoaded && (
-            <section className="rounded-[1.75rem] border border-red-200 bg-red-50 px-6 py-5 text-red-900 shadow-sm">
+            <section className="rounded-[1.75rem] border border-red-200 bg-red-50 px-5 py-4 text-red-900 shadow-sm sm:px-6 sm:py-5">
               {summary.error}
             </section>
           )}
@@ -821,7 +821,7 @@ export default function MetricsPage() {
             />
           </section>
 
-          <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-6 shadow-sm">
+          <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-5 shadow-sm sm:p-6">
             <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
@@ -872,7 +872,7 @@ export default function MetricsPage() {
           </section>
 
           <section className="grid gap-6 xl:grid-cols-[1.4fr_0.9fr]">
-            <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
+            <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-5 shadow-sm sm:p-6">
               <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
@@ -952,7 +952,7 @@ export default function MetricsPage() {
             </div>
 
             <div className="grid gap-6">
-              <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
+              <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-5 shadow-sm sm:p-6">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
                   Conversion rates
                 </p>
@@ -1000,7 +1000,7 @@ export default function MetricsPage() {
                 </div>
               </div>
 
-              <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
+              <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-5 shadow-sm sm:p-6">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
                   Onboarding step distribution
                 </p>
@@ -1044,7 +1044,7 @@ export default function MetricsPage() {
             </div>
           </section>
 
-          <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-6 shadow-sm">
+          <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-5 shadow-sm sm:p-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
@@ -1215,7 +1215,7 @@ export default function MetricsPage() {
           </section>
 
           <section className="grid gap-6 xl:grid-cols-[1.18fr_0.82fr]">
-            <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
+            <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-5 shadow-sm sm:p-6">
               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
                 Daily appendix
               </p>
@@ -1288,7 +1288,7 @@ export default function MetricsPage() {
             </div>
 
             <div className="grid gap-6">
-              <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
+              <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-5 shadow-sm sm:p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
@@ -1323,7 +1323,7 @@ export default function MetricsPage() {
               </div>
 
               {warnings.length > 0 && (
-                <section className="rounded-[2rem] border border-amber-200 bg-amber-50 p-6 shadow-sm">
+                <section className="rounded-[2rem] border border-amber-200 bg-amber-50 p-5 shadow-sm sm:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-amber-700">
@@ -1355,7 +1355,7 @@ export default function MetricsPage() {
             </div>
           </section>
 
-          <section className="flex flex-col gap-2 rounded-[1.75rem] border border-[#e8dfcb] bg-white px-6 py-5 text-sm text-[#5f5a4d] shadow-sm md:flex-row md:items-center md:justify-between">
+          <section className="flex flex-col gap-2 rounded-[1.75rem] border border-[#e8dfcb] bg-white px-5 py-4 text-sm text-[#5f5a4d] shadow-sm sm:px-6 sm:py-5 md:flex-row md:items-center md:justify-between">
             <p>
               {summary.error
                 ? `Latest load issue: ${summary.error}`
