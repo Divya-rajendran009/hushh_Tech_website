@@ -3,6 +3,8 @@ import { Check } from "lucide-react";
 
 /** Matches `src/pages/home/ui.tsx` hero `h1` */
 const playfair = { fontFamily: "'Playfair Display', serif" };
+const sectionHeaderClassName =
+  "mb-5 flex flex-col items-center gap-2 text-center sm:mb-6 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left";
 const featureRowClassName = "flex items-start gap-3.5";
 const featureIconClassName = "mt-[3px] h-5 w-5 shrink-0 text-hushh-blue";
 const benefitCardGridClassName =
@@ -40,7 +42,7 @@ const BenefitsPage: React.FC = () => {
         <div className={benefitCardGridClassName} data-testid="benefits-card-grid">
           {/* Compensation & Investment Opportunities */}
           <section className={benefitCardClassName}>
-            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+            <div className={sectionHeaderClassName}>
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 💰
               </span>
@@ -93,7 +95,7 @@ const BenefitsPage: React.FC = () => {
 
           {/* Health, Wellness & Family Support */}
           <section className={benefitCardClassName}>
-            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+            <div className={sectionHeaderClassName}>
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🏥
               </span>
@@ -146,7 +148,7 @@ const BenefitsPage: React.FC = () => {
 
           {/* Work-Life, Growth & Giving Back */}
           <section className={benefitCardClassName}>
-            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+            <div className={sectionHeaderClassName}>
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🌱
               </span>
@@ -211,7 +213,7 @@ const BenefitsPage: React.FC = () => {
 
           {/* Perks, Culture & Quality of Life */}
           <section className={benefitCardClassName}>
-            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+            <div className={sectionHeaderClassName}>
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🎯
               </span>

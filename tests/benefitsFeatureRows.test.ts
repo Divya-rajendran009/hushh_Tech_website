@@ -68,4 +68,22 @@ describe("Benefits feature rows", () => {
       expect(list.className).toContain("md:gap-y-4");
     });
   });
+
+  it("keeps section headers spaced responsively from their feature rows", async () => {
+    await act(async () => {
+      root.render(React.createElement(BenefitsPage));
+    });
+
+    const sectionHeaders = Array.from(
+      container.querySelectorAll("section > div:first-child"),
+    ).filter((header) => header.querySelector("h2"));
+
+    expect(sectionHeaders).toHaveLength(4);
+
+    sectionHeaders.forEach((header) => {
+      expect(header.className).toContain("mb-5");
+      expect(header.className).toContain("sm:mb-6");
+      expect(header.className).toContain("sm:flex-row");
+    });
+  });
 });
