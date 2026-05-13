@@ -14,6 +14,7 @@ interface SearchableSelectProps {
   id: string;
   label: string;
   labelIcon?: ReactNode;
+  helperText?: string;
   value: string;
   options: Option[];
   onChange: (value: string) => void;
@@ -30,6 +31,7 @@ export function SearchableSelect({
   id,
   label,
   labelIcon,
+  helperText,
   value,
   options,
   onChange,
@@ -47,6 +49,7 @@ export function SearchableSelect({
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const listboxId = `${id}-listbox`;
+  const helperTextId = helperText ? `${id}-helper` : undefined;
 
   // Display text: selected option label or manual value.
   const displayText = options.find((option) => option.value === value)?.label || value;
@@ -255,6 +258,7 @@ export function SearchableSelect({
           aria-haspopup="listbox"
           aria-controls={listboxId}
           aria-activedescendant={activeOptionId}
+          aria-describedby={helperTextId}
           role="combobox"
           className={`h-12 w-full rounded-xl border bg-white px-4 pr-10 text-base text-slate-900 placeholder:text-slate-400 transition-all focus:border-[#2b8cee] focus:outline-none focus:ring-2 focus:ring-[#2b8cee]/20 ${
             disabled ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400' : 'border-slate-200'
@@ -277,6 +281,12 @@ export function SearchableSelect({
           </svg>
         </div>
       </div>
+
+      {helperText && (
+        <p id={helperTextId} className="text-xs leading-5 text-slate-500">
+          {helperText}
+        </p>
+      )}
 
       {isOpen && !disabled && (
         <ul

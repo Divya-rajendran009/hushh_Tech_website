@@ -66,6 +66,16 @@ export default function OnboardingStep11() {
   } = useStep11Logic();
   const allocationModalRef = useRef<HTMLDivElement>(null);
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
+  const recurringCustomAmountErrorId = "summary-recurring-custom-amount-error";
+  const recurringCustomAmountValueId = "summary-recurring-custom-amount-value";
+  const recurringCustomAmountHelperId = "summary-recurring-custom-amount-helper";
+  const recurringCustomAmountDescriptionId = customAmountError
+    ? recurringCustomAmountErrorId
+    : customAmount
+    ? recurringCustomAmountValueId
+    : selectedAmount === null
+    ? recurringCustomAmountHelperId
+    : undefined;
 
   useModalKeyboardNavigation({
     isOpen: isModalOpen,
@@ -293,6 +303,8 @@ export default function OnboardingStep11() {
                   <div className="relative">
                     <span className={`absolute inset-y-0 left-0 pl-4 flex items-center font-medium text-lg ${customAmountError ? 'text-red-400' : 'text-gray-400'}`}>$</span>
                     <input
+                      aria-describedby={recurringCustomAmountDescriptionId}
+                      aria-invalid={customAmountError ? "true" : undefined}
                       type="text"
                       inputMode="numeric"
                       value={customAmount}
@@ -305,12 +317,12 @@ export default function OnboardingStep11() {
                       }`}
                     />
                   </div>
-                  {customAmountError && <p className="text-red-500 text-xs font-medium px-1">{customAmountError}</p>}
+                  {customAmountError && <p id={recurringCustomAmountErrorId} className="text-red-500 text-xs font-medium px-1">{customAmountError}</p>}
                   {!customAmountError && customAmount && (
-                    <p className="text-ios-green text-xs font-medium px-1">Amount: ${parseFormattedNumber(customAmount).toLocaleString()}</p>
+                    <p id={recurringCustomAmountValueId} className="text-ios-green text-xs font-medium px-1">Amount: ${parseFormattedNumber(customAmount).toLocaleString()}</p>
                   )}
                   {!customAmount && selectedAmount === null && (
-                    <p className="text-gray-400 text-xs px-1 font-light">Leave empty to set recurring later.</p>
+                    <p id={recurringCustomAmountHelperId} className="text-gray-400 text-xs px-1 font-light">Leave empty to set recurring later.</p>
                   )}
                 </div>
               </div>

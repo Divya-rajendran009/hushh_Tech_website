@@ -63,6 +63,25 @@ export default function OnboardingStep13() {
     applyAccountSelection,
     userModifiedFields,
   } = useStep13Logic();
+  const bankNameErrorId = "bank-name-error";
+  const accountHolderNameErrorId = "account-holder-name-error";
+  const routingNumberErrorId = "routing-number-error";
+  const accountNumberErrorId = "account-number-error";
+  const confirmAccountNumberErrorId = "confirm-account-number-error";
+  const bankDetailsHelperId = "bank-details-helper";
+  const bankNameDescriptionId = touched.bankName && bankNameError ? bankNameErrorId : undefined;
+  const accountHolderDescriptionId =
+    touched.accountHolderName && accountHolderNameError
+      ? accountHolderNameErrorId
+      : bankDetailsHelperId;
+  const routingNumberDescriptionId =
+    touched.routingNumber && routingNumberError
+      ? `${routingNumberErrorId} ${bankDetailsHelperId}`
+      : bankDetailsHelperId;
+  const accountNumberDescriptionId =
+    touched.accountNumber && accountNumberError ? accountNumberErrorId : undefined;
+  const confirmAccountNumberDescriptionId =
+    touched.confirmAccountNumber && confirmAccountNumberError ? confirmAccountNumberErrorId : undefined;
 
   return (
     <div className="bg-white text-gray-900 min-h-screen antialiased flex flex-col selection:bg-hushh-blue selection:text-white">
@@ -212,8 +231,11 @@ export default function OnboardingStep13() {
                     <span className="material-symbols-outlined text-gray-700 text-lg" style={{ fontVariationSettings: "'wght' 400" }}>account_balance</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className="text-sm font-semibold text-gray-900 block mb-1">Bank Name</label>
+                    <label htmlFor="bank-name" className="text-sm font-semibold text-gray-900 block mb-1">Bank Name</label>
                     <input
+                      id="bank-name"
+                      aria-describedby={bankNameDescriptionId}
+                      aria-invalid={bankNameDescriptionId ? "true" : undefined}
                       type="text"
                       value={bankName}
                       onChange={(e) => { userModifiedFields.current.add('bankName'); setBankName(e.target.value); }}
@@ -223,7 +245,7 @@ export default function OnboardingStep13() {
                     />
                   </div>
                 </div>
-                {touched.bankName && bankNameError && <p className="text-xs text-red-500 font-medium mt-2 pl-14">{bankNameError}</p>}
+                {touched.bankName && bankNameError && <p id={bankNameErrorId} className="text-xs text-red-500 font-medium mt-2 pl-14">{bankNameError}</p>}
               </div>
 
               {/* Account Holder Name */}
@@ -233,8 +255,11 @@ export default function OnboardingStep13() {
                     <span className="material-symbols-outlined text-gray-700 text-lg" style={{ fontVariationSettings: "'wght' 400" }}>person</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className="text-sm font-semibold text-gray-900 block mb-1">Account Holder Name</label>
+                    <label htmlFor="account-holder-name" className="text-sm font-semibold text-gray-900 block mb-1">Account Holder Name</label>
                     <input
+                      id="account-holder-name"
+                      aria-describedby={accountHolderDescriptionId}
+                      aria-invalid={touched.accountHolderName && accountHolderNameError ? "true" : undefined}
                       type="text"
                       value={accountHolderName}
                       onChange={(e) => setAccountHolderName(e.target.value)}
@@ -244,7 +269,7 @@ export default function OnboardingStep13() {
                     />
                   </div>
                 </div>
-                {touched.accountHolderName && accountHolderNameError && <p className="text-xs text-red-500 font-medium mt-2 pl-14">{accountHolderNameError}</p>}
+                {touched.accountHolderName && accountHolderNameError && <p id={accountHolderNameErrorId} className="text-xs text-red-500 font-medium mt-2 pl-14">{accountHolderNameError}</p>}
               </div>
 
               {/* Account Type */}
@@ -292,8 +317,11 @@ export default function OnboardingStep13() {
                     <span className="material-symbols-outlined text-gray-700 text-lg" style={{ fontVariationSettings: "'wght' 400" }}>tag</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className="text-sm font-semibold text-gray-900 block mb-1">Routing Number</label>
+                    <label htmlFor="routing-number" className="text-sm font-semibold text-gray-900 block mb-1">Routing Number</label>
                     <input
+                      id="routing-number"
+                      aria-describedby={routingNumberDescriptionId}
+                      aria-invalid={touched.routingNumber && routingNumberError ? "true" : undefined}
                       type="tel"
                       inputMode="numeric"
                       value={routingNumber}
@@ -305,7 +333,7 @@ export default function OnboardingStep13() {
                     />
                   </div>
                 </div>
-                {touched.routingNumber && routingNumberError && <p className="text-xs text-red-500 font-medium mt-2 pl-14">{routingNumberError}</p>}
+                {touched.routingNumber && routingNumberError && <p id={routingNumberErrorId} className="text-xs text-red-500 font-medium mt-2 pl-14">{routingNumberError}</p>}
               </div>
 
               {/* Account Number */}
@@ -315,8 +343,11 @@ export default function OnboardingStep13() {
                     <span className="material-symbols-outlined text-gray-700 text-lg" style={{ fontVariationSettings: "'wght' 400" }}>pin</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className="text-sm font-semibold text-gray-900 block mb-1">Account Number</label>
+                    <label htmlFor="account-number" className="text-sm font-semibold text-gray-900 block mb-1">Account Number</label>
                     <input
+                      id="account-number"
+                      aria-describedby={accountNumberDescriptionId}
+                      aria-invalid={accountNumberDescriptionId ? "true" : undefined}
                       type="tel"
                       inputMode="numeric"
                       value={accountNumber}
@@ -327,7 +358,7 @@ export default function OnboardingStep13() {
                     />
                   </div>
                 </div>
-                {touched.accountNumber && accountNumberError && <p className="text-xs text-red-500 font-medium mt-2 pl-14">{accountNumberError}</p>}
+                {touched.accountNumber && accountNumberError && <p id={accountNumberErrorId} className="text-xs text-red-500 font-medium mt-2 pl-14">{accountNumberError}</p>}
               </div>
 
               {/* Confirm Account Number */}
@@ -337,8 +368,11 @@ export default function OnboardingStep13() {
                     <span className="material-symbols-outlined text-gray-700 text-lg" style={{ fontVariationSettings: "'wght' 400" }}>verified</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className="text-sm font-semibold text-gray-900 block mb-1">Confirm Account Number</label>
+                    <label htmlFor="confirm-account-number" className="text-sm font-semibold text-gray-900 block mb-1">Confirm Account Number</label>
                     <input
+                      id="confirm-account-number"
+                      aria-describedby={confirmAccountNumberDescriptionId}
+                      aria-invalid={confirmAccountNumberDescriptionId ? "true" : undefined}
                       type="tel"
                       inputMode="numeric"
                       value={confirmAccountNumber}
@@ -349,7 +383,7 @@ export default function OnboardingStep13() {
                     />
                   </div>
                 </div>
-                {touched.confirmAccountNumber && confirmAccountNumberError && <p className="text-xs text-red-500 font-medium mt-2 pl-14">{confirmAccountNumberError}</p>}
+                {touched.confirmAccountNumber && confirmAccountNumberError && <p id={confirmAccountNumberErrorId} className="text-xs text-red-500 font-medium mt-2 pl-14">{confirmAccountNumberError}</p>}
               </div>
 
               {/* Info note */}
@@ -357,7 +391,7 @@ export default function OnboardingStep13() {
                 <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-gray-500 text-lg" style={{ fontVariationSettings: "'wght' 400" }}>info</span>
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed font-light pt-2">
+                <p id={bankDetailsHelperId} className="text-xs text-gray-500 leading-relaxed font-light pt-2">
                   Routing number can be found on the bottom left of your check. Ensure the holder name matches your ID exactly.
                 </p>
               </div>

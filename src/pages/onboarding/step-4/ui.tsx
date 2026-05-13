@@ -53,6 +53,8 @@ export default function OnboardingStep5() {
   } = useStep5Logic();
   const dialPickerRef = useRef<HTMLDivElement>(null);
   const doneButtonRef = useRef<HTMLButtonElement>(null);
+  const phoneHelperId = "phone-number-helper";
+  const phoneRatesId = "phone-number-rates";
 
   useModalKeyboardNavigation({
     isOpen: showDialPicker,
@@ -188,7 +190,7 @@ export default function OnboardingStep5() {
                 </span>
               )}
             </div>
-            <p className="text-xs text-gray-400 font-light mb-5">
+            <p id={phoneHelperId} className="text-xs text-gray-400 font-light mb-5">
               We&apos;ll use this to verify your identity when needed.
             </p>
 
@@ -226,12 +228,14 @@ export default function OnboardingStep5() {
 
                 {/* Phone input */}
                 <input
+                  id="phone-number"
                   type="tel"
                   value={formatPhoneNumber(phoneNumber)}
                   onChange={handlePhoneChange}
                   placeholder="(000) 000-0000"
                   className="flex-1 text-sm font-medium text-gray-900 placeholder-gray-400 bg-transparent border-none outline-none p-0"
                   aria-label="Phone number"
+                  aria-describedby={`${phoneHelperId} ${phoneRatesId}`}
                 />
               </div>
             </div>
@@ -251,7 +255,7 @@ export default function OnboardingStep5() {
               </div>
             )}
 
-            <p className="text-[10px] text-gray-400 mt-2 font-light">
+            <p id={phoneRatesId} className="text-[10px] text-gray-400 mt-2 font-light">
               Standard message and data rates may apply.
             </p>
           </section>

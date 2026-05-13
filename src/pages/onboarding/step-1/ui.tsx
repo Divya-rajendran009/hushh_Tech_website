@@ -61,6 +61,7 @@ export default function OnboardingStep1() {
     handleNext,
     handleBack,
   } = useStep1Logic();
+  const customAmountErrorId = "recurring-custom-amount-error";
 
   return (
     <div className="bg-white text-gray-900 min-h-screen antialiased flex flex-col selection:bg-hushh-blue selection:text-white">
@@ -355,6 +356,8 @@ export default function OnboardingStep1() {
                     $
                   </span>
                   <input
+                    aria-describedby={customAmountError ? customAmountErrorId : undefined}
+                    aria-invalid={customAmountError ? "true" : undefined}
                     type="text"
                     value={customAmount}
                     onChange={handleCustomAmountChange}
@@ -363,7 +366,7 @@ export default function OnboardingStep1() {
                   />
                 </div>
                 {customAmountError && (
-                  <p className="text-xs text-red-600 mt-1 font-medium">{customAmountError}</p>
+                  <p id={customAmountErrorId} className="text-xs text-red-600 mt-1 font-medium">{customAmountError}</p>
                 )}
               </div>
             </div>

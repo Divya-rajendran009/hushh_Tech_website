@@ -450,4 +450,28 @@ describe("keyboard accessibility helpers", () => {
 
     expect(onChange).toHaveBeenCalledWith("Atlantis");
   });
+
+  it("connects searchable select helper text with aria-describedby", async () => {
+    await act(async () => {
+      root.render(
+        React.createElement(SearchableSelect, {
+          id: "residence-country",
+          label: "Residence country",
+          helperText: "Used to prefill compliance fields.",
+          value: "",
+          options: [{ value: "in", label: "India" }],
+          onChange: vi.fn(),
+        }),
+      );
+    });
+
+    const input = container.querySelector("input");
+    const helper = container.querySelector("#residence-country-helper");
+
+    expect(input).toBeInstanceOf(HTMLInputElement);
+    expect(helper?.textContent).toBe("Used to prefill compliance fields.");
+    expect(input?.getAttribute("aria-describedby")).toBe(
+      "residence-country-helper",
+    );
+  });
 });
