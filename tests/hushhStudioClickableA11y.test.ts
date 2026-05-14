@@ -68,6 +68,7 @@ describe("Hushh Studio clickable accessibility", () => {
     expect(uploadButton).not.toBeNull();
     expect(uploadButton?.getAttribute("type")).toBe("button");
     expect(uploadButton?.className).toContain("aspect-video");
+    expect(uploadButton?.querySelector('input[type="file"]')).toBeNull();
     expect(container.querySelector('div[aria-label="Upload source image"]')).toBeNull();
   });
 });
