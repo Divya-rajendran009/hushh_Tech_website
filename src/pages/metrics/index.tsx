@@ -27,6 +27,8 @@ import type { SummaryPayload, SummaryState } from "./types";
 const REFRESH_INTERVAL_MS = 5 * 60_000;
 const DEFAULT_WINDOW_DAYS = 7;
 const DEFAULT_REPORT_TIMEZONE = "America/Los_Angeles";
+const ANALYTICS_CARD_HEADER_CLASS =
+  "max-w-full whitespace-normal break-words text-[10px] font-semibold uppercase leading-4 tracking-[0.18em]";
 
 function formatNumber(value: number | null | undefined) {
   if (value == null || Number.isNaN(value)) {
@@ -205,7 +207,7 @@ export function MetricCard({
       className={`rounded-[1.6rem] border border-gray-200 bg-white px-5 py-5 shadow-sm ${className}`.trim()}
       data-testid="metric-card"
     >
-      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500">
+      <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-gray-500`}>
         {eyebrow}
       </p>
       <div className="mt-4 space-y-1.5" data-testid="metric-label-value-stack">
@@ -246,7 +248,7 @@ function SummaryCell({
       }`}
     >
       <p
-        className={`text-[10px] font-semibold uppercase tracking-[0.22em] ${
+        className={`${ANALYTICS_CARD_HEADER_CLASS} ${
           isDark ? "text-white/45" : "text-[#6b6252]"
         }`}
       >
@@ -305,7 +307,7 @@ function SearchPerformanceList({
     >
       <p
         id={headingId}
-        className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]"
+        className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}
       >
         {title}
       </p>
@@ -667,7 +669,7 @@ export default function MetricsPage() {
             <aside className="rounded-[2rem] border border-black bg-[#050505] p-6 text-white shadow-2xl md:p-8">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.24em] text-white/45">
+                  <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-white/45`}>
                     Funnel stack
                   </p>
                   <h2
@@ -824,7 +826,7 @@ export default function MetricsPage() {
           <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-6 shadow-sm">
             <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
+                <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}>
                   Search Console
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold tracking-tight text-black">
@@ -875,7 +877,7 @@ export default function MetricsPage() {
             <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
               <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
+                  <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}>
                     7-Day KPI Flow
                   </p>
                   <h2 className="mt-2 text-2xl font-semibold tracking-tight text-black">
@@ -953,7 +955,7 @@ export default function MetricsPage() {
 
             <div className="grid gap-6">
               <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
+                <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}>
                   Conversion rates
                 </p>
                 <div className="mt-4 grid gap-3">
@@ -1001,7 +1003,7 @@ export default function MetricsPage() {
               </div>
 
               <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
+                <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}>
                   Onboarding step distribution
                 </p>
                 <div className="mt-4 space-y-3">
@@ -1047,7 +1049,7 @@ export default function MetricsPage() {
           <section className="rounded-[2rem] border border-[#e8dfcb] bg-[#fffaf0] p-6 shadow-sm">
             <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
+                <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}>
                   Traffic context
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold tracking-tight text-black">
@@ -1216,7 +1218,7 @@ export default function MetricsPage() {
 
           <section className="grid gap-6 xl:grid-cols-[1.18fr_0.82fr]">
             <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
+              <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}>
                 Daily appendix
               </p>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight text-black">
@@ -1291,7 +1293,7 @@ export default function MetricsPage() {
               <div className="rounded-[2rem] border border-[#e8dfcb] bg-white p-6 shadow-sm">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
+                    <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#244d86]`}>
                       Legacy appendix
                     </p>
                     <h2 className="mt-2 text-2xl font-semibold tracking-tight text-black">
@@ -1306,7 +1308,7 @@ export default function MetricsPage() {
                 </div>
 
                 <div className="mt-6 rounded-2xl border border-[#ece4d2] bg-[#faf5ea] px-4 py-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#6f684f]">
+                  <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-[#6f684f]`}>
                     Legacy users created
                   </p>
                   <p className="mt-3 text-4xl font-semibold tracking-tight text-black">
@@ -1326,7 +1328,7 @@ export default function MetricsPage() {
                 <section className="rounded-[2rem] border border-amber-200 bg-amber-50 p-6 shadow-sm">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-amber-700">
+                      <p className={`${ANALYTICS_CARD_HEADER_CLASS} text-amber-700`}>
                         Audit notes
                       </p>
                       <h2 className="mt-2 text-2xl font-semibold tracking-tight text-amber-950">

@@ -54,6 +54,26 @@ describe("metrics MetricCard accessibility", () => {
     expect(visibleLabel?.getAttribute("aria-hidden")).toBe("true");
   });
 
+  it("allows analytics card headers to wrap instead of clipping text", async () => {
+    await act(async () => {
+      root.render(
+        React.createElement(MetricCard, {
+          eyebrow: "Search performance and traffic quality",
+          label: "Average position",
+          value: "12.4",
+        })
+      );
+    });
+
+    const eyebrow = container.querySelector("p");
+
+    expect(eyebrow?.className).toContain("max-w-full");
+    expect(eyebrow?.className).toContain("whitespace-normal");
+    expect(eyebrow?.className).toContain("break-words");
+    expect(eyebrow?.className).toContain("leading-4");
+    expect(eyebrow?.className).not.toContain("truncate");
+  });
+
   it("exposes dashboard card badges as named status text", async () => {
     await act(async () => {
       root.render(
