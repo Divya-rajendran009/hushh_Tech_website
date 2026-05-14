@@ -27,6 +27,7 @@ import type { SummaryPayload, SummaryState } from "./types";
 const REFRESH_INTERVAL_MS = 5 * 60_000;
 const DEFAULT_WINDOW_DAYS = 7;
 const DEFAULT_REPORT_TIMEZONE = "America/Los_Angeles";
+const ANALYTICS_CARD_HEADER_CONTENT_GAP_CLASS = "mt-3";
 
 function formatNumber(value: number | null | undefined) {
   if (value == null || Number.isNaN(value)) {
@@ -208,7 +209,7 @@ export function MetricCard({
         {eyebrow}
       </p>
       <h3
-        className="mt-3 text-[28px] font-semibold tracking-tight text-black"
+        className={`${ANALYTICS_CARD_HEADER_CONTENT_GAP_CLASS} text-[28px] font-semibold tracking-tight text-black`}
         aria-label={`${label}: ${value}`}
       >
         {value}
@@ -250,7 +251,7 @@ function SummaryCell({
         {label}
       </p>
       <p
-        className={`mt-2 text-sm font-medium ${
+        className={`${ANALYTICS_CARD_HEADER_CONTENT_GAP_CLASS} text-sm font-medium ${
           isDark ? "text-white" : "text-black"
         }`}
       >
@@ -294,7 +295,7 @@ function SearchPerformanceList({
       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#244d86]">
         {title}
       </p>
-      <div className="mt-3 space-y-3">
+      <div className={`${ANALYTICS_CARD_HEADER_CONTENT_GAP_CLASS} space-y-3`}>
         {rows.length > 0 ? (
           rows.slice(0, 5).map((row, index) => {
             const hasSearchMetrics = "clicks" in row || "impressions" in row;

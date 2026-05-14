@@ -52,6 +52,14 @@ describe("metrics MetricCard accessibility", () => {
     expect(visibleLabel?.getAttribute("aria-hidden")).toBe("true");
   });
 
+  it("keeps consistent spacing between card header and primary content", async () => {
+    await renderMetricCard();
+
+    const valueHeading = container.querySelector("h3");
+
+    expect(valueHeading?.className).toContain("mt-3");
+  });
+
   it("exposes dashboard card badges as named status text", async () => {
     await act(async () => {
       root.render(
