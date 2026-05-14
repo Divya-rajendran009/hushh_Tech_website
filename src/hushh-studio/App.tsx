@@ -143,9 +143,11 @@ const HushhStudioApp: React.FC = () => {
         <div className="mt-8 space-y-6">
           {/* Image Upload for Image-to-Video mode */}
           {mode === 'image-to-video' && (
-            <div
+            <button
+              type="button"
+              aria-label={selectedImage ? "Change source image" : "Upload source image"}
               onClick={() => fileInputRef.current?.click()}
-              className="relative aspect-video rounded-2xl border-2 border-dashed border-white/20 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:border-purple-500/50 hover:bg-purple-500/5 transition-all overflow-hidden group"
+              className="relative aspect-video w-full rounded-2xl border-2 border-dashed border-white/20 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:border-purple-500/50 hover:bg-purple-500/5 transition-all overflow-hidden group text-left"
             >
               {selectedImage ? (
                 <>
@@ -178,7 +180,7 @@ const HushhStudioApp: React.FC = () => {
                 className="hidden"
                 onChange={handleImageSelect}
               />
-            </div>
+            </button>
           )}
 
           {/* Video Preview (for extend mode or showing result) */}
