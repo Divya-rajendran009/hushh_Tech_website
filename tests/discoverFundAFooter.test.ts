@@ -104,6 +104,13 @@ vi.mock("../src/components/hushh-tech-footer/HushhTechFooter", () => ({
 
 import FundA from "../src/pages/discover-fund-a/ui";
 
+const expectClassTokens = (element: Element | null | undefined, tokens: string[]) => {
+  expect(element).toBeTruthy();
+  tokens.forEach((token) => {
+    expect(element?.classList.contains(token)).toBe(true);
+  });
+};
+
 describe("FundA footer shell", () => {
   let container: HTMLDivElement;
   let root: Root;
@@ -133,7 +140,7 @@ describe("FundA footer shell", () => {
     const footer = container.querySelector('[data-testid="fund-a-footer"]');
 
     expect(footer?.getAttribute("data-active-tab")).toBe("fund-a");
-    expect(footer?.parentElement?.className).toContain("lg:hidden");
+    expectClassTokens(footer?.parentElement, ["lg:hidden"]);
   });
 
   it("marks feature card icons as decorative", async () => {
@@ -167,16 +174,11 @@ describe("FundA footer shell", () => {
     expect(desktopTiles).toHaveLength(8);
 
     mobileCards.forEach((card) => {
-      expect(card.className).toContain("gap-3");
-      expect(card.className).toContain("p-4");
-      expect(card.className).toContain("sm:gap-4");
-      expect(card.className).toContain("sm:p-5");
+      expectClassTokens(card, ["gap-3", "p-4", "sm:gap-4", "sm:p-5"]);
     });
 
     desktopTiles.forEach((tile) => {
-      expect(tile.className).toContain("gap-3");
-      expect(tile.className).toContain("p-4");
-      expect(tile.className).toContain("xl:p-5");
+      expectClassTokens(tile, ["gap-3", "p-4", "xl:p-5"]);
     });
   });
 
@@ -200,13 +202,11 @@ describe("FundA footer shell", () => {
     expect(pricingMetrics).toHaveLength(pricingCards.length);
 
     pricingHeaders.forEach((pricingHeader) => {
-      expect(pricingHeader.className).toContain("flex-col");
-      expect(pricingHeader.className).toContain("sm:flex-row");
+      expectClassTokens(pricingHeader, ["flex-col", "sm:flex-row"]);
     });
 
     pricingMetrics.forEach((pricingMetricGroup) => {
-      expect(pricingMetricGroup.className).toContain("grid-cols-1");
-      expect(pricingMetricGroup.className).toContain("sm:grid-cols-3");
+      expectClassTokens(pricingMetricGroup, ["grid-cols-1", "sm:grid-cols-3"]);
     });
   });
 });
