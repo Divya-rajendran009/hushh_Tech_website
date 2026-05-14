@@ -46,7 +46,7 @@ const EndpointCard: React.FC<EndpointCardProps> = ({ title, description, endpoin
                 ? "bg-green-50 text-green-600" 
                 : "hover:bg-slate-100 text-slate-400"
             }`}
-            aria-label={`${hasCopied ? "Copied" : "Copy"} ${title} endpoint`}
+            aria-label={`${hasCopied ? "Copied" : "Copy"} ${title}`}
           >
             {hasCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>

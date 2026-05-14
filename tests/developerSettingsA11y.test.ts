@@ -34,9 +34,9 @@ describe("DeveloperSettings accessibility", () => {
     );
 
     expect(copyButtons.map((button) => button.getAttribute("aria-label"))).toEqual([
-      "Copy MCP Discovery Endpoint endpoint",
-      "Copy Chat Endpoint endpoint",
-      "Copy AgentCard Endpoint (A2A) endpoint",
+      "Copy MCP Discovery Endpoint",
+      "Copy Chat Endpoint",
+      "Copy AgentCard Endpoint (A2A)",
     ]);
 
     for (const button of copyButtons) {
