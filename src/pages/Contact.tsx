@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -69,11 +69,6 @@ emailjs.init("_TMzDc8Bfy6riSfzq");
 export default function Contact() {
   const [num1, setNum1] = useState<number>(0);
   const [num2, setNum2] = useState<number>(0);
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
-  const [subject, setSubject] = useState(null);
-  const [message, setMessage] = useState("");
 
   const [formData, setFormData] = useState({
     name: '',
@@ -84,8 +79,6 @@ export default function Contact() {
     message: '',
     captcha: ''
   });
-
-  
 
   const [captchaError, setCaptchaError] = useState<string>('');
   const navigate = useNavigate();

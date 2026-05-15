@@ -119,7 +119,7 @@ export default function CommunityPage() {
         {/* ── Post List ── */}
         {apiLoading ? (
           <div className="flex justify-center py-16">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-hushh-blue rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-hushh-blue rounded-full animate-spin" role="status" aria-label="Loading" />
           </div>
         ) : filteredContent.length > 0 ? (
           <div className="space-y-0 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-5">
