@@ -7,6 +7,10 @@ cd "$ROOT_DIR"
 
 COMMAND="${1:-}"
 
+ensure_playwright_chromium() {
+  npx playwright install --with-deps chromium
+}
+
 case "$COMMAND" in
   secret)
     bash scripts/security/run-gitleaks.sh
@@ -15,6 +19,7 @@ case "$COMMAND" in
     npm run env:check
     ;;
   web)
+    ensure_playwright_chromium
     npm run test
     npx tsc --noEmit
     npm run build:web
@@ -28,6 +33,7 @@ case "$COMMAND" in
   queue)
     npm run env:check
     npm run lint:ci
+    ensure_playwright_chromium
     npm run test
     npx tsc --noEmit
     npm run build:web

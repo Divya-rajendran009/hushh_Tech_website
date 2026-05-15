@@ -5,6 +5,13 @@ import { Check } from "lucide-react";
 const playfair = { fontFamily: "'Playfair Display', serif" };
 const featureRowClassName = "flex items-start gap-3.5";
 const featureIconClassName = "mt-[3px] h-5 w-5 shrink-0 text-hushh-blue";
+const benefitsCtaClassName = [
+  "inline-flex h-14 w-full items-center justify-center gap-2 rounded-full",
+  "border border-black bg-black px-6 text-sm font-semibold tracking-wide text-white shadow-lg",
+  "transition-[background-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-px hover:bg-black/90 hover:shadow-xl",
+  "active:translate-y-0 active:scale-[0.98] sm:w-auto sm:min-w-[200px]",
+  "benefits-career-cta",
+].join(" ");
 
 const BenefitsPage: React.FC = () => {
   return (
@@ -257,7 +264,7 @@ const BenefitsPage: React.FC = () => {
             </p>
             <a
               href="/career"
-              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full border border-black bg-black px-6 text-sm font-semibold tracking-wide text-white shadow-lg transition-all duration-200 ease-out hover:-translate-y-px hover:bg-black/90 hover:shadow-xl active:translate-y-0 active:scale-[0.98] sm:w-auto sm:min-w-[200px]"
+              className={benefitsCtaClassName}
             >
               View Open Positions
             </a>

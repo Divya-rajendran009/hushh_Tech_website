@@ -44,4 +44,5 @@ describe("Benefits feature rows", () => {
       expect(icon?.getAttribute("class")).toContain("shrink-0");
     });
   });
+
 });
