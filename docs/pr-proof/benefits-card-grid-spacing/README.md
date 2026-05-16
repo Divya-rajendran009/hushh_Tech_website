@@ -7,6 +7,7 @@ Proof captured with Playwright from a local Vite proof page that imports the rea
 Screenshots:
 
 - `benefits-card-grid-desktop.png` - desktop-width benefits card grid with two-column cards, consistent gaps, and full-width CTA card.
+- `benefits-card-grid-mobile.png` - narrow mobile benefits card grid with single-column cards and preserved row spacing.
 
 Recreate:
 

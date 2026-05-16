@@ -22,21 +22,37 @@ try {
   }
 
   const browser = await chromium.launch();
-  const page = await browser.newPage({
-    viewport: { width: 1280, height: 980 },
-    deviceScaleFactor: 1,
-  });
+  const proofs = [
+    {
+      path: "docs/pr-proof/benefits-card-grid-spacing/benefits-card-grid-desktop.png",
+      viewport: { width: 1280, height: 980 },
+    },
+    {
+      path: "docs/pr-proof/benefits-card-grid-spacing/benefits-card-grid-mobile.png",
+      viewport: { width: 390, height: 1200 },
+    },
+  ];
 
-  await page.goto(
-    new URL(
-      "docs/pr-proof/benefits-card-grid-spacing/benefits-card-grid-proof.html",
-      baseUrl
-    ).toString(),
-    { waitUntil: "networkidle" }
-  );
-  await page.locator('[data-testid="benefits-card-grid-proof"]').screenshot({
-    path: "docs/pr-proof/benefits-card-grid-spacing/benefits-card-grid-desktop.png",
-  });
+  for (const proof of proofs) {
+    const page = await browser.newPage({
+      viewport: proof.viewport,
+      deviceScaleFactor: 1,
+    });
+
+    await page.goto(
+      new URL(
+        "docs/pr-proof/benefits-card-grid-spacing/benefits-card-grid-proof.html",
+        baseUrl
+      ).toString(),
+      { waitUntil: "networkidle" }
+    );
+
+    await page.locator('[data-testid="benefits-card-grid-proof"]').screenshot({
+      path: proof.path,
+    });
+
+    await page.close();
+  }
 
   await browser.close();
 } finally {
