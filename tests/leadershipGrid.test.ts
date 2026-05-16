@@ -4,6 +4,7 @@ import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
+import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import Leadership from "../src/components/Leadership";
@@ -28,7 +29,7 @@ describe("Leadership card grid", () => {
     root = null;
   });
 
-  it("keeps leadership testimonial cards inside the responsive grid", () => {
+  it("renders leadership cards in the constrained responsive grid", () => {
     container = document.createElement("div");
     document.body.appendChild(container);
     root = createRoot(container);
@@ -36,9 +37,13 @@ describe("Leadership card grid", () => {
     act(() => {
       root?.render(
         React.createElement(
-          ChakraProvider,
+          MemoryRouter,
           null,
-          React.createElement(Leadership),
+          React.createElement(
+            ChakraProvider,
+            null,
+            React.createElement(Leadership),
+          ),
         ),
       );
     });
