@@ -163,6 +163,7 @@ function InvestorProfilePage() {
                   View Hushh Gold Pass
                 </Button>
                 <Stack
+                  data-testid="investor-wallet-action-controls"
                   direction={{ base: "column", sm: "row" }}
                   gap={{ base: 3, sm: 4 }}
                   justify="center"

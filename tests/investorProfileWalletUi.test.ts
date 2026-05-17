@@ -101,4 +101,26 @@ describe("InvestorProfile wallet UI", () => {
       "Google Wallet is temporarily unavailable while we finish the wallet issuer setup."
     );
   });
+
+  it("uses the responsive wallet action stack for narrow profile screens", async () => {
+    await act(async () => {
+      root.render(
+        React.createElement(
+          ChakraProvider,
+          { theme },
+          React.createElement(InvestorProfilePage)
+        )
+      );
+    });
+
+    const walletControls = container.querySelector(
+      '[data-testid="investor-wallet-action-controls"]'
+    );
+    const appleButton = container.querySelector(
+      'button[aria-label="Add to Apple Wallet"]'
+    );
+
+    expect(walletControls).not.toBeNull();
+    expect(appleButton).not.toBeNull();
+  });
 });
