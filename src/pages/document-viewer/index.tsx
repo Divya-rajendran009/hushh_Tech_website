@@ -184,9 +184,9 @@ const DocumentViewerPage: React.FC = () => {
           <a
             href={documentUrl}
             download
-            className="inline-flex items-center gap-2 rounded-xl bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/80"
+            className="group inline-flex items-center gap-2 rounded-xl bg-black px-4 py-2 text-sm font-medium text-white transition-all hover:bg-black/80 hover:shadow-md hover:-translate-y-0.5"
           >
-            <span aria-hidden="true" className="material-symbols-outlined text-base">
+            <span aria-hidden="true" className="material-symbols-outlined text-base transition-transform group-hover:translate-y-[2px]">
               download
             </span>
             Download Original
@@ -240,7 +240,7 @@ const DocumentViewerPage: React.FC = () => {
                       <table className="min-w-full divide-y divide-slate-200 text-sm">
                         <tbody className="divide-y divide-slate-100">
                           {block.rows.map((row, rowIndex) => (
-                            <tr key={`row-${rowIndex}`} className="align-top">
+                            <tr key={`row-${rowIndex}`} className="align-top hover:bg-slate-50/80 transition-colors">
                               {row.map((cell, cellIndex) => (
                                 <td key={`cell-${rowIndex}-${cellIndex}`} className="whitespace-pre-wrap px-4 py-3 text-slate-700">
                                   {cell}

@@ -4,11 +4,12 @@ import {
   Container,
   Box,
   Text,
-  useToast,
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Button,
+  HStack,
 } from '@chakra-ui/react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import ReportDetail from '../../components/ReportDetail';
@@ -20,7 +21,22 @@ const ReportDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const toast = useToast();
+
+  const renderRecoveryActions = () => (
+    <HStack spacing={3} mt={4} justifyContent="center" flexWrap="wrap">
+      <Button
+        type="button"
+        colorScheme="cyan"
+        variant="outline"
+        onClick={() => navigate('/community')}
+      >
+        Back to Community
+      </Button>
+      <Button type="button" variant="ghost" onClick={() => navigate('/')}>
+        Back to Home
+      </Button>
+    </HStack>
+  );
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -67,13 +83,14 @@ const ReportDetailPage: React.FC = () => {
 
     if (error) {
       return (
-        <Alert 
-          status="error" 
-          variant="subtle" 
-          flexDirection="column" 
-          alignItems="center" 
-          justifyContent="center" 
-          textAlign="center" 
+        <Alert
+          status="error"
+          variant="subtle"
+          role="alert"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          textAlign="center"
           borderRadius="md"
           py={6}
         >
@@ -84,19 +101,21 @@ const ReportDetailPage: React.FC = () => {
           <AlertDescription maxWidth="sm">
             {error}
           </AlertDescription>
+          {renderRecoveryActions()}
         </Alert>
       );
     }
 
     if (!report) {
       return (
-        <Alert 
-          status="info" 
-          variant="subtle" 
-          flexDirection="column" 
-          alignItems="center" 
-          justifyContent="center" 
-          textAlign="center" 
+        <Alert
+          status="info"
+          variant="subtle"
+          role="alert"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          textAlign="center"
           borderRadius="md"
           py={6}
         >
@@ -107,6 +126,7 @@ const ReportDetailPage: React.FC = () => {
           <AlertDescription maxWidth="sm">
             We couldn't find the report you're looking for.
           </AlertDescription>
+          {renderRecoveryActions()}
         </Alert>
       );
     }
@@ -115,9 +135,9 @@ const ReportDetailPage: React.FC = () => {
   };
 
   return (
-    <Box bg="white" minH="100vh" py={12} px={4}>
+    <Box as="main" id="main-content" bg="white" minH="100vh" py={12} px={4}>
       <Container maxW="container.md">
-        <Text as={'h2'} fontSize={{base:'sm',md:'md'}} fontWeight={'600'} color={'#0AADBC'}>
+        <Text as="p" fontSize={{ base: 'sm', md: 'md' }} fontWeight="600" color="#0AADBC" mb={4}>
           Market Updates
         </Text>
         

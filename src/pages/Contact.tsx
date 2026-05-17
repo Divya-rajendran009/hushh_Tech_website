@@ -57,6 +57,12 @@ const fieldChrome = {
 
 const cardHoverBorder = "rgba(0, 102, 204, 0.3)";
 
+const buttonFocusVisible = {
+  _focusVisible: inputFocus,
+};
+
+const CAPTCHA_ERROR_ID = "contact-captcha-error";
+
 const reasonOptions = [
   "Infrastructure Consultation",
   "Investment Information",
@@ -81,6 +87,7 @@ export default function Contact() {
   });
 
   const [captchaError, setCaptchaError] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const form = useRef<HTMLFormElement>(null);
 
@@ -96,24 +103,29 @@ export default function Contact() {
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    if (name === "captcha" && captchaError) {
+      setCaptchaError("");
+    }
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value,
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
     const userCaptcha = parseInt(formData.captcha, 10);
     const correctAnswer = num1 + num2;
 
     if (userCaptcha !== correctAnswer) {
-      setCaptchaError('Incorrect sum. Please try again.');
+      setCaptchaError("Incorrect sum. Please try again.");
       return;
-    } else {
-      setCaptchaError('');
     }
+
+    setCaptchaError("");
 
     const serviceId = "service_tsuapx9";
     const templateId = "template_50ujflf";
@@ -128,19 +140,28 @@ export default function Contact() {
       message: formData.message,
     };
 
-    emailjs.send(serviceId, templateId, templateParams, userId)
-      .then((result) => {
-        console.log('Email sent successfully:', result.text);
-        toast.success('Email sent successfully!');
-        navigate('/');
-      }, (error) => {
-        console.error('Failed to send email:', error.text);
-        toast.error('Failed to send email. Please try again later');
-      });
+    setIsSubmitting(true);
+    try {
+      const result = await emailjs.send(serviceId, templateId, templateParams, userId);
+      console.log("Email sent successfully:", result.text);
+      toast.success("Email sent successfully!");
+      navigate("/");
+    } catch (error) {
+      const message =
+        error && typeof error === "object" && "text" in error
+          ? String((error as { text: string }).text)
+          : "Unknown error";
+      console.error("Failed to send email:", message);
+      toast.error("Failed to send email. Please try again later");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <Box
+      as="main"
+      id="main-content"
       bg={pageBg}
       w="100%"
       className="antialiased text-gray-900"
@@ -236,7 +257,7 @@ export default function Contact() {
               Send us a Message
             </Heading>
 
-            <form ref={form} onSubmit={handleSubmit}>
+            <form ref={form} onSubmit={handleSubmit} aria-busy={isSubmitting}>
               <VStack spacing={5} align="stretch">
                 <SimpleGrid
                   columns={{ base: 1, md: 2 }}
@@ -358,18 +379,28 @@ export default function Contact() {
                   </FormLabel>
                   <Input
                     name="captcha"
+                    inputMode="numeric"
                     placeholder="Enter the answer"
                     value={formData.captcha}
                     onChange={handleChange}
                     size="lg"
                     h="48px"
+                    aria-invalid={captchaError ? true : undefined}
+                    aria-describedby={captchaError ? CAPTCHA_ERROR_ID : undefined}
+                    isDisabled={isSubmitting}
                     {...fieldChrome}
                   />
-                  {captchaError && (
-                    <Text color="#FF3B30" fontSize="sm" mt={1}>
-                      {captchaError}
-                    </Text>
-                  )}
+                  <Text
+                    id={CAPTCHA_ERROR_ID}
+                    role="alert"
+                    aria-live="polite"
+                    color={captchaError ? "#FF3B30" : "transparent"}
+                    fontSize="sm"
+                    mt={1}
+                    minH="20px"
+                  >
+                    {captchaError}
+                  </Text>
                 </FormControl>
 
                 <Box pt={6} mt={1} borderTopWidth="1px" borderTopColor={gray100}>
@@ -382,8 +413,14 @@ export default function Contact() {
                     fontWeight="600"
                     bg="gray.900"
                     color="white"
-                    _hover={{ bg: "black" }}
+                    isLoading={isSubmitting}
+                    isDisabled={isSubmitting}
+                    loadingText="Sending..."
+                    aria-busy={isSubmitting}
+                    _hover={{ bg: isSubmitting ? "gray.900" : "black" }}
                     _active={{ bg: "black" }}
+                    _disabled={{ bg: "gray.900", opacity: 0.7, cursor: "not-allowed" }}
+                    {...buttonFocusVisible}
                   >
                     Submit Message
                   </Button>
@@ -420,6 +457,7 @@ export default function Contact() {
                 <HStack spacing={4} align="flex-start">
                   <Icon
                     as={MapPin}
+                    aria-hidden
                     color={brandBlue}
                     boxSize={5}
                     mt={1}
@@ -441,6 +479,7 @@ export default function Contact() {
                 <HStack spacing={4} align="flex-start">
                   <Icon
                     as={Phone}
+                    aria-hidden
                     color={brandBlue}
                     boxSize={5}
                     mt={1}
@@ -459,6 +498,7 @@ export default function Contact() {
                 <HStack spacing={4} align="flex-start">
                   <Icon
                     as={Clock}
+                    aria-hidden
                     color={brandBlue}
                     boxSize={5}
                     mt={1}
@@ -518,10 +558,13 @@ export default function Contact() {
                 fontWeight="600"
                 borderWidth="1px"
                 borderColor={gray200}
-                rightIcon={<Icon as={ArrowRight} boxSize={4} color={gray900} />}
+                rightIcon={
+                  <Icon as={ArrowRight} aria-hidden boxSize={4} color={gray900} />
+                }
                 _hover={{ bg: gray50 }}
                 _active={{ bg: gray100 }}
                 onClick={() => navigate("/about/leadership")}
+                {...buttonFocusVisible}
               >
                 Learn About Our Strategy
               </Button>

@@ -244,8 +244,18 @@ const FieldCard: React.FC<{ field: DataField }> = ({ field }) => {
                 color="gray.400"
                 boxSize={4}
                 cursor="pointer"
+                role="button"
+                tabIndex={0}
+                aria-label={isRevealed ? "Hide sensitive data" : "Show sensitive data"}
                 _hover={{ color: 'white' }}
                 onClick={() => setIsRevealed(!isRevealed)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsRevealed(!isRevealed);
+                  }
+                }}
               />
             )}
           </HStack>

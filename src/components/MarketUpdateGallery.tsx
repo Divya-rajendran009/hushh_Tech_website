@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import { 
   Box, 
   Heading, 
@@ -38,6 +38,8 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const galleryHeadingId = useId();
+  const modalTitleId = useId();
   
   // Define the base URL for Supabase storage
   const baseUrl = getSupabaseStoragePublicUrl('website');
@@ -170,8 +172,14 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
   };
 
   return (
-    <Box mt={8}>
-      <Heading as="h3" fontSize="lg" color="black" mb={4}>
+    <Box as="section" mt={8} aria-labelledby={galleryHeadingId}>
+      <Heading
+        as="h3"
+        id={galleryHeadingId}
+        fontSize="lg"
+        color="black"
+        mb={4}
+      >
         {title}
       </Heading>
       
@@ -199,7 +207,11 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
               textAlign="left"
               transition="transform 0.2s"
               _hover={{ transform: 'scale(1.02)' }}
-              _focus={{ boxShadow: '0 0 0 3px rgba(43, 140, 238, 0.35)' }}
+              _focus={{ outline: 'none' }}
+              _focusVisible={{
+                boxShadow: '0 0 0 3px rgba(43, 140, 238, 0.55)',
+                outline: 'none',
+              }}
             >
               {/* Skeleton loader */}
               <Skeleton
@@ -239,7 +251,8 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
                   transform="translate(-50%, -50%)"
                   zIndex="1"
                 >
-                  <Spinner 
+                  <Spinner
+                    aria-hidden="true"
                     size="md"
                     color="blue.500"
                     thickness="3px"
@@ -260,8 +273,33 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
       {/* Full-screen image modal */}
       <Modal isOpen={isOpen} onClose={onClose} size="full" isCentered>
         <ModalOverlay bg="blackAlpha.900" />
-        <ModalContent bg="transparent" maxW="100vw" maxH="100vh" m={0} p={0}>
+        <ModalContent
+          bg="transparent"
+          maxW="100vw"
+          maxH="100vh"
+          m={0}
+          p={0}
+          aria-labelledby={selectedImage ? modalTitleId : undefined}
+        >
           <ModalBody p={0} display="flex" alignItems="center" justifyContent="center">
+            {selectedImage && (
+              <Text
+                as="h2"
+                id={modalTitleId}
+                className="sr-only"
+                position="absolute"
+                w="1px"
+                h="1px"
+                p={0}
+                m="-1px"
+                overflow="hidden"
+                clipPath="inset(50%)"
+                whiteSpace="nowrap"
+                borderWidth={0}
+              >
+                Enlarged market analysis chart {getChartLabel(selectedImage.name)}
+              </Text>
+            )}
             <Flex 
               position="absolute" 
               top={4} 
@@ -269,12 +307,17 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
               zIndex={2}
             >
               <IconButton
-                aria-label="Close modal"
+                aria-label="Close enlarged chart"
                 icon={<CloseIcon />}
                 onClick={onClose}
                 colorScheme="whiteAlpha"
                 variant="ghost"
                 size="lg"
+                _focus={{ outline: 'none' }}
+                _focusVisible={{
+                  boxShadow: '0 0 0 3px rgba(255, 255, 255, 0.95)',
+                  outline: 'none',
+                }}
               />
             </Flex>
             {hasCarouselControls && (
@@ -291,6 +334,11 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
                   top="50%"
                   transform="translateY(-50%)"
                   zIndex={2}
+                  _focus={{ outline: 'none' }}
+                  _focusVisible={{
+                    boxShadow: '0 0 0 3px rgba(255, 255, 255, 0.95)',
+                    outline: 'none',
+                  }}
                 />
                 <IconButton
                   aria-label="Show next market analysis chart"
@@ -304,6 +352,11 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
                   top="50%"
                   transform="translateY(-50%)"
                   zIndex={2}
+                  _focus={{ outline: 'none' }}
+                  _focusVisible={{
+                    boxShadow: '0 0 0 3px rgba(255, 255, 255, 0.95)',
+                    outline: 'none',
+                  }}
                 />
               </>
             )}
@@ -316,6 +369,7 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
                 objectFit="contain"
                 onClick={onClose}
                 cursor="pointer"
+                decoding="async"
               />
             )}
           </ModalBody>

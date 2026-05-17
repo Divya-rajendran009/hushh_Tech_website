@@ -5,6 +5,12 @@ import { Check } from "lucide-react";
 const playfair = { fontFamily: "'Playfair Display', serif" };
 const featureRowClassName = "flex items-start gap-3.5";
 const featureIconClassName = "mt-[3px] h-5 w-5 shrink-0 text-hushh-blue";
+const benefitCardGridClassName =
+  "grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:items-stretch lg:gap-6 xl:gap-8";
+const benefitCardClassName =
+  "h-full rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6";
+const benefitFeatureGridClassName =
+  "grid grid-cols-1 gap-x-6 gap-y-3 sm:gap-y-3.5 md:grid-cols-2 md:gap-y-4";
 
 const BenefitsPage: React.FC = () => {
   return (
@@ -12,7 +18,10 @@ const BenefitsPage: React.FC = () => {
       data-page="benefits"
       className="bg-white antialiased text-gray-900 selection:bg-hushh-blue selection:text-white"
     >
-      <main className="mx-auto w-full max-w-7xl px-4 pt-4 pb-12 sm:px-6 lg:px-8">
+      <main
+        id="main-content"
+        className="mx-auto w-full max-w-7xl px-4 pt-4 pb-12 sm:px-6 lg:px-8"
+      >
         {/* Hero — compact; same copy as before */}
         <header className="mx-auto max-w-3xl py-6 text-center sm:py-8 md:py-10">
           <h1
@@ -28,9 +37,9 @@ const BenefitsPage: React.FC = () => {
           </p>
         </header>
 
-        <div className="flex flex-col gap-5 sm:gap-6 lg:gap-8">
+        <div className={benefitCardGridClassName} data-testid="benefits-card-grid">
           {/* Compensation & Investment Opportunities */}
-          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+          <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 💰
@@ -42,7 +51,7 @@ const BenefitsPage: React.FC = () => {
                 Compensation & Investment Opportunities
               </h2>
             </div>
-            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+            <ul className={benefitFeatureGridClassName}>
               <li className={featureRowClassName}>
                 <Check className={featureIconClassName} aria-hidden />
                 <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
@@ -83,7 +92,7 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Health, Wellness & Family Support */}
-          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+          <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🏥
@@ -95,7 +104,7 @@ const BenefitsPage: React.FC = () => {
                 Health, Wellness & Family Support
               </h2>
             </div>
-            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+            <ul className={benefitFeatureGridClassName}>
               <li className={featureRowClassName}>
                 <Check className={featureIconClassName} aria-hidden />
                 <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
@@ -136,7 +145,7 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Work-Life, Growth & Giving Back */}
-          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+          <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🌱
@@ -148,7 +157,7 @@ const BenefitsPage: React.FC = () => {
                 Work-Life, Growth & Giving Back
               </h2>
             </div>
-            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+            <ul className={benefitFeatureGridClassName}>
               <li className={featureRowClassName}>
                 <Check className={featureIconClassName} aria-hidden />
                 <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
@@ -201,7 +210,7 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Perks, Culture & Quality of Life */}
-          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+          <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🎯
@@ -213,7 +222,7 @@ const BenefitsPage: React.FC = () => {
                 Perks, Culture & Quality of Life
               </h2>
             </div>
-            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+            <ul className={benefitFeatureGridClassName}>
               <li className={featureRowClassName}>
                 <Check className={featureIconClassName} aria-hidden />
                 <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
@@ -242,7 +251,7 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Why Join Hushh Technologies? — home-style CTA card + primary black button */}
-          <section className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-6 text-center transition-colors hover:border-hushh-blue/30 sm:p-8">
+          <section className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-6 text-center transition-colors hover:border-hushh-blue/30 sm:p-8 lg:col-span-2">
             <h2
               className="mb-3 text-xl font-medium tracking-tight text-black sm:mb-4 sm:text-3xl md:text-4xl"
               style={playfair}
