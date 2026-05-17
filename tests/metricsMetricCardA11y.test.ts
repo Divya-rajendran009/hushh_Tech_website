@@ -90,6 +90,9 @@ describe("metrics MetricCard accessibility", () => {
     expect(badge?.getAttribute("aria-label")).toBe("Funnel stack status: Live");
     expect(badge?.textContent).toBe("Live");
     expect(badge?.className).toContain("inline-flex");
+    expect(badge?.className).toContain("items-center");
+    expect(badge?.className).toContain("justify-center");
+    expect(badge?.className).toContain("leading-none");
     expect(badge?.className).toContain("rounded-full");
   });
 
