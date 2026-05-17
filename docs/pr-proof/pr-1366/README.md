@@ -2,10 +2,11 @@
 
 Route: `/metrics`
 
-Proof captured from a local production build preview after running:
+Proof captured with Playwright against a local Vite server using the mocked
+metrics summary payload from `tests/metricsCardPaddingVisual.spec.ts`.
 
 ```bash
-npm.cmd run build:web
+npx.cmd playwright test tests/metricsCardPaddingVisual.spec.ts
 ```
 
 Screenshots:
