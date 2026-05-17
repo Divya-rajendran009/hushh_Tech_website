@@ -8,8 +8,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const useHushhUserProfileLogicMock = vi.hoisted(() => vi.fn());
 
 vi.mock("../src/pages/hushh-user-profile/logic", () => ({
-  FIELD_LABELS: {},
-  VALUE_LABELS: {},
+  FIELD_LABELS: {
+    primary_goal: "Primary goal",
+  },
+  VALUE_LABELS: {
+    aggressive_growth: "Aggressive growth across concentrated AI infrastructure and private market opportunities",
+  },
   useHushhUserProfileLogic: () => useHushhUserProfileLogicMock(),
 }));
 
@@ -144,5 +148,53 @@ describe("HushhUserProfile PrivacyShield integration", () => {
     expect(
       container.querySelectorAll('input[role="switch"]'),
     ).toHaveLength(2);
+  });
+
+  it("keeps AI preference confidence badges from wrapping while values truncate", async () => {
+    const getConfidenceLabel = vi.fn(() => "High confidence");
+    const getConfidenceBadgeClass = vi.fn(() => "border-emerald-200 text-emerald-700");
+
+    useHushhUserProfileLogicMock.mockReturnValue({
+      ...useHushhUserProfileLogicMock(),
+      investorProfile: {
+        primary_goal: {
+          value: "aggressive_growth",
+          confidence: 0.91,
+        },
+      },
+      getConfidenceLabel,
+      getConfidenceBadgeClass,
+    });
+
+    await act(async () => {
+      root.render(React.createElement(HushhUserProfilePage));
+    });
+
+    const row = container.querySelector(
+      '[aria-label="Edit Primary goal"]',
+    ) as HTMLElement | null;
+    expect(row).not.toBeNull();
+    expect(row?.className).toContain("gap-3");
+
+    const label = row?.querySelector("span:first-child") as HTMLElement | null;
+    expect(label?.className).toContain("max-w-[42%]");
+    expect(label?.className).toContain("truncate");
+
+    const valueGroup = row?.querySelector("div") as HTMLElement | null;
+    expect(valueGroup?.className).toContain("min-w-0");
+    expect(valueGroup?.className).toContain("flex-1");
+
+    const value = valueGroup?.querySelector("span:first-child") as HTMLElement | null;
+    expect(value?.textContent).toContain("Aggressive growth");
+    expect(value?.className).toContain("min-w-0");
+    expect(value?.className).toContain("max-w-full");
+    expect(value?.className).toContain("truncate");
+    expect(value?.className).toContain("text-right");
+
+    const badge = valueGroup?.querySelector("span:nth-child(2)") as HTMLElement | null;
+    expect(badge?.textContent).toBe("High confidence");
+    expect(badge?.className).toContain("shrink-0");
+    expect(badge?.className).toContain("whitespace-nowrap");
+    expect(badge?.className).toContain("leading-none");
   });
 });
