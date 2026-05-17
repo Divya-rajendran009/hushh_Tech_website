@@ -32,7 +32,7 @@ export function HushhUserProfileWalletActions({
 }: HushhUserProfileWalletActionsProps) {
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4" data-testid="hushh-wallet-action-controls">
         <button
           type="button"
           onClick={onAppleWalletPass}

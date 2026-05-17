@@ -1,15 +1,22 @@
 # PR 1291 Visual Proof
 
-Surface: disabled Apple Wallet and Google Wallet action styling in `HushhUserProfileWalletActions`.
+Surface: wallet action disabled, available, and loading states on Hushh user profile, investor profile, and public investor profile UI.
 
-Proof captured with Playwright from a local Vite proof page that imports the same React component used by `src/pages/hushh-user-profile/ui.tsx`. The surrounding proof frame is only screenshot chrome; the wallet buttons and support messages are rendered by the production component and `src/index.css`.
+Proof captured with Playwright from the real wallet action components used by the affected profile pages.
 
-Screenshots:
+Command:
 
-- `wallet-disabled-muted-state.png` - disabled wallet controls with muted text and icons while retaining readable opacity.
-
-Recreate:
-
-```bash
-node docs/pr-proof/capture-visual-proof.mjs
+```powershell
+npx.cmd playwright test tests/profileWalletStatesVisual.spec.ts
 ```
+
+Screenshots follow this naming pattern:
+
+- `<surface>-wallet-actions-disabled-mobile.png`
+- `<surface>-wallet-actions-disabled-desktop.png`
+- `<surface>-wallet-actions-available-mobile.png`
+- `<surface>-wallet-actions-available-desktop.png`
+- `<surface>-wallet-actions-loading-mobile.png`
+- `<surface>-wallet-actions-loading-desktop.png`
+
+Surfaces covered: `hushh-user-profile`, `investor-profile`, and `public-investor-profile`.

@@ -46,6 +46,68 @@ const walletCardActionClassName = [
   "disabled:[&_svg]:grayscale disabled:[&_svg]:opacity-60 disabled:[&_span]:text-gray-400",
 ].join(" ");
 
+interface PublicInvestorWalletActionsProps {
+  isApplePassLoading: boolean;
+  isGooglePassLoading: boolean;
+  appleWalletSupported: boolean;
+  googleWalletSupported: boolean;
+  googleWalletSupportMessage: string;
+  onAppleWalletPass: () => void;
+  onGoogleWalletPass: () => void;
+}
+
+export function PublicInvestorWalletActions({
+  isApplePassLoading,
+  isGooglePassLoading,
+  appleWalletSupported,
+  googleWalletSupported,
+  googleWalletSupportMessage,
+  onAppleWalletPass,
+  onGoogleWalletPass,
+}: PublicInvestorWalletActionsProps) {
+  return (
+    <>
+      <div
+        className="flex flex-col min-[380px]:flex-row items-stretch min-[380px]:items-center justify-center gap-3 min-[380px]:gap-4"
+        data-testid="public-investor-wallet-action-controls"
+      >
+        <button
+          onClick={onAppleWalletPass}
+          disabled={isApplePassLoading || !appleWalletSupported}
+          className={walletCardActionClassName}
+          aria-label="Add to Apple Wallet"
+        >
+          <FaApple className="w-5 h-5 shrink-0 text-black" />
+          <span className="text-sm font-medium text-black whitespace-nowrap">
+            {isApplePassLoading ? "Loading..." : "Apple Wallet"}
+          </span>
+        </button>
+        <button
+          onClick={onGoogleWalletPass}
+          disabled={isGooglePassLoading || !googleWalletSupported}
+          className={walletCardActionClassName}
+          aria-label="Add to Google Wallet"
+        >
+          <FaGoogle className="w-4 h-4 shrink-0" style={{ color: '#4285F4' }} />
+          <span className="text-sm font-medium text-black whitespace-nowrap">
+            {isGooglePassLoading ? "Loading..." : "Google Wallet"}
+          </span>
+        </button>
+      </div>
+      {!appleWalletSupported && (
+        <p className="mt-3 text-center text-xs text-gray-500 font-light">
+          {APPLE_WALLET_SUPPORT_MESSAGE}
+        </p>
+      )}
+      {!googleWalletSupported && (
+        <p className="mt-2 text-center text-xs text-gray-500 font-light">
+          {googleWalletSupportMessage}
+        </p>
+      )}
+    </>
+  );
+}
+
 const PublicInvestorProfilePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -410,30 +472,15 @@ const PublicInvestorProfilePage: React.FC = () => {
               <>
                 {/* Wallet Buttons - Top */}
                 <section className="pt-4 sm:pt-6 pb-2">
-                  <div className="flex flex-col min-[380px]:flex-row items-stretch min-[380px]:items-center justify-center gap-3 min-[380px]:gap-4">
-                    <button
-                      onClick={handleAppleWalletPass}
-                      disabled={isApplePassLoading || !appleWalletSupported}
-                      className={walletCardActionClassName}
-                      aria-label="Add to Apple Wallet"
-                    >
-                      <FaApple className="w-5 h-5 shrink-0 text-black" />
-                      <span className="text-sm font-medium text-black whitespace-nowrap">
-                        {isApplePassLoading ? "Loading..." : "Apple Wallet"}
-                      </span>
-                    </button>
-                    <button
-                      onClick={handleGoogleWalletPass}
-                      disabled={isGooglePassLoading || !googleWalletSupported}
-                      className={walletCardActionClassName}
-                      aria-label="Add to Google Wallet"
-                    >
-                      <FaGoogle className="w-4 h-4 shrink-0" style={{ color: '#4285F4' }} />
-                      <span className="text-sm font-medium text-black whitespace-nowrap">
-                        {isGooglePassLoading ? "Loading..." : "Google Wallet"}
-                      </span>
-                    </button>
-                  </div>
+                  <PublicInvestorWalletActions
+                    isApplePassLoading={isApplePassLoading}
+                    isGooglePassLoading={isGooglePassLoading}
+                    appleWalletSupported={appleWalletSupported}
+                    googleWalletSupported={googleWalletSupported}
+                    googleWalletSupportMessage={googleWalletSupportMessage}
+                    onAppleWalletPass={handleAppleWalletPass}
+                    onGoogleWalletPass={handleGoogleWalletPass}
+                  />
                   <button
                     type="button"
                     onClick={() => setIsWalletPreviewOpen(true)}
@@ -441,16 +488,6 @@ const PublicInvestorProfilePage: React.FC = () => {
                   >
                     View Hushh Gold Pass
                   </button>
-                  {!appleWalletSupported && (
-                    <p className="mt-3 text-center text-xs text-gray-500 font-light">
-                      {APPLE_WALLET_SUPPORT_MESSAGE}
-                    </p>
-                  )}
-                  {!googleWalletSupported && (
-                    <p className="mt-2 text-center text-xs text-gray-500 font-light">
-                      {googleWalletSupportMessage}
-                    </p>
-                  )}
                 </section>
 
                 {/* Welcome Section */}

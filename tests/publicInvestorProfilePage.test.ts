@@ -191,6 +191,9 @@ describe("PublicInvestorProfilePage", () => {
     expect(container.textContent).toContain("Verified Investor Profile");
     expect(container.textContent).toContain("Verified");
     expect(container.textContent).toContain("Investment Profile");
+    expect(
+      container.querySelector('[data-testid="public-investor-wallet-action-controls"]')
+    ).not.toBeNull();
 
     const emailValue = container.querySelector(
       '[data-testid="profile-email-value"]',

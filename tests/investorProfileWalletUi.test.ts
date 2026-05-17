@@ -90,7 +90,11 @@ describe("InvestorProfile wallet UI", () => {
     const appleButton = container.querySelector(
       'button[aria-label="Add to Apple Wallet"]'
     ) as HTMLButtonElement | null;
+    const walletControls = container.querySelector(
+      '[data-testid="investor-wallet-action-controls"]'
+    );
 
+    expect(walletControls).not.toBeNull();
     expect(appleButton).not.toBeNull();
     expect(appleButton?.disabled).toBe(true);
     expect(container.textContent).toContain("View Hushh Gold Pass");

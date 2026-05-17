@@ -179,7 +179,12 @@ function InvestorProfilePage() {
                 >
                   View Hushh Gold Pass
                 </Button>
-                <HStack spacing={4} justify="center" w="full">
+                <HStack
+                  spacing={4}
+                  justify="center"
+                  w="full"
+                  data-testid="investor-wallet-action-controls"
+                >
                 <Button
                   aria-label="Add to Apple Wallet"
                   onClick={handleAppleWalletDownload}
