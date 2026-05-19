@@ -6,7 +6,7 @@ const playfair = { fontFamily: "'Playfair Display', serif" };
 const featureRowClassName = "flex items-start gap-3.5";
 const featureIconClassName = "mt-[3px] h-5 w-5 shrink-0 text-hushh-blue";
 const benefitCardGridClassName =
-  "grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:items-stretch lg:gap-6 xl:gap-8";
+  "grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-2 lg:items-stretch lg:gap-6 xl:gap-8";
 const benefitCardClassName =
   "h-full rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6";
 const benefitFeatureGridClassName =
