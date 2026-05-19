@@ -239,7 +239,7 @@ const FundA = () => {
 
       {/* ═══ Main ═══ */}
       <main className="px-6 flex-grow max-w-md mx-auto w-full pb-32 lg:max-w-7xl lg:px-10 xl:px-16">
-        <section className="pt-6 pb-8 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+        <section className="pt-6 pb-2 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
           {/* ── Hero ── */}
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-hushh-blue/20 rounded-full mb-6">
