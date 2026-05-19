@@ -33,9 +33,9 @@ const FieldRow = ({
 
 /* ── section label (same as profile page) ── */
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium mt-10 mb-2">
+  <h2 className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-semibold mt-10 mb-3">
     {children}
-  </p>
+  </h2>
 );
 
 /* ── card with icon (same as step-2 cards) ── */
