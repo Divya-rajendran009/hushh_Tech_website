@@ -135,7 +135,7 @@ function PublicHushhProfilePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 py-10 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Hero Section - Professional Dashboard Style */}
         <div className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 rounded-3xl border border-gray-200 p-8 md:p-10 shadow-xl">
           <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-100/40 to-transparent rounded-full -mr-32 -mt-32"></div>
