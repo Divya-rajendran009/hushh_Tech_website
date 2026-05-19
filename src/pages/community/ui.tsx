@@ -163,13 +163,13 @@ export default function CommunityPage() {
                   }`}
                 >
                   {/* date pill */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[10px] tracking-[0.15em] uppercase font-medium text-gray-400">
+                  <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 mb-3">
+                    <span className="shrink-0 text-[10px] tracking-[0.15em] uppercase font-medium text-gray-400">
                       {formatDisplayDate(post.date)}
                     </span>
-                    <div className="h-px w-6 bg-gray-200" />
+                    <div className="h-px w-6 shrink-0 bg-gray-200" />
                     {post.category && (
-                      <span className="text-[10px] tracking-[0.1em] uppercase text-hushh-blue/70 font-light">
+                      <span className="min-w-0 max-w-full truncate text-[10px] tracking-[0.1em] uppercase text-hushh-blue/70 font-light">
                         {post.category}
                       </span>
                     )}

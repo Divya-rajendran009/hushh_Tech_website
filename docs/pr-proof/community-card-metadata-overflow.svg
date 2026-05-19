@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="560" viewBox="0 0 390 560" role="img" aria-labelledby="title desc">
+  <title id="title">Community card metadata mobile overflow proof</title>
+  <desc id="desc">Shows a community card metadata row wrapping and truncating safely on a 390 pixel mobile viewport.</desc>
+  <rect width="390" height="560" fill="#ffffff"/>
+  <text x="195" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#000000">
+    Community Card
+  </text>
+  <text x="195" y="74" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#000000">
+    Metadata Proof
+  </text>
+  <text x="195" y="108" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#6b7280">
+    Long metadata stays inside a mobile card.
+  </text>
+
+  <rect x="16" y="150" width="358" height="300" rx="18" fill="#fafafa" stroke="#e5e7eb"/>
+
+  <g font-family="Arial, sans-serif" font-size="10" letter-spacing="1.2">
+    <text x="40" y="195" fill="#9ca3af" font-weight="700">MAY 19, 2026</text>
+    <line x1="132" y1="191" x2="156" y2="191" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="168" y="195" fill="#0066cc" opacity="0.75">
+      INVESTOR RELATIONS &amp; STRATE...
+    </text>
+    <text x="40" y="218" fill="#0066cc" opacity="0.75">
+      MARKET UPDATES
+    </text>
+  </g>
+
+  <text x="40" y="265" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#000000">
+    Latest community insights
+  </text>
+  <text x="40" y="298" font-family="Arial, sans-serif" font-size="13" fill="#6b7280">
+    Metadata row uses flex-wrap, min-w-0, and truncate
+  </text>
+  <text x="40" y="318" font-family="Arial, sans-serif" font-size="13" fill="#6b7280">
+    so long labels do not spill beyond the card.
+  </text>
+
+  <text x="195" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#0066cc">
+    No horizontal metadata overflow
+  </text>
+  <line x1="16" y1="470" x2="374" y2="470" stroke="#0066cc" stroke-width="2"/>
+  <text x="195" y="495" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#6b7280">
+    390px viewport card boundary
+  </text>
+</svg>
