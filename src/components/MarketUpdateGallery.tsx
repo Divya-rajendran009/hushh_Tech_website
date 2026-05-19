@@ -18,6 +18,8 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from '@chakra-ui/icons';
 import { getSupabaseStoragePublicUrl } from '../services/runtime/mainWeb';
 
+const chartFrameAspectRatio = '16 / 9';
+
 interface MarketUpdateGalleryProps {
   date: string; // Format: 'dmu14mar' or 'DD/MM/YYYY'
   showTestImage?: boolean;
@@ -160,7 +162,8 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
         p={2}
       >
         <Skeleton
-          height="300px"
+          aspectRatio={chartFrameAspectRatio}
+          w="100%"
           fadeDuration={1}
           borderRadius="md"
           startColor="gray.100"
@@ -216,6 +219,8 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
               {/* Skeleton loader */}
               <Skeleton
                 isLoaded={imagesLoaded[image.name]}
+                aspectRatio={chartFrameAspectRatio}
+                w="100%"
                 fadeDuration={1}
                 borderRadius="md"
                 startColor="gray.100"
@@ -228,8 +233,7 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
                   borderRadius="md"
                   objectFit="contain"
                   w="100%"
-                  minH="300px"
-                  maxH="400px"
+                  h="100%"
                   loading="lazy"
                   bg="gray.50"
                   onLoad={() => handleImageLoad(image.name)}
