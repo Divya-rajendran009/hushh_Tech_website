@@ -13,6 +13,9 @@ interface LocationPreferencesProps {
   value: string;
 }
 
+const elevatedCardSurfaceClassName =
+  "shadow-sm hover:shadow-md transition-shadow duration-200";
+
 const PreferenceCard = ({
   title,
   items,
@@ -23,7 +26,7 @@ const PreferenceCard = ({
   icon?: string;
 }) => {
   return (
-    <div className="relative overflow-hidden border border-gray-200 rounded-2xl p-5 bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
+    <div className={`relative overflow-hidden border border-gray-200 rounded-2xl p-5 bg-white ${elevatedCardSurfaceClassName}`}>
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cyan-50 to-transparent rounded-full -mr-16 -mt-16 opacity-50"></div>
       <div className="relative">
         <div className="flex items-center gap-3 mb-4">
@@ -182,7 +185,7 @@ function PublicHushhProfilePage() {
 
         {/* Quick Stats - Overview cards with icons and gradients */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="relative overflow-hidden bg-gradient-to-br from-orange-50 to-white rounded-2xl border border-orange-100 p-5 shadow-md hover:shadow-lg transition-all duration-200 group">
+          <div className={`relative overflow-hidden bg-gradient-to-br from-orange-50 to-white rounded-2xl border border-orange-100 p-5 group ${elevatedCardSurfaceClassName}`}>
             <div className="absolute top-0 right-0 text-6xl opacity-10 group-hover:opacity-20 transition-opacity">🍽️</div>
             <div className="relative">
               <div className="flex items-center gap-2 mb-2">
@@ -199,7 +202,7 @@ function PublicHushhProfilePage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 p-5 shadow-md hover:shadow-lg transition-all duration-200 group">
+          <div className={`relative overflow-hidden bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100 p-5 group ${elevatedCardSurfaceClassName}`}>
             <div className="absolute top-0 right-0 text-6xl opacity-10 group-hover:opacity-20 transition-opacity">🏨</div>
             <div className="relative">
               <div className="flex items-center gap-2 mb-2">
@@ -216,7 +219,7 @@ function PublicHushhProfilePage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden bg-gradient-to-br from-purple-50 to-white rounded-2xl border border-purple-100 p-5 shadow-md hover:shadow-lg transition-all duration-200 group">
+          <div className={`relative overflow-hidden bg-gradient-to-br from-purple-50 to-white rounded-2xl border border-purple-100 p-5 group ${elevatedCardSurfaceClassName}`}>
             <div className="absolute top-0 right-0 text-6xl opacity-10 group-hover:opacity-20 transition-opacity">🛍️</div>
             <div className="relative">
               <div className="flex items-center gap-2 mb-2">

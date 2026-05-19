@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Visual proof for elevated card surface consistency</title>
+  <desc id="desc">The public Hushh ID page now uses the same subtle base and hover elevation for repeated overview and detail card surfaces.</desc>
+  <rect width="1200" height="720" fill="#f8fafc"/>
+  <text x="70" y="72" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#111827">Elevated card surface consistency</text>
+  <text x="70" y="112" font-family="Arial, sans-serif" font-size="18" fill="#4b5563">Repeated public Hushh ID cards now share one subtle elevation scale.</text>
+
+  <g transform="translate(80 165)">
+    <rect width="480" height="420" rx="18" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="30" y="48" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#991b1b">Before</text>
+    <rect x="45" y="105" width="110" height="110" rx="16" fill="#fff7ed" stroke="#fed7aa"/>
+    <rect x="185" y="95" width="125" height="125" rx="16" fill="#eff6ff" stroke="#bfdbfe"/>
+    <rect x="340" y="82" width="105" height="145" rx="16" fill="#faf5ff" stroke="#e9d5ff"/>
+    <ellipse cx="100" cy="234" rx="58" ry="12" fill="#d1d5db" opacity="0.35"/>
+    <ellipse cx="248" cy="242" rx="70" ry="16" fill="#9ca3af" opacity="0.45"/>
+    <ellipse cx="392" cy="250" rx="76" ry="20" fill="#6b7280" opacity="0.5"/>
+    <line x1="70" y1="145" x2="130" y2="145" stroke="#fb923c" stroke-width="8" stroke-linecap="round"/>
+    <line x1="215" y1="145" x2="280" y2="145" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+    <line x1="365" y1="145" x2="420" y2="145" stroke="#a78bfa" stroke-width="8" stroke-linecap="round"/>
+    <text x="30" y="330" font-family="Arial, sans-serif" font-size="15" fill="#7f1d1d">Overview cards used stronger shadows than detail cards.</text>
+    <text x="30" y="360" font-family="Arial, sans-serif" font-size="15" fill="#7f1d1d">Similar surfaces appeared to sit at different depths.</text>
+  </g>
+
+  <g transform="translate(640 165)">
+    <rect width="480" height="420" rx="18" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="30" y="48" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#065f46">After</text>
+    <rect x="48" y="105" width="112" height="120" rx="16" fill="#fff7ed" stroke="#fed7aa"/>
+    <rect x="184" y="105" width="112" height="120" rx="16" fill="#eff6ff" stroke="#bfdbfe"/>
+    <rect x="320" y="105" width="112" height="120" rx="16" fill="#faf5ff" stroke="#e9d5ff"/>
+    <ellipse cx="104" cy="242" rx="58" ry="12" fill="#94a3b8" opacity="0.28"/>
+    <ellipse cx="240" cy="242" rx="58" ry="12" fill="#94a3b8" opacity="0.28"/>
+    <ellipse cx="376" cy="242" rx="58" ry="12" fill="#94a3b8" opacity="0.28"/>
+    <line x1="74" y1="150" x2="134" y2="150" stroke="#fb923c" stroke-width="8" stroke-linecap="round"/>
+    <line x1="210" y1="150" x2="270" y2="150" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+    <line x1="346" y1="150" x2="406" y2="150" stroke="#a78bfa" stroke-width="8" stroke-linecap="round"/>
+    <text x="30" y="330" font-family="Arial, sans-serif" font-size="15" fill="#065f46">Overview and detail cards share shadow-sm to hover:shadow-md.</text>
+    <text x="30" y="360" font-family="Arial, sans-serif" font-size="15" fill="#065f46">Repeated card surfaces now feel like one visual system.</text>
+  </g>
+
+  <rect x="70" y="625" width="1060" height="54" rx="10" fill="#111827"/>
+  <text x="95" y="659" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Changed: public Hushh ID repeated cards use a shared elevatedCardSurfaceClassName.</text>
+</svg>
