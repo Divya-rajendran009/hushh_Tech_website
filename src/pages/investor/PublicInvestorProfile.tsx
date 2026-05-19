@@ -514,7 +514,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                     </h2>
                     <button
                       onClick={handleOpenProfile}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                      className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors"
                       aria-label="Open profile"
                     >
                       <ExternalLink className="w-4 h-4 text-gray-500" />
@@ -527,7 +527,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                       <Link className="w-4 h-4 text-gray-700" />
                     </div>
                     <span className="text-sm text-gray-700 truncate flex-1">{profileUrl}</span>
-                    <button onClick={onCopy} className="p-2 hover:bg-gray-100 rounded-full transition-colors" aria-label="Copy link">
+                    <button onClick={onCopy} className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors" aria-label="Copy link">
                       {hasCopied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5 text-gray-400" />}
                     </button>
                   </div>
