@@ -542,51 +542,51 @@ const FundA = () => {
             <div
               key={sc.shareClass}
               data-testid="share-class-pricing-card"
-              className="border border-gray-200 rounded-2xl p-5 hover:border-gray-300 hover:bg-gray-50/40 hover:shadow-sm transition-all"
+              className="border border-gray-200 rounded-2xl p-5 hover:border-gray-300 hover:bg-gray-50/40 hover:shadow-sm transition-all sm:p-5"
             >
               <div
                 data-testid="share-class-pricing-header"
-                className="flex flex-col items-start gap-3 mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:mb-3"
+                className="flex flex-col items-start gap-3 mb-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:mb-3"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-ios-dark flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-ios-dark flex items-center justify-center shrink-0 sm:w-9 sm:h-9">
                     <span className="material-symbols-outlined text-white !text-[0.9rem]">
                       account_balance_wallet
                     </span>
                   </div>
-                  <span className="text-[13px] font-semibold text-black">
+                  <span className="text-[15px] font-semibold text-black sm:text-[13px]">
                     {sc.shareClass}
                   </span>
                 </div>
-                <span className="inline-flex max-w-full text-[11px] font-medium text-hushh-blue bg-hushh-blue/10 px-2.5 py-1 rounded-full">
+                <span className="inline-flex max-w-full text-[12px] font-medium text-hushh-blue bg-hushh-blue/10 px-3 py-1.5 rounded-full sm:text-[11px] sm:px-2.5 sm:py-1">
                   Min {sc.minInvestment}
                 </span>
               </div>
               <div
                 data-testid="share-class-pricing-metrics"
-                className="grid grid-cols-1 gap-2 sm:grid-cols-3"
+                className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-2"
               >
-                <div className="text-center rounded-xl border border-gray-200 bg-white px-2 py-2 transition-all hover:border-hushh-blue/40 hover:bg-hushh-blue/5">
-                  <p className="text-[9px] uppercase tracking-widest text-gray-400 mb-0.5">
+                <div className="flex items-center justify-between gap-3 rounded-xl border border-gray-200 bg-white px-3.5 py-3 text-left transition-all hover:border-hushh-blue/40 hover:bg-hushh-blue/5 sm:block sm:px-2 sm:py-2 sm:text-center">
+                  <p className="text-[10px] uppercase tracking-widest text-gray-400 sm:mb-0.5 sm:text-[9px]">
                     Mgmt
                   </p>
-                  <p className="text-[12px] font-semibold text-black transition-colors hover:text-hushh-blue">
+                  <p className="text-[14px] font-semibold text-black transition-colors hover:text-hushh-blue sm:text-[12px]">
                     {sc.managementFee}
                   </p>
                 </div>
-                <div className="text-center rounded-xl border border-gray-200 bg-white px-2 py-2 transition-all hover:border-ios-green/40 hover:bg-ios-green/5">
-                  <p className="text-[9px] uppercase tracking-widest text-gray-400 mb-0.5">
+                <div className="flex items-center justify-between gap-3 rounded-xl border border-gray-200 bg-white px-3.5 py-3 text-left transition-all hover:border-ios-green/40 hover:bg-ios-green/5 sm:block sm:px-2 sm:py-2 sm:text-center">
+                  <p className="text-[10px] uppercase tracking-widest text-gray-400 sm:mb-0.5 sm:text-[9px]">
                     Perf
                   </p>
-                  <p className="text-[12px] font-semibold text-black transition-colors hover:text-ios-green">
+                  <p className="text-[14px] font-semibold text-black transition-colors hover:text-ios-green sm:text-[12px]">
                     {sc.performanceFee}
                   </p>
                 </div>
-                <div className="text-center rounded-xl border border-gray-200 bg-white px-2 py-2 transition-all hover:border-ios-yellow/50 hover:bg-ios-yellow/10">
-                  <p className="text-[9px] uppercase tracking-widest text-gray-400 mb-0.5">
+                <div className="flex items-center justify-between gap-3 rounded-xl border border-gray-200 bg-white px-3.5 py-3 text-left transition-all hover:border-ios-yellow/50 hover:bg-ios-yellow/10 sm:block sm:px-2 sm:py-2 sm:text-center">
+                  <p className="text-[10px] uppercase tracking-widest text-gray-400 sm:mb-0.5 sm:text-[9px]">
                     Hurdle
                   </p>
-                  <p className="text-[12px] font-semibold text-black transition-colors hover:text-ios-yellow">
+                  <p className="text-[14px] font-semibold text-black transition-colors hover:text-ios-yellow sm:text-[12px]">
                     {sc.hurdleRate}
                   </p>
                 </div>
