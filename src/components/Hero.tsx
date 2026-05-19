@@ -528,14 +528,45 @@ export default function Hero() {
         pb="28px" pt={2} px={6} zIndex={40}
       >
         <Flex justify="space-between" align="center" maxW={{ base: "393px", md: "768px", lg: "1024px" }} mx="auto">
-          <TabItem icon="home" label="Home" active />
-          <Box onClick={() => navigate("/hushh-user-profile")} cursor="pointer">
+          <Box
+            as="button"
+            type="button"
+            onClick={() => navigate("/")}
+            aria-label="Go to home"
+            aria-current="page"
+            borderRadius="10px"
+            _focusVisible={{ outline: "2px solid #007AFF", outlineOffset: "3px" }}
+          >
+            <TabItem icon="home" label="Home" active />
+          </Box>
+          <Box
+            as="button"
+            type="button"
+            onClick={() => navigate("/hushh-user-profile")}
+            aria-label="Go to portfolio"
+            borderRadius="10px"
+            _focusVisible={{ outline: "2px solid #007AFF", outlineOffset: "3px" }}
+          >
             <TabItem icon="pie_chart" label="Portfolio" />
           </Box>
-          <Box onClick={() => navigate("/discover-fund-a")} cursor="pointer">
+          <Box
+            as="button"
+            type="button"
+            onClick={() => navigate("/discover-fund-a")}
+            aria-label="Go to Fund A"
+            borderRadius="10px"
+            _focusVisible={{ outline: "2px solid #007AFF", outlineOffset: "3px" }}
+          >
             <TabItem icon="swap_horiz" label="Trade" />
           </Box>
-          <Box onClick={() => session ? navigate("/hushh-user-profile") : navigate("/login")} cursor="pointer">
+          <Box
+            as="button"
+            type="button"
+            onClick={() => session ? navigate("/hushh-user-profile") : navigate("/login")}
+            aria-label={session ? "Go to profile" : "Log in to view profile"}
+            borderRadius="10px"
+            _focusVisible={{ outline: "2px solid #007AFF", outlineOffset: "3px" }}
+          >
             <TabItem icon="person" label="Profile" />
           </Box>
         </Flex>
