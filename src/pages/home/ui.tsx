@@ -23,12 +23,12 @@ export default function HomePage() {
         id="main-content"
         className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32 lg:pb-12 pt-4"
       >
-        <div className="flex min-h-[calc(100vh-6rem)] flex-col gap-12 lg:gap-16">
+        <div className="flex min-h-[calc(100dvh-6rem)] flex-col gap-10 sm:gap-12 lg:gap-16">
           <section
-            className="grid grid-cols-1 gap-8 lg:min-h-[70vh] lg:grid-cols-2 lg:items-center lg:gap-12"
+            className="grid grid-cols-1 items-start gap-8 lg:min-h-[clamp(560px,70dvh,760px)] lg:grid-cols-[minmax(0,1fr)_minmax(320px,520px)] lg:items-center lg:gap-12"
             aria-labelledby="home-hero-heading"
           >
-            <div className="flex min-w-0 flex-col justify-center py-4 lg:min-h-[58vh]">
+            <div className="flex min-w-0 flex-col justify-center py-4 lg:min-h-[clamp(460px,58dvh,640px)]">
               <h1
                 id="home-hero-heading"
                 className="text-[2.75rem] leading-[1.1] font-normal text-black tracking-tight font-serif sm:text-[3.25rem] lg:text-[4rem]"
@@ -94,8 +94,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative mt-2 min-w-0 lg:mt-0">
-              <div className="group bg-ios-dark hover:bg-gray-100 text-white hover:text-gray-900 border border-white/10 hover:border-gray-300 p-8 sm:p-10 lg:p-12 rounded-2xl relative overflow-hidden shadow-2xl w-full lg:max-w-[520px] lg:ml-auto transition-all duration-700 ease-out hover:-rotate-[8deg]">
+            <div className="relative mt-2 min-w-0 lg:mt-0 lg:flex lg:justify-end">
+              <div className="group bg-ios-dark hover:bg-gray-100 text-white hover:text-gray-900 border border-white/10 hover:border-gray-300 p-8 sm:p-10 lg:p-12 rounded-2xl relative overflow-hidden shadow-2xl w-full min-h-[360px] sm:min-h-[380px] lg:min-h-[420px] lg:max-w-[520px] transition-all duration-700 ease-out hover:-rotate-[8deg]">
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-hushh-blue/15 rounded-full blur-3xl" aria-hidden="true" />
                 <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-hushh-blue/5 to-transparent" aria-hidden="true" />
 
