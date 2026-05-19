@@ -205,19 +205,26 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
         {/* Scrollable FAQ content */}
         <div className="flex-1 overflow-y-auto px-6 pb-10 scrollbar-thin">
           {FAQ_DATA.map((category) => (
-            <section key={category.title} className="mt-6">
+            <section
+              key={category.title}
+              className="mt-6"
+              aria-labelledby={`faq-category-${getFaqItemKey(category.title, 0)}`}
+            >
               {/* Category header */}
-              <h3 className="text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-3 font-medium">
+              <h3
+                id={`faq-category-${getFaqItemKey(category.title, 0)}`}
+                className="text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-3 font-medium"
+              >
                 {category.title}
               </h3>
 
-              <div className="border border-gray-200 divide-y divide-gray-100">
+              <div className="border border-gray-200 divide-y divide-gray-100" role="list">
                 {category.items.map((item, idx) => {
                   const key = getFaqItemKey(category.title, idx);
                   const isExpanded = expandedIdx === key;
 
                   return (
-                    <div key={key}>
+                    <div key={key} role="listitem">
                       {/* Question row */}
                       <button
                         id={`faq-btn-${key}`}
@@ -230,6 +237,7 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                           <span
                             className="material-symbols-outlined text-gray-600 text-sm"
                             style={{ fontVariationSettings: "'wght' 300" }}
+                            aria-hidden="true"
                           >
                             help
                           </span>
@@ -242,6 +250,7 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                             isExpanded ? "rotate-180" : ""
                           }`}
                           style={{ fontVariationSettings: "'wght' 300" }}
+                          aria-hidden="true"
                         >
                           expand_more
                         </span>

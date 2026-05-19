@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Visual proof for expandable content accessibility semantics</title>
+  <desc id="desc">The FAQ sheet expandable sections now expose labelled categories, list semantics for question rows, and hide decorative icons from assistive technologies.</desc>
+  <rect width="1200" height="720" fill="#f8fafc"/>
+  <text x="70" y="72" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#111827">Expandable content accessibility semantics</text>
+  <text x="70" y="112" font-family="Arial, sans-serif" font-size="18" fill="#4b5563">FAQ accordion groups are easier to navigate with headings, labelled sections, and list structure.</text>
+
+  <g transform="translate(90 160)">
+    <rect width="430" height="440" rx="18" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="30" y="48" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#991b1b">Before</text>
+    <rect x="30" y="82" width="120" height="18" rx="9" fill="#fee2e2"/>
+    <text x="46" y="96" font-family="Arial, sans-serif" font-size="12" fill="#7f1d1d">visual label</text>
+    <g transform="translate(30 128)">
+      <rect width="360" height="58" fill="#f3f4f6" stroke="#e5e7eb"/>
+      <circle cx="30" cy="29" r="16" fill="#d1d5db"/>
+      <rect x="58" y="22" width="200" height="12" rx="6" fill="#9ca3af"/>
+      <path d="M320 24 l9 9 9-9" fill="none" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(30 186)">
+      <rect width="360" height="58" fill="#f3f4f6" stroke="#e5e7eb"/>
+      <circle cx="30" cy="29" r="16" fill="#d1d5db"/>
+      <rect x="58" y="22" width="185" height="12" rx="6" fill="#9ca3af"/>
+      <path d="M320 24 l9 9 9-9" fill="none" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <text x="30" y="305" font-family="Arial, sans-serif" font-size="15" fill="#7f1d1d">Rows are visually grouped, but structure is generic.</text>
+    <text x="30" y="334" font-family="Arial, sans-serif" font-size="15" fill="#7f1d1d">Decorative icons can add extra noise.</text>
+  </g>
+
+  <g transform="translate(680 160)">
+    <rect width="430" height="440" rx="18" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="30" y="48" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#065f46">After</text>
+    <rect x="30" y="82" width="180" height="18" rx="9" fill="#dcfce7"/>
+    <text x="46" y="96" font-family="Arial, sans-serif" font-size="12" fill="#065f46">labelled h3 section</text>
+    <g transform="translate(30 128)">
+      <rect width="360" height="58" fill="#f0fdf4" stroke="#86efac"/>
+      <circle cx="30" cy="29" r="16" fill="#bbf7d0"/>
+      <rect x="58" y="22" width="200" height="12" rx="6" fill="#16a34a"/>
+      <path d="M320 24 l9 9 9-9" fill="none" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/>
+      <text x="58" y="49" font-family="Arial, sans-serif" font-size="10" fill="#166534">role=listitem</text>
+    </g>
+    <g transform="translate(30 186)">
+      <rect width="360" height="58" fill="#f0fdf4" stroke="#86efac"/>
+      <circle cx="30" cy="29" r="16" fill="#bbf7d0"/>
+      <rect x="58" y="22" width="185" height="12" rx="6" fill="#16a34a"/>
+      <path d="M320 24 l9 9 9-9" fill="none" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/>
+      <text x="58" y="49" font-family="Arial, sans-serif" font-size="10" fill="#166534">aria-expanded + aria-controls</text>
+    </g>
+    <text x="30" y="305" font-family="Arial, sans-serif" font-size="15" fill="#065f46">Categories are labelled sections.</text>
+    <text x="30" y="334" font-family="Arial, sans-serif" font-size="15" fill="#065f46">Question groups expose list/listitem semantics.</text>
+  </g>
+
+  <rect x="70" y="635" width="1060" height="54" rx="10" fill="#111827"/>
+  <text x="95" y="669" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Changed: FAQ sheet categories use aria-labelledby, accordion groups use role=list/listitem, and decorative icons are aria-hidden.</text>
+</svg>
