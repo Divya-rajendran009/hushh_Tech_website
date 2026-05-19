@@ -75,6 +75,7 @@ const bodyFont =
 
 const FaqPage: React.FC = () => {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
+  const faqListRef = React.useRef<HTMLDivElement>(null);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -82,7 +83,7 @@ const FaqPage: React.FC = () => {
 
   const focusFaqTrigger = (nextIndex: number) => {
     const triggers = Array.from(
-      document.querySelectorAll<HTMLButtonElement>("[data-faq-trigger='true']"),
+      faqListRef.current?.querySelectorAll<HTMLButtonElement>("[data-faq-trigger='true']") ?? [],
     );
     if (triggers.length === 0) return;
 
@@ -162,6 +163,7 @@ const FaqPage: React.FC = () => {
           mx="auto"
           w="100%"
           role="list"
+          ref={faqListRef}
         >
           {faqs.map((faq, index: number) => {
             const isOpen = openIndex === index;

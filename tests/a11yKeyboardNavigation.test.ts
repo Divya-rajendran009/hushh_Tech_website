@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
+import { ChakraProvider } from "@chakra-ui/react";
 import {
   afterEach,
   beforeEach,
@@ -15,6 +16,8 @@ import {
 import { SearchableSelect } from "../src/components/onboarding/SearchableSelect";
 import LanguageSwitcher from "../src/components/LanguageSwitcher";
 import { useModalKeyboardNavigation } from "../src/hooks/useModalKeyboardNavigation";
+import FaqPage from "../src/pages/faq";
+import theme from "../src/theme";
 
 const languageMock = vi.hoisted(() => ({
   currentLanguage: "en",
@@ -127,6 +130,34 @@ function RerenderingModalHarness() {
           ),
         )
       : null,
+  );
+}
+
+function FaqKeyboardHarness() {
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(
+      "button",
+      {
+        type: "button",
+        "data-faq-trigger": "true",
+      },
+      "Outside matching trigger before FAQ",
+    ),
+    React.createElement(
+      ChakraProvider,
+      { theme },
+      React.createElement(FaqPage),
+    ),
+    React.createElement(
+      "button",
+      {
+        type: "button",
+        "data-faq-trigger": "true",
+      },
+      "Outside matching trigger after FAQ",
+    ),
   );
 }
 
@@ -312,6 +343,57 @@ describe("keyboard accessibility helpers", () => {
     });
 
     expect(document.activeElement).toBe(buttons[1]);
+  });
+
+  it("moves FAQ accordion focus with arrow, Home, and End keys inside the FAQ list only", async () => {
+    await act(async () => {
+      root.render(React.createElement(FaqKeyboardHarness));
+    });
+
+    const faqTriggers = Array.from(
+      container.querySelectorAll<HTMLButtonElement>(
+        "[id^='faq-trigger-'][data-faq-trigger='true']",
+      ),
+    );
+    const outsideTriggers = Array.from(
+      container.querySelectorAll<HTMLButtonElement>(
+        "button[data-faq-trigger='true']:not([id^='faq-trigger-'])",
+      ),
+    );
+
+    expect(faqTriggers.length).toBeGreaterThan(3);
+    expect(outsideTriggers).toHaveLength(2);
+
+    faqTriggers[0].focus();
+
+    await act(async () => {
+      faqTriggers[0].dispatchEvent(
+        new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }),
+      );
+    });
+    expect(document.activeElement).toBe(faqTriggers[1]);
+
+    await act(async () => {
+      faqTriggers[1].dispatchEvent(
+        new KeyboardEvent("keydown", { key: "End", bubbles: true }),
+      );
+    });
+    expect(document.activeElement).toBe(faqTriggers[faqTriggers.length - 1]);
+
+    await act(async () => {
+      faqTriggers[faqTriggers.length - 1].dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Home", bubbles: true }),
+      );
+    });
+    expect(document.activeElement).toBe(faqTriggers[0]);
+
+    await act(async () => {
+      faqTriggers[0].dispatchEvent(
+        new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }),
+      );
+    });
+    expect(document.activeElement).toBe(faqTriggers[faqTriggers.length - 1]);
+    expect(outsideTriggers).not.toContain(document.activeElement);
   });
 
   it("opens the language menu with the keyboard and supports arrow navigation", async () => {
