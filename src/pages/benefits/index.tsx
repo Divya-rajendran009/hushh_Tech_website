@@ -39,12 +39,16 @@ const BenefitsPage: React.FC = () => {
 
         <div className={benefitCardGridClassName} data-testid="benefits-card-grid">
           {/* Compensation & Investment Opportunities */}
-          <section className={benefitCardClassName}>
+          <section
+            className={benefitCardClassName}
+            aria-labelledby="benefits-compensation-title"
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 💰
               </span>
               <h2
+                id="benefits-compensation-title"
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -92,12 +96,16 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Health, Wellness & Family Support */}
-          <section className={benefitCardClassName}>
+          <section
+            className={benefitCardClassName}
+            aria-labelledby="benefits-health-title"
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🏥
               </span>
               <h2
+                id="benefits-health-title"
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -145,12 +153,16 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Work-Life, Growth & Giving Back */}
-          <section className={benefitCardClassName}>
+          <section
+            className={benefitCardClassName}
+            aria-labelledby="benefits-growth-title"
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🌱
               </span>
               <h2
+                id="benefits-growth-title"
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -210,12 +222,16 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Perks, Culture & Quality of Life */}
-          <section className={benefitCardClassName}>
+          <section
+            className={benefitCardClassName}
+            aria-labelledby="benefits-perks-title"
+          >
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
               <span className="text-2xl sm:text-3xl" aria-hidden>
                 🎯
               </span>
               <h2
+                id="benefits-perks-title"
                 className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
                 style={playfair}
               >
@@ -251,8 +267,12 @@ const BenefitsPage: React.FC = () => {
           </section>
 
           {/* Why Join Hushh Technologies? — home-style CTA card + primary black button */}
-          <section className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-6 text-center transition-colors hover:border-hushh-blue/30 sm:p-8 lg:col-span-2">
+          <section
+            className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-6 text-center transition-colors hover:border-hushh-blue/30 sm:p-8 lg:col-span-2"
+            aria-labelledby="benefits-join-title"
+          >
             <h2
+              id="benefits-join-title"
               className="mb-3 text-xl font-medium tracking-tight text-black sm:mb-4 sm:text-3xl md:text-4xl"
               style={playfair}
             >
