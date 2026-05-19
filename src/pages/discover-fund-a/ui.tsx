@@ -32,10 +32,16 @@ const FieldRow = ({
 );
 
 /* ── section label (same as profile page) ── */
-const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium mt-10 mb-2">
+const SectionLabel = ({
+  children,
+  id,
+}: {
+  children: React.ReactNode;
+  id?: string;
+}) => (
+  <h2 id={id} className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium mt-10 mb-2">
     {children}
-  </p>
+  </h2>
 );
 
 /* ── card with icon (same as step-2 cards) ── */
@@ -52,6 +58,7 @@ const FeatureCard = ({
 }) => (
   <div
     data-testid="feature-comparison-card"
+    role="listitem"
     className="group flex items-start gap-3 border border-gray-200 rounded-2xl p-4 hover:border-gray-300 hover:bg-gray-50/50 hover:shadow-sm transition-all sm:gap-4 sm:p-5"
   >
     <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center shrink-0 bg-white group-hover:border-gray-300 transition-colors sm:w-11 sm:h-11">
@@ -88,6 +95,7 @@ const FeatureHighlightTile = ({
 }) => (
   <div
     data-testid="feature-comparison-tile"
+    role="listitem"
     className="group flex flex-col items-center text-center gap-3 border border-gray-200/70 rounded-2xl p-4 bg-white hover:border-gray-300 hover:bg-gray-50/40 hover:shadow-sm transition-all xl:p-5"
   >
     <div className="w-12 h-12 rounded-full border border-gray-200/70 flex items-center justify-center bg-gray-50 group-hover:bg-white group-hover:border-gray-300 transition-colors">
@@ -289,93 +297,99 @@ const FundA = () => {
         </section>
 
         {/* ── Investment Philosophy ── */}
-        <SectionLabel>{philosophySectionTitle}</SectionLabel>
-        <div className="space-y-3 mb-2 lg:hidden">
-          {philosophyCards.map((card) => (
-            <FeatureCard
-              key={card.title}
-              icon={PHILOSOPHY_ICONS[card.title] || "lightbulb"}
-              iconColor={PHILOSOPHY_COLORS[card.title] || "text-hushh-blue"}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
-        </div>
-        <div className="hidden lg:grid lg:grid-cols-3 gap-4 mb-2">
-          {philosophyCards.map((card) => (
-            <FeatureHighlightTile
-              key={card.title}
-              icon={PHILOSOPHY_ICONS[card.title] || "lightbulb"}
-              iconColor={PHILOSOPHY_COLORS[card.title] || "text-hushh-blue"}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
-        </div>
+        <section aria-labelledby="fund-a-philosophy-heading">
+          <SectionLabel id="fund-a-philosophy-heading">{philosophySectionTitle}</SectionLabel>
+          <div className="space-y-3 mb-2 lg:hidden" role="list">
+            {philosophyCards.map((card) => (
+              <FeatureCard
+                key={card.title}
+                icon={PHILOSOPHY_ICONS[card.title] || "lightbulb"}
+                iconColor={PHILOSOPHY_COLORS[card.title] || "text-hushh-blue"}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
+          </div>
+          <div className="hidden lg:grid lg:grid-cols-3 gap-4 mb-2" role="list">
+            {philosophyCards.map((card) => (
+              <FeatureHighlightTile
+                key={card.title}
+                icon={PHILOSOPHY_ICONS[card.title] || "lightbulb"}
+                iconColor={PHILOSOPHY_COLORS[card.title] || "text-hushh-blue"}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
+          </div>
+        </section>
 
         {/* ── Sell the Wall Framework ── */}
-        <SectionLabel>
-          Our Edge —{" "}
-          <a
-            href={sellTheWallHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-hushh-blue underline decoration-hushh-blue/30 hover:decoration-hushh-blue transition-colors"
-          >
-            Sell the Wall
-          </a>{" "}
-          Framework
-        </SectionLabel>
-        <div className="space-y-3 mb-2 lg:hidden">
-          {edgeCards.map((card) => (
-            <FeatureCard
-              key={card.title}
-              icon={EDGE_ICONS[card.title] || "auto_awesome"}
-              iconColor={EDGE_COLORS[card.title] || "text-hushh-blue"}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
-        </div>
-        <div className="hidden lg:grid lg:grid-cols-4 gap-4 mb-2">
-          {edgeCards.map((card) => (
-            <FeatureHighlightTile
-              key={card.title}
-              icon={EDGE_ICONS[card.title] || "auto_awesome"}
-              iconColor={EDGE_COLORS[card.title] || "text-hushh-blue"}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
-        </div>
+        <section aria-labelledby="fund-a-edge-heading">
+          <SectionLabel id="fund-a-edge-heading">
+            Our Edge —{" "}
+            <a
+              href={sellTheWallHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-hushh-blue underline decoration-hushh-blue/30 hover:decoration-hushh-blue transition-colors"
+            >
+              Sell the Wall
+            </a>{" "}
+            Framework
+          </SectionLabel>
+          <div className="space-y-3 mb-2 lg:hidden" role="list">
+            {edgeCards.map((card) => (
+              <FeatureCard
+                key={card.title}
+                icon={EDGE_ICONS[card.title] || "auto_awesome"}
+                iconColor={EDGE_COLORS[card.title] || "text-hushh-blue"}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
+          </div>
+          <div className="hidden lg:grid lg:grid-cols-4 gap-4 mb-2" role="list">
+            {edgeCards.map((card) => (
+              <FeatureHighlightTile
+                key={card.title}
+                icon={EDGE_ICONS[card.title] || "auto_awesome"}
+                iconColor={EDGE_COLORS[card.title] || "text-hushh-blue"}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
+          </div>
+        </section>
 
         {/* ── Asset Focus ── */}
-        <SectionLabel>{assetFocusSectionTitle}</SectionLabel>
-        <p className="text-[11px] text-gray-400 font-light leading-relaxed mb-4">
-          {assetFocusDescription}
-        </p>
-        <div className="space-y-3 mb-2 lg:hidden">
-          {assetPillars.map((pillar) => (
-            <FeatureCard
-              key={pillar.title}
-              icon={ASSET_ICONS[pillar.title] || "category"}
-              iconColor={ASSET_COLORS[pillar.title] || "text-hushh-blue"}
-              title={pillar.title}
-              description={pillar.description}
-            />
-          ))}
-        </div>
-        <div className="hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-2">
-          {assetPillars.map((pillar) => (
-            <FeatureHighlightTile
-              key={pillar.title}
-              icon={ASSET_ICONS[pillar.title] || "category"}
-              iconColor={ASSET_COLORS[pillar.title] || "text-hushh-blue"}
-              title={pillar.title}
-              description={pillar.description}
-            />
-          ))}
-        </div>
+        <section aria-labelledby="fund-a-asset-focus-heading" aria-describedby="fund-a-asset-focus-description">
+          <SectionLabel id="fund-a-asset-focus-heading">{assetFocusSectionTitle}</SectionLabel>
+          <p id="fund-a-asset-focus-description" className="text-[11px] text-gray-400 font-light leading-relaxed mb-4">
+            {assetFocusDescription}
+          </p>
+          <div className="space-y-3 mb-2 lg:hidden" role="list">
+            {assetPillars.map((pillar) => (
+              <FeatureCard
+                key={pillar.title}
+                icon={ASSET_ICONS[pillar.title] || "category"}
+                iconColor={ASSET_COLORS[pillar.title] || "text-hushh-blue"}
+                title={pillar.title}
+                description={pillar.description}
+              />
+            ))}
+          </div>
+          <div className="hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-2" role="list">
+            {assetPillars.map((pillar) => (
+              <FeatureHighlightTile
+                key={pillar.title}
+                icon={ASSET_ICONS[pillar.title] || "category"}
+                iconColor={ASSET_COLORS[pillar.title] || "text-hushh-blue"}
+                title={pillar.title}
+                description={pillar.description}
+              />
+            ))}
+          </div>
+        </section>
 
         {/* ── Targeted Alpha Stack (FieldRow style) ── */}
         <SectionLabel>{alphaStackSectionTitle}</SectionLabel>
@@ -494,29 +508,31 @@ const FundA = () => {
         </div>
 
         {/* ── Risk Management ── */}
-        <SectionLabel>{riskSectionTitle}</SectionLabel>
-        <div className="space-y-3 mb-2 lg:hidden">
-          {riskCards.map((card) => (
-            <FeatureCard
-              key={card.title}
-              icon={RISK_ICONS[card.title] || "security"}
-              iconColor={RISK_COLORS[card.title] || "text-ios-green"}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
-        </div>
-        <div className="hidden lg:grid lg:grid-cols-2 gap-4 mb-2">
-          {riskCards.map((card) => (
-            <FeatureHighlightTile
-              key={card.title}
-              icon={RISK_ICONS[card.title] || "security"}
-              iconColor={RISK_COLORS[card.title] || "text-ios-green"}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
-        </div>
+        <section aria-labelledby="fund-a-risk-heading">
+          <SectionLabel id="fund-a-risk-heading">{riskSectionTitle}</SectionLabel>
+          <div className="space-y-3 mb-2 lg:hidden" role="list">
+            {riskCards.map((card) => (
+              <FeatureCard
+                key={card.title}
+                icon={RISK_ICONS[card.title] || "security"}
+                iconColor={RISK_COLORS[card.title] || "text-ios-green"}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
+          </div>
+          <div className="hidden lg:grid lg:grid-cols-2 gap-4 mb-2" role="list">
+            {riskCards.map((card) => (
+              <FeatureHighlightTile
+                key={card.title}
+                icon={RISK_ICONS[card.title] || "security"}
+                iconColor={RISK_COLORS[card.title] || "text-ios-green"}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
+          </div>
+        </section>
 
         {/* ── Key Terms (FieldRow style) ── */}
         <SectionLabel>{keyTermsSectionTitle}</SectionLabel>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Visual proof for accessible feature comparison structure</title>
+  <desc id="desc">The Fund A feature comparison sections now use labelled sections with list and listitem semantics for their cards.</desc>
+  <rect width="1200" height="720" fill="#f8fafc"/>
+  <text x="70" y="72" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#111827">Feature comparison accessibility structure</text>
+  <text x="70" y="112" font-family="Arial, sans-serif" font-size="18" fill="#4b5563">Visual proof that comparison groups expose section headings and card list semantics.</text>
+
+  <g transform="translate(70 165)">
+    <rect width="470" height="410" rx="16" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="28" y="48" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#991b1b">Before</text>
+    <rect x="28" y="78" width="165" height="24" rx="6" fill="#fee2e2"/>
+    <text x="44" y="96" font-family="Arial, sans-serif" font-size="13" fill="#7f1d1d">plain label paragraph</text>
+    <g transform="translate(28 135)">
+      <rect width="185" height="82" rx="12" fill="#f3f4f6" stroke="#e5e7eb"/>
+      <circle cx="36" cy="41" r="18" fill="#d1d5db"/>
+      <rect x="66" y="24" width="88" height="10" rx="5" fill="#9ca3af"/>
+      <rect x="66" y="45" width="104" height="8" rx="4" fill="#d1d5db"/>
+    </g>
+    <g transform="translate(238 135)">
+      <rect width="185" height="82" rx="12" fill="#f3f4f6" stroke="#e5e7eb"/>
+      <circle cx="36" cy="41" r="18" fill="#d1d5db"/>
+      <rect x="66" y="24" width="88" height="10" rx="5" fill="#9ca3af"/>
+      <rect x="66" y="45" width="104" height="8" rx="4" fill="#d1d5db"/>
+    </g>
+    <text x="28" y="270" font-family="Arial, sans-serif" font-size="15" fill="#7f1d1d">Assistive tech sees generic div groups.</text>
+    <text x="28" y="300" font-family="Arial, sans-serif" font-size="15" fill="#7f1d1d">Section names are not part of heading navigation.</text>
+  </g>
+
+  <g transform="translate(660 165)">
+    <rect width="470" height="410" rx="16" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="28" y="48" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#065f46">After</text>
+    <rect x="28" y="78" width="185" height="24" rx="6" fill="#dcfce7"/>
+    <text x="44" y="96" font-family="Arial, sans-serif" font-size="13" fill="#065f46">h2 labelled section</text>
+    <g transform="translate(28 135)">
+      <rect width="185" height="82" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+      <circle cx="36" cy="41" r="18" fill="#bbf7d0"/>
+      <rect x="66" y="24" width="88" height="10" rx="5" fill="#16a34a"/>
+      <rect x="66" y="45" width="104" height="8" rx="4" fill="#86efac"/>
+      <text x="70" y="72" font-family="Arial, sans-serif" font-size="10" fill="#166534">role=listitem</text>
+    </g>
+    <g transform="translate(238 135)">
+      <rect width="185" height="82" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+      <circle cx="36" cy="41" r="18" fill="#bbf7d0"/>
+      <rect x="66" y="24" width="88" height="10" rx="5" fill="#16a34a"/>
+      <rect x="66" y="45" width="104" height="8" rx="4" fill="#86efac"/>
+      <text x="70" y="72" font-family="Arial, sans-serif" font-size="10" fill="#166534">role=listitem</text>
+    </g>
+    <text x="28" y="270" font-family="Arial, sans-serif" font-size="15" fill="#065f46">Comparison groups are labelled sections.</text>
+    <text x="28" y="300" font-family="Arial, sans-serif" font-size="15" fill="#065f46">Cards are exposed as list items inside each group.</text>
+  </g>
+
+  <rect x="70" y="635" width="1060" height="54" rx="10" fill="#111827"/>
+  <text x="95" y="669" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Changed: Fund A comparison sections use h2 labels, aria-labelledby sections, role=list grids, and role=listitem cards.</text>
+</svg>
