@@ -22,7 +22,18 @@ const TermsOfServicePage: React.FC = () => {
           Terms of Service
         </Heading>
       </Box>
-      <Container maxW="container.lg" py={10} px={4}>
+      <Container
+        maxW="3xl"
+        py={10}
+        px={{ base: 5, md: 6 }}
+        sx={{
+          overflowWrap: "anywhere",
+          wordBreak: "normal",
+          "p, li": {
+            lineHeight: "1.75",
+          },
+        }}
+      >
         <VStack spacing={8} align="stretch">
           {/* Last Updated */}
           <Box textAlign="center">
