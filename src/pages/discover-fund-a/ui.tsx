@@ -623,6 +623,7 @@ const FundA = () => {
               <HushhTechCta
                 variant={HushhTechCtaVariant.BLACK}
                 onClick={handleCompleteProfile}
+                className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-hushh-blue"
               >
                 {joinButtonLabel}
                 <span className="material-symbols-outlined !text-[1.1rem]">
@@ -634,6 +635,7 @@ const FundA = () => {
               <HushhTechCta
                 variant={HushhTechCtaVariant.WHITE}
                 onClick={() => navigate("/")}
+                className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-hushh-blue"
               >
                 Back to Home
               </HushhTechCta>
