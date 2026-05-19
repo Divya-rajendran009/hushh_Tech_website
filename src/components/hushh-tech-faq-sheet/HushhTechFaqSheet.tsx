@@ -94,6 +94,8 @@ const getFaqItemKey = (categoryTitle: string, itemIndex: number) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")}-${itemIndex}`;
 
+const FAQ_TRIGGER_SELECTOR = "[data-faq-sheet-trigger='true']";
+
 /* ── Props ── */
 interface HushhTechFaqSheetProps {
   isOpen: boolean;
@@ -133,6 +135,37 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
   const handleToggle = useCallback((key: string) => {
     setExpandedIdx((prev) => (prev === key ? null : key));
   }, []);
+
+  const focusFaqTrigger = useCallback((nextIndex: number) => {
+    const triggers = Array.from(
+      sheetRef.current?.querySelectorAll<HTMLButtonElement>(FAQ_TRIGGER_SELECTOR) ?? [],
+    );
+    if (triggers.length === 0) return;
+
+    triggers[(nextIndex + triggers.length) % triggers.length]?.focus();
+  }, []);
+
+  const handleAccordionKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+      const triggers = sheetRef.current?.querySelectorAll(FAQ_TRIGGER_SELECTOR);
+      const triggerCount = triggers?.length ?? 0;
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        focusFaqTrigger(index + 1);
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        focusFaqTrigger(index - 1);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        focusFaqTrigger(0);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        focusFaqTrigger(triggerCount - 1);
+      }
+    },
+    [focusFaqTrigger],
+  );
 
   const handleBackdropClick = useCallback(() => {
     setIsVisible(false);
@@ -204,7 +237,12 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
 
         {/* Scrollable FAQ content */}
         <div className="flex-1 overflow-y-auto px-6 pb-10 scrollbar-thin">
-          {FAQ_DATA.map((category) => (
+          {FAQ_DATA.map((category, categoryIndex) => {
+            const precedingItemCount = FAQ_DATA
+              .slice(0, categoryIndex)
+              .reduce((count, faqCategory) => count + faqCategory.items.length, 0);
+
+            return (
             <section key={category.title} className="mt-6">
               {/* Category header */}
               <h3 className="text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-3 font-medium">
@@ -215,6 +253,7 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                 {category.items.map((item, idx) => {
                   const key = getFaqItemKey(category.title, idx);
                   const isExpanded = expandedIdx === key;
+                  const triggerIndex = precedingItemCount + idx;
 
                   return (
                     <div key={key}>
@@ -222,6 +261,8 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                       <button
                         id={`faq-btn-${key}`}
                         onClick={() => handleToggle(key)}
+                        onKeyDown={(event) => handleAccordionKeyDown(event, triggerIndex)}
+                        data-faq-sheet-trigger="true"
                         className="w-full flex items-center gap-3 px-4 py-4 text-left hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hushh-blue"
                         aria-expanded={isExpanded}
                         aria-controls={`faq-panel-${key}`}
@@ -266,7 +307,8 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                 })}
               </div>
             </section>
-          ))}
+            );
+          })}
 
           {/* Help footer */}
           <div className="mt-8 mb-4 flex flex-col items-center text-center gap-2">

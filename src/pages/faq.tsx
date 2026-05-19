@@ -80,6 +80,34 @@ const FaqPage: React.FC = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const focusFaqTrigger = (nextIndex: number) => {
+    const triggers = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-faq-trigger='true']"),
+    );
+    if (triggers.length === 0) return;
+
+    triggers[(nextIndex + triggers.length) % triggers.length]?.focus();
+  };
+
+  const handleAccordionKeyDown = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      focusFaqTrigger(index + 1);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      focusFaqTrigger(index - 1);
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      focusFaqTrigger(0);
+    } else if (event.key === "End") {
+      event.preventDefault();
+      focusFaqTrigger(faqs.length - 1);
+    }
+  };
+
   return (
     <Box
       bg="gray.50"
@@ -176,6 +204,8 @@ const FaqPage: React.FC = () => {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => toggleAccordion(index)}
+                    onKeyDown={(event) => handleAccordionKeyDown(event, index)}
+                    data-faq-trigger="true"
                     display="flex"
                     w="100%"
                     alignItems="flex-start"
