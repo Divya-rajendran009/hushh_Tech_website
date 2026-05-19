@@ -9,6 +9,8 @@ const benefitCardGridClassName =
   "grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:items-stretch lg:gap-6 xl:gap-8";
 const benefitCardClassName =
   "h-full rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6";
+const benefitCardVisualClassName =
+  "flex aspect-square h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-2xl leading-none shadow-sm ring-1 ring-gray-200/70 sm:h-11 sm:w-11 sm:text-3xl";
 const benefitFeatureGridClassName =
   "grid grid-cols-1 gap-x-6 gap-y-3 sm:gap-y-3.5 md:grid-cols-2 md:gap-y-4";
 
@@ -41,7 +43,7 @@ const BenefitsPage: React.FC = () => {
           {/* Compensation & Investment Opportunities */}
           <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
-              <span className="text-2xl sm:text-3xl" aria-hidden>
+              <span className={benefitCardVisualClassName} aria-hidden>
                 💰
               </span>
               <h2
@@ -94,7 +96,7 @@ const BenefitsPage: React.FC = () => {
           {/* Health, Wellness & Family Support */}
           <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
-              <span className="text-2xl sm:text-3xl" aria-hidden>
+              <span className={benefitCardVisualClassName} aria-hidden>
                 🏥
               </span>
               <h2
@@ -147,7 +149,7 @@ const BenefitsPage: React.FC = () => {
           {/* Work-Life, Growth & Giving Back */}
           <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
-              <span className="text-2xl sm:text-3xl" aria-hidden>
+              <span className={benefitCardVisualClassName} aria-hidden>
                 🌱
               </span>
               <h2
@@ -212,7 +214,7 @@ const BenefitsPage: React.FC = () => {
           {/* Perks, Culture & Quality of Life */}
           <section className={benefitCardClassName}>
             <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
-              <span className="text-2xl sm:text-3xl" aria-hidden>
+              <span className={benefitCardVisualClassName} aria-hidden>
                 🎯
               </span>
               <h2
