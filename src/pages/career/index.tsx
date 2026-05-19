@@ -129,9 +129,9 @@ const CareerList = () => {
                   borderRadius="lg"
                   {...jobCardFocusVisible}
                 >
-                  <Flex justify="space-between" align="center">
-                    <Box>
-                      <Heading as="h3" fontSize="xl" fontWeight="500" color="gray.800" mb={3}>
+                  <Flex justify="space-between" align="center" gap={4}>
+                    <Box flex="1" minW={0}>
+                      <Heading as="h3" fontSize="xl" fontWeight="500" color="gray.800" mb={3} overflowWrap="anywhere">
                         {job.title}
                       </Heading>
                       <HStack
@@ -140,17 +140,17 @@ const CareerList = () => {
                         mt={1}
                         flexDirection={{ base: "column", md: "row" }}
                       >
-                        <HStack spacing={2}>
+                        <HStack spacing={2} minW={0}>
                           <Icon as={MapPin} color="gray.500" boxSize={4} aria-hidden />
-                          <Text color="gray.600" fontSize="sm">{job.location}</Text>
+                          <Text color="gray.600" fontSize="sm" minW={0} overflowWrap="anywhere">{job.location}</Text>
                         </HStack>
-                        <HStack spacing={2}>
+                        <HStack spacing={2} minW={0}>
                           <Icon as={Clock} color="gray.500" boxSize={4} aria-hidden />
                           <Text color="gray.600" fontSize="sm">Full-time</Text>
                         </HStack>
                       </HStack>
                     </Box>
-                    <Icon as={ChevronRight} color="gray.400" boxSize={6} aria-hidden />
+                    <Icon as={ChevronRight} color="gray.400" boxSize={6} flexShrink={0} aria-hidden />
                   </Flex>
                 </Box>
               ))}
