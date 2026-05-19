@@ -81,24 +81,29 @@ const Business = () => {
 
       <HStack
         display={"flex"}
-        flexDirection={"row"}
+        flexDirection={{ base: "column", md: "row" }}
+        alignItems={{ base: "center", md: "center" }}
         my={{ md: "2.5rem", base: "1.5rem" }}
-        gap={{ md: "8rem", base: "2.5rem" }}
+        gap={{ md: "8rem", base: "1.5rem" }}
         px={{ md: "12rem", base: "1rem" }}
         boxSizing="border-box"
         width={"100%"}
       >
         <Image
-          width={"474"}
-          height={"440"}
+          width={{ base: "100%", md: "474px" }}
+          maxW={{ base: "360px", md: "474px" }}
+          height={"auto"}
           src="/images/media.png"
           alt="Hushh Eco System"
+          flexShrink={0}
         />
         <VStack
           flex={1}
+          w={"100%"}
+          maxW={{ base: "36rem", md: "none" }}
           gap={{ md: "1.25rem", base: "0.65rem" }}
-          textAlign={"left"}
-          alignItems={"flex-start"}
+          textAlign={{ base: "center", md: "left" }}
+          alignItems={{ base: "center", md: "flex-start" }}
         >
           <Text
             fontWeight={"700"}
