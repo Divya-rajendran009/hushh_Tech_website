@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, Routes, Route, useLocation } from 'react-router-dom';
 import { careers } from '../../data/career';
 import JobDetails from './JobDetails';
@@ -26,6 +26,12 @@ const jobCardFocusVisible = {
 };
 
 const CareerList = () => {
+  const departmentEntries = useMemo(() => Object.entries(careers), []);
+  const [selectedDepartment, setSelectedDepartment] = useState("All");
+  const visibleDepartments = selectedDepartment === "All"
+    ? departmentEntries
+    : departmentEntries.filter(([department]) => department === selectedDepartment);
+
   return (
     <Container as="main" id="main-content" maxW="container.xl" px={{ base: 4, md: 6 }}>
       {/* Main Header */}
@@ -86,8 +92,40 @@ const CareerList = () => {
       </Box>
 
       {/* Career Departments */}
+      <HStack
+        as="div"
+        role="group"
+        aria-label="Filter career departments"
+        spacing={3}
+        flexWrap="wrap"
+        justify="center"
+        maxW="container.lg"
+        mx="auto"
+        mb={10}
+      >
+        {["All", ...departmentEntries.map(([department]) => department)].map((department) => {
+          const isSelected = selectedDepartment === department;
+
+          return (
+            <Button
+              key={department}
+              type="button"
+              size="sm"
+              borderRadius="full"
+              variant={isSelected ? "solid" : "outline"}
+              colorScheme={isSelected ? "cyan" : "gray"}
+              aria-pressed={isSelected}
+              onClick={() => setSelectedDepartment(department)}
+              {...jobCardFocusVisible}
+            >
+              {department}
+            </Button>
+          );
+        })}
+      </HStack>
+
       <VStack spacing={14} align="stretch" maxW="container.lg" mx="auto" bg={'rgb(255 255 255 / var(--tw-bg-opacity, 1))'} opacity={1}>
-        {Object.entries(careers).map(([department, jobs]) => (
+        {visibleDepartments.map(([department, jobs]) => (
           <Box key={department} bg={'white'} borderRadius={'2xl'} p={8}  >
             <Heading 
               as="h2" 
