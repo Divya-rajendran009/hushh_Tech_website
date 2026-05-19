@@ -27,6 +27,15 @@ const jobCardFocusVisible = {
 
 const CareerList = () => {
   const departmentEntries = useMemo(() => Object.entries(careers), []);
+  const departmentFilterOptions = useMemo(
+    () => [
+      "All",
+      ...departmentEntries
+        .map(([department]) => department)
+        .filter((department) => department !== "All"),
+    ],
+    [departmentEntries]
+  );
   const [selectedDepartment, setSelectedDepartment] = useState("All");
   const visibleDepartments = selectedDepartment === "All"
     ? departmentEntries
@@ -103,7 +112,7 @@ const CareerList = () => {
         mx="auto"
         mb={10}
       >
-        {["All", ...departmentEntries.map(([department]) => department)].map((department) => {
+        {departmentFilterOptions.map((department) => {
           const isSelected = selectedDepartment === department;
 
           return (
